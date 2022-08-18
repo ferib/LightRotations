@@ -1,3 +1,3 @@
 local addon, dank = ...
 
-dank.data = { }
+dank.data = {}

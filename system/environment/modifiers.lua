@@ -1,45 +1,45 @@
 local addon, dank = ...
 
-local modifiers = { }
+local modifiers = {}
 
 function modifiers:shift()
-  return IsShiftKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsShiftKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:control()
-  return IsControlKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsControlKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:alt()
-  return IsAltKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsAltKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:lshift()
-  return IsLeftShiftKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsLeftShiftKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:lcontrol()
-  return IsLeftControlKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsLeftControlKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:lalt()
-  return IsLeftAltKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsLeftAltKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:rshift()
-  return IsRightShiftKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsRightShiftKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:rcontrol()
-  return IsRightControlKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsRightControlKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 function modifiers:ralt()
-  return IsRightAltKeyDown() and GetCurrentKeyBoardFocus() == nil
+    return IsRightAltKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
 dank.environment.hooks.modifier = setmetatable({}, {
-  __index = function(t, k)
-    return modifiers[k](t)
-  end
+    __index = function(t, k)
+        return modifiers[k](t)
+    end
 })

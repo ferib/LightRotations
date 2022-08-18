@@ -9,9 +9,9 @@ local function resting()
 end
 
 dank.rotation.register({
-  class = dank.rotation.classes.shaman,
-  name = 'shaman',
-  label = 'Bundled Shaman',
-  combat = combat,
-  resting = resting
+    class = dank.rotation.classes.shaman,
+    name = 'shaman',
+    label = 'Bundled Shaman',
+    combat = combat,
+    resting = resting
 })
