@@ -1,0 +1,10 @@
+lightweight tag a4d3d2e3ab7dd1ffed46577064b015770e2813e1 v1.0.2
+Author:	Eliote <>
+Date:	Sat Oct 5 17:13:46 2019 -0300
+
+commit a4d3d2e3ab7dd1ffed46577064b015770e2813e1
+Author: Eliote <>
+Date:   Sat Oct 5 17:13:46 2019 -0300
+
+    Fix LibAddonCompat Herbalism
+

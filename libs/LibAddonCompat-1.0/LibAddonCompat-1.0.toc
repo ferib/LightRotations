@@ -1,0 +1,7 @@
+## Interface: 11302
+## Title: LibAddonCompat-1.0
+## Notes: Library to make addons compatible with classic and retail
+## Author: Eliote
+## Version: v1.0.2
+
+LibAddonCompat-1.0.xml

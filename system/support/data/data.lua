@@ -1,0 +1,3 @@
+local addon, dank = ...
+
+dank.data = { }

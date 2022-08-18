@@ -1,0 +1,64 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+  <!-- CORE ADDON FILES -->
+  <Script file="system\support\init.lua" />
+  <Script file="system\support\ext.lua" />
+  <Script file="system\interface\interface.lua" />
+  <Script file="system\interface\color.lua" />
+  <Script file="system\support\logger.lua" />
+  <Script file="system\support\event.lua" />
+  <Script file="system\support\storage.lua" />
+  <Script file="system\support\commands.lua" />
+  <Script file="system\support\data\data.lua" />
+  <Script file="system\support\data\removables.lua" />
+  <Script file="system\interface\window.lua" />
+  <Script file="system\interface\buttons.lua" />
+  <Script file="system\environment\environment.lua" />
+  <Script file="system\environment\logical.lua" />
+  <Script file="system\environment\virtual.lua" />
+  <Script file="system\environment\cast.lua" />
+  <Script file="system\environment\modifiers.lua" />
+  <Script file="system\environment\buff.lua" />
+  <Script file="system\environment\debuff.lua" />
+  <Script file="system\environment\health.lua" />
+  <Script file="system\environment\runes.lua" />
+  <Script file="system\environment\powertype.lua" />
+  <Script file="system\environment\power.lua" />
+  <Script file="system\environment\spell.lua" />
+  <Script file="system\environment\group.lua" />
+  <Script file="system\environment\enemies.lua" />
+  <Script file="system\environment\unit.lua" />
+  <Script file="system\rotation\rotation.lua" />
+  <Script file="system\rotation\timer.lua" />
+
+  <!-- SPELLBOOKS -->
+  <Script file="rotations\druid\spellbook.lua" />
+  <Script file="rotations\priest\spellbook.lua" />
+  <Script file="rotations\mage\spellbook.lua" />
+  <Script file="rotations\paladin\spellbook.lua" />
+  <Script file="rotations\hunter\spellbook.lua" />
+  <Script file="rotations\rogue\spellbook.lua" />
+  <Script file="rotations\shaman\spellbook.lua" />
+  <Script file="rotations\warlock\spellbook.lua" />
+  <Script file="rotations\warrior\spellbook.lua" />
+
+  <!-- ROTATIONS -->
+  <Script file="rotations\druid\druid.lua" />
+  <Script file="rotations\priest\priest.lua" />
+  <Script file="rotations\priest\priest_buddy.lua" />
+  <Script file="rotations\mage\mage.lua" />
+  <Script file="rotations\mage\mage_buddy.lua" />
+  <Script file="rotations\paladin\paladin.lua" />
+  <Script file="rotations\hunter\hunter.lua" />
+  <!--<Script file="rotations\rogue\rogue.lua" />-->
+  <Script file="rotations\shaman\shaman.lua" />
+  <Script file="rotations\warlock\warlock.lua" />
+  <Script file="rotations\warlock\dotlock.lua" />
+  <Script file="rotations\warlock\furrylock.lua" />
+  <Script file="rotations\warrior\warrior.lua" />
+
+  <!-- MISC -->
+  <Script file="system\support\patches.lua" />
+  <Script file="system\support\ready.lua" />
+</Ui>
