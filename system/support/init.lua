@@ -1,12 +1,13 @@
 local addon, light = ...
 
 _G['light_interface'] = light
-light.name = 'DankRotations Classic'
+light.name = 'Light'
 light.version = 'r300'
 light.color = 'f5deb3'
 light.color2 = 'ebbd68'
 light.color3 = 'ebdec2'
 light.fontColor = '424242' -- light.interface.color.grey
+light.fontFamily = 'ComicSans'
 light.ready = false
 light.settings_ready = false
 light.ready_callbacks = {}
