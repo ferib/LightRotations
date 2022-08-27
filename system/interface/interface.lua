@@ -7,14 +7,14 @@ light.interface = { }
 
 local fontObject
 
-fontObject = CreateFont("dank_regular")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", 14)
+fontObject = CreateFont("dark_regulat")
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Regular.ttf", 14)
 
 fontObject = CreateFont("dark_bold")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", 14)
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Bold.ttf", 14)
 
-fontObject = CreateFont("dank_icon")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\FontAwesomeProRegular.otf", 18)
+fontObject = CreateFont("dark_icon")
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\FontAwesomeProRegular.otf", 18)
 
 local bytemarkers = { {0x7FF,192}, {0xFFFF,224}, {0x1FFFFF,240} }
 local function utf8(decimal)

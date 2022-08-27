@@ -321,7 +321,7 @@ local function interface()
         {
             name = "settings",
             label = "Rotation Settings",
-            font = "dank_icon",
+            font = "dark_icon",
             on = {
                 label = light.interface.icon("cog"),
                 color = light.interface.color.purple,

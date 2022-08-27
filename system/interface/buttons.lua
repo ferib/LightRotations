@@ -12,17 +12,17 @@ local container_frame = CreateFrame('frame', 'dr_container_frame', UIParent)
 local first_button
 local last_button
 
-fontObject = CreateFont("dank_regular")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", button_size / 4)
+fontObject = CreateFont("dark_regulat")
+fontObject:SetFont("Interface\\Addons\\light\\media\\OpenSans-Regular.ttf", button_size / 4)
 
-fontObject = CreateFont("dank_small")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", 12)
+fontObject = CreateFont("dark_small")
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Regular.ttf", 12)
 
 fontObject = CreateFont("dark_bold")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", button_size / 4)
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Bold.ttf", button_size / 4)
 
-fontObject = CreateFont("dank_icon")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\FontAwesomeProRegular.otf", button_size / 2)
+fontObject = CreateFont("dark_icon")
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\FontAwesomeProRegular.otf", button_size / 2)
 
 container_frame.moving = false
 container_frame:SetPoint('CENTER', UIParent)
@@ -49,7 +49,7 @@ container_frame.background:SetDrawLayer('BACKGROUND')
 local tooltip_frame = CreateFrame('frame', 'dr_tooltip_frame', container_frame)
 
 tooltip_frame.text = tooltip_frame:CreateFontString()
-tooltip_frame.text:SetFontObject("dank_small")
+tooltip_frame.text:SetFontObject("dark_small")
 local r, g, b = light.interface.color.hexToRgb(light.fontColor)
 tooltip_frame.text:SetTextColor(r, g, b, 1)
 tooltip_frame:SetFrameStrata('HIGH')
@@ -109,7 +109,7 @@ info_frame.text:SetPoint("TOPLEFT", info_frame, "TOPLEFT", 5, 0)
 info_frame.text:SetPoint("BOTTOMRIGHT", info_frame, "BOTTOMRIGHT", 5, 0)
 
 info_frame.text:SetJustifyH('LEFT')
-info_frame.text:SetFontObject("dank_regular")
+info_frame.text:SetFontObject("dark_regulat")
 local r, g, b = light.interface.color.hexToRgb(light.fontColor)
 info_frame.text:SetTextColor(r, g, b, 1)
 info_frame.text:SetText('')
@@ -119,7 +119,7 @@ info_frame.text_right:SetPoint("TOPLEFT", info_frame, "TOPLEFT", -5, 0)
 info_frame.text_right:SetPoint("BOTTOMRIGHT", info_frame, "BOTTOMRIGHT", -5, 0)
 
 info_frame.text_right:SetJustifyH('RIGHT')
-info_frame.text_right:SetFontObject("dank_regular")
+info_frame.text_right:SetFontObject("dark_regulat")
 local r, g, b = light.interface.color.hexToRgb(light.fontColor)
 info_frame.text:SetTextColor(r, g, b, 1)
 info_frame.text_right:SetText('')
@@ -369,14 +369,14 @@ function light.interface.buttons.resize()
     local fontObject
     button_size = light.settings.fetch('button_size', 32)
 
-    fontObject = CreateFont("dank_regular")
-    fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", button_size / 4)
+    fontObject = CreateFont("dark_regulat")
+    fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Regular.ttf", button_size / 4)
 
     fontObject = CreateFont("dark_bold")
-    fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", button_size / 4)
+    fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Bold.ttf", button_size / 4)
 
-    fontObject = CreateFont("dank_icon")
-    fontObject:SetFont("Interface\\Addons\\dank\\media\\FontAwesomeProRegular.otf", button_size / 2)
+    fontObject = CreateFont("dark_icon")
+    fontObject:SetFont("Interface\\AddOns\\Light\\media\\FontAwesomeProRegular.otf", button_size / 2)
 
     for key, button in pairs(buttons) do
         local offset = (button.frame.index * button_size) + (button.frame.index * button_padding)
@@ -391,14 +391,14 @@ end
 light.on_ready(function()
     button_size = light.settings.fetch('button_size', button_size)
 
-    fontObject = CreateFont("dank_regular")
-    fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", button_size / 4)
+    fontObject = CreateFont("dark_regulat")
+    fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Regular.ttf", button_size / 4)
 
     fontObject = CreateFont("dark_bold")
-    fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", button_size / 4)
+    fontObject:SetFont("Interface\\AddOns\\Light\\media\\OpenSans-Bold.ttf", button_size / 4)
 
-    fontObject = CreateFont("dank_icon")
-    fontObject:SetFont("Interface\\Addons\\dank\\media\\FontAwesomeProRegular.otf", button_size / 2)
+    fontObject = CreateFont("dark_icon")
+    fontObject:SetFont("Interface\\AddOns\\Light\\media\\FontAwesomeProRegular.otf", button_size / 2)
 
     light.commands.register({
         command = 'move',
@@ -439,7 +439,7 @@ light.on_ready(function()
         core = true,
         name = 'master_toggle',
         label = 'Rotation',
-        font = 'dank_icon',
+        font = 'dark_icon',
         on = {
             label = light.interface.icon('toggle-on'),
             color = light.interface.color.green,
@@ -456,7 +456,7 @@ light.on_ready(function()
         core = true,
         name = 'cooldowns',
         label = 'Cooldowns',
-        font = 'dank_icon',
+        font = 'dark_icon',
         on = {
             label = light.interface.icon('clock'),
             color = light.interface.color.teal,
@@ -473,7 +473,7 @@ light.on_ready(function()
         core = true,
         name = 'interrupts',
         label = 'Interrupts',
-        font = 'dank_icon',
+        font = 'dark_icon',
         on = {
             label = light.interface.icon('hand-paper'),
             color = light.interface.color.teal,
@@ -490,7 +490,7 @@ light.on_ready(function()
         core = true,
         name = 'multitarget',
         label = 'Multi-target',
-        font = 'dank_icon',
+        font = 'dark_icon',
         on = {
             label = light.interface.icon('users'),
             color = light.interface.color.teal,

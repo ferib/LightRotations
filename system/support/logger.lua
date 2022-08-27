@@ -8,7 +8,7 @@ light.console = {
 }
 
 local fontObject = CreateFont("dank_console")
-fontObject:SetFont("Interface\\Addons\\dank\\media\\Consolas.ttf", 12)
+fontObject:SetFont("Interface\\AddOns\\Light\\media\\Consolas.ttf", 12)
 
 local consoleFrame = CreateFrame('ScrollingMessageFrame', 'dank_console', UIParent)
 

@@ -5,8 +5,8 @@ frame:RegisterEvent('ADDON_LOADED')
 frame:SetScript('OnEvent', function(self, event, arg1)
     if event == 'ADDON_LOADED' and arg1 == addon then
         light.log('Build ' .. light.version)
-        if dank_storage == nil then
-            dank_storage = {}
+        if light_storage == nil then
+            light_storage = {}
             light.log('Creating new settings profile!')
         else
             light.log('Settings loaded, welcome back!')
@@ -18,12 +18,12 @@ end)
 light.settings = {}
 
 function light.settings.store(key, value)
-    dank_storage[key] = value
+    light_storage[key] = value
     return true
 end
 
 function light.settings.fetch(key, default)
-    local value = dank_storage[key]
+    local value = light_storage[key]
     return value == nil and default or value
 end
 
@@ -38,7 +38,7 @@ function light.settings.store_toggle(key, value)
     else
         full_key = 'toggle_' .. key
     end
-    dank_storage[full_key] = value
+    light_storage[full_key] = value
     light.console.debug(5, 'settings', 'purple', string.format('%s <= %s', full_key, tostring(value)))
     return true
 end
@@ -57,7 +57,7 @@ function light.settings.fetch_toggle(key, default)
     if not string.find(full_key, 'master_toggle') then
         light.console.debug(5, 'settings', 'purple', string.format('%s => %s', full_key, tostring(default)))
     end
-    return dank_storage[full_key] or default
+    return light_storage[full_key] or default
 end
 
 light.tmp = {
