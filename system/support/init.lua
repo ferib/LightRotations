@@ -1,28 +1,28 @@
-local addon, dank = ...
+local addon, light = ...
 
-_G['light_interface'] = dank
-dank.name = 'DankRotations Classic'
-dank.version = 'r300'
-dank.color = 'f5deb3'
-dank.color2 = 'ebbd68'
-dank.color3 = 'ebdec2'
-dank.fontColor = '424242' -- dank.interface.color.grey
-dank.ready = false
-dank.settings_ready = false
-dank.ready_callbacks = {}
-dank.protected = false
-dank.adv_protected = false
--- dank.libcc = LibStub("LibClassicCasterino")
-dank.savedHealTarget = nil
-dank.healthCooldown = {}
+_G['light_interface'] = light
+light.name = 'DankRotations Classic'
+light.version = 'r300'
+light.color = 'f5deb3'
+light.color2 = 'ebbd68'
+light.color3 = 'ebdec2'
+light.fontColor = '424242' -- light.interface.color.grey
+light.ready = false
+light.settings_ready = false
+light.ready_callbacks = {}
+light.protected = false
+light.adv_protected = false
+-- light.libcc = LibStub("LibClassicCasterino")
+light.savedHealTarget = nil
+light.healthCooldown = {}
 
-function dank.on_ready(callback)
-    dank.ready_callbacks[callback] = callback
+function light.on_ready(callback)
+    light.ready_callbacks[callback] = callback
 end
 
 local libccstub = function(event, ...)
     return
 end
--- dank.libcc.RegisterCallback(dank.name,"UNIT_SPELLCAST_START", libccstub)
--- UnitCastingInfo = function(unit) return dank.libcc:UnitCastingInfo(unit) end
--- UnitChannelInfo = function(unit) return dank.libcc:UnitChannelInfo(unit) end
+-- light.libcc.RegisterCallback(light.name,"UNIT_SPELLCAST_START", libccstub)
+-- UnitCastingInfo = function(unit) return light.libcc:UnitCastingInfo(unit) end
+-- UnitChannelInfo = function(unit) return light.libcc:UnitChannelInfo(unit) end

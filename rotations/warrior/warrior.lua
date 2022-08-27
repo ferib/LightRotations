@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local function combat()
     if castable(SB.HeroicStrike, 'target') then
@@ -16,8 +16,8 @@ local function resting()
     end
 end
 
-dank.rotation.register({
-    class = dank.rotation.classes.warrior,
+light.rotation.register({
+    class = light.rotation.classes.warrior,
     name = 'warrior',
     label = 'Bundled Warrior',
     combat = combat,

@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation.spellbooks.hunter = {
+light.rotation.spellbooks.hunter = {
     AimedShot = {19434, 20900, 20901, 20902, 20903, 20904},
     ArcaneShot = {3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287},
     AspectOfTheBeast = 13161,
@@ -96,7 +96,7 @@ dank.rotation.spellbooks.hunter = {
     WyvernSting = {19386, 24132, 24133}
 }
 
-dank.rotation.spellbooks.hunter_pet = {
+light.rotation.spellbooks.hunter_pet = {
     Bite = {17253, 17255, 17256, 17257, 17258, 17259, 17260, 17261},
     Charge = {7371, 26177, 26178, 26179, 26201, 27685},
     Claw = {16827, 16828, 16829, 16830, 16831, 16832, 3010, 3009},

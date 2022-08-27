@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.console = {
+light.console = {
     debugLevel = 0,
     file = '',
     line = '',
@@ -61,18 +61,18 @@ consoleFrame:SetScript('OnMouseWheel', function(self, delta)
 end)
 
 -- display frame
-function dank.console.set_level(level)
+function light.console.set_level(level)
     level = tonumber(level) or 0
-    dank.console.debugLevel = level
-    dank.settings.store('debug_level', level)
+    light.console.debugLevel = level
+    light.settings.store('debug_level', level)
 end
 
-function dank.console.toggle(show)
-    if dank.console.logfile ~= nil then
+function light.console.toggle(show)
+    if light.console.logfile ~= nil then
         return
     end
     show = show
-    dank.settings.store('debug_show', show)
+    light.settings.store('debug_show', show)
     if show then
         consoleFrame:Show()
     else
@@ -89,15 +89,15 @@ local function join(...)
 end
 
 local colorize = function(color, msg)
-    if dank.console.logfile ~= nil then
+    if light.console.logfile ~= nil then
         return msg
     else
-        return dank.interface.colorize(color, msg)
+        return light.interface.colorize(color, msg)
     end
 end
 
 local last = false
-function dank.console.log_time(str)
+function light.console.log_time(str)
     local tm = GetTime()
     local sec = math.floor(tm)
     local milli = math.floor((tm - sec) * 1000)
@@ -109,39 +109,39 @@ function dank.console.log_time(str)
 
     local joined = string.format('%s %s', at, str)
     if last ~= joined then
-        dank.console.log(joined)
+        light.console.log(joined)
         last = joined
     end
 end
 
 -- TODO: rm LB?
-function dank.console.log(msg)
-    -- if dank.adv_protected and dank.console.logfile ~= nil then
-    --  WriteFile(dank.console.logfile, msg..'\r\n', true, true)
-    -- elseif dank.luabox and dank.console.logfile ~= nil then
-    --  __LB__.WriteFile(dank.console.logfile, msg..'\n', true)
+function light.console.log(msg)
+    -- if light.adv_protected and light.console.logfile ~= nil then
+    --  WriteFile(light.console.logfile, msg..'\r\n', true, true)
+    -- elseif light.luabox and light.console.logfile ~= nil then
+    --  __LB__.WriteFile(light.console.logfile, msg..'\n', true)
     -- else
     consoleFrame:AddMessage(msg)
     -- end
 end
 
-function dank.console.notice(...)
-    dank.console.log(date('%H:%M:%S', time()) .. '|cff91FF00[notice]|r ' .. join(...))
+function light.console.notice(...)
+    light.console.log(date('%H:%M:%S', time()) .. '|cff91FF00[notice]|r ' .. join(...))
 end
 
-function dank.console.debug(level, section, color, ...)
-    if dank.console.debugLevel >= level then
-        dank.console.log_time(string.format('%s %s', colorize(color, '[' .. section .. ']'), join(...)))
+function light.console.debug(level, section, color, ...)
+    if light.console.debugLevel >= level then
+        light.console.log_time(string.format('%s %s', colorize(color, '[' .. section .. ']'), join(...)))
     end
 end
 
-function dank.log(string, ...)
+function light.log(string, ...)
     local formatted = string.format(string, ...)
-    print('|cff' .. dank.color .. '[' .. dank.name .. ']|r ' .. formatted)
+    print('|cff' .. light.color .. '[' .. light.name .. ']|r ' .. formatted)
 end
 
-function dank.error(...)
-    print('|cff' .. dank.color .. '[' .. dank.name .. ']|r |cffc32425' .. join(...) .. '|r')
+function light.error(...)
+    print('|cff' .. light.color .. '[' .. light.name .. ']|r |cffc32425' .. join(...) .. '|r')
 end
 
 local function round(num, numDecimalPlaces)
@@ -149,7 +149,7 @@ local function round(num, numDecimalPlaces)
     return math.floor(num * mult + 0.5) / mult
 end
 
-function dank.format(value)
+function light.format(value)
     if tonumber(value) then
         return round(value, 2)
     else
@@ -157,13 +157,13 @@ function dank.format(value)
     end
 end
 
-dank.on_ready(function()
-    local debug_level = dank.settings.fetch('debug_level', nil)
-    dank.console.set_level(debug_level)
-    if dank.settings.fetch('_engine_enablelogfile', false) then
-        dank.console.logfile = dank.settings.fetch('_engine_logfilename', nil)
+light.on_ready(function()
+    local debug_level = light.settings.fetch('debug_level', nil)
+    light.console.set_level(debug_level)
+    if light.settings.fetch('_engine_enablelogfile', false) then
+        light.console.logfile = light.settings.fetch('_engine_logfilename', nil)
     end
-    local toggle = dank.settings.fetch('debug_show', false)
-    dank.console.toggle(toggle)
-    dank.console.log("Welcome!")
+    local toggle = light.settings.fetch('debug_show', false)
+    light.console.toggle(toggle)
+    light.console.log("Welcome!")
 end)

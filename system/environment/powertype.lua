@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local powerType = {}
 
@@ -54,7 +54,7 @@ function powerType:tomax()
     return tomax or 0
 end
 
-function dank.environment.conditions.powerType(unit, power_type, power_type_name)
+function light.environment.conditions.powerType(unit, power_type, power_type_name)
     return setmetatable({
         unitID = unit.unitID,
         type = power_type,
@@ -63,15 +63,15 @@ function dank.environment.conditions.powerType(unit, power_type, power_type_name
         __index = function(t, k)
             if powerType[k] then
                 local result = powerType[k](t)
-                dank.console.debug(4, 'power', 'blue',
-                    t.unitID .. '.power.' .. t.type .. '.' .. k .. ' = ' .. dank.format(result))
+                light.console.debug(4, 'power', 'blue',
+                    t.unitID .. '.power.' .. t.type .. '.' .. k .. ' = ' .. light.format(result))
                 return result
             end
         end,
         __unm = function(t)
             local result = powerType['actual'](t)
-            dank.console.debug(4, 'power', 'blue',
-                t.unitID .. '.power.' .. t.type_name .. '.actual' .. ' = ' .. dank.format(result))
+            light.console.debug(4, 'power', 'blue',
+                t.unitID .. '.power.' .. t.type_name .. '.actual' .. ' = ' .. light.format(result))
             return result
         end
     })

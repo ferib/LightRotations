@@ -1,7 +1,7 @@
-local addon, dank = ...
+local addon, light = ...
 
 local health = {}
-local UnitHealth = dank.environment.UnitHealth
+local UnitHealth = light.environment.UnitHealth
 
 function health:percent()
     return UnitHealth(self.unitID) / UnitHealthMax(self.unitID) * 100
@@ -23,7 +23,7 @@ function health:max()
     return UnitHealthMax(self.unitID)
 end
 
-function dank.environment.conditions.health(unit, called)
+function light.environment.conditions.health(unit, called)
     return setmetatable({
         unitID = unit.unitID
     }, {

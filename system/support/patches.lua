@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local function hide_block(...)
     StaticPopup1:Hide()
@@ -76,6 +76,6 @@ end
 
 -- remove taint popup, might happen during the 'unlocking loop' for basic unlockers
 --
-dank.event.register("MACRO_ACTION_FORBIDDEN", hide_block)
-dank.event.register("ADDON_ACTION_FORBIDDEN", hide_block)
-dank.event.register("ADDON_ACTION_BLOCKED", hide_block)
+light.event.register("MACRO_ACTION_FORBIDDEN", hide_block)
+light.event.register("ADDON_ACTION_FORBIDDEN", hide_block)
+light.event.register("ADDON_ACTION_BLOCKED", hide_block)

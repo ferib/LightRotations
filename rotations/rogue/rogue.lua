@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local inCombat = false
 
@@ -9,12 +9,12 @@ local function opener()
 		if target.in_range("Throw") then
 			cast("Throw")
 		--elseif target.in_range("Attack") then
-		else
+		elseif target.in_range("Sinister Strike") then -- melee range check
 			cast("Attack")
 		end
 	end
 end
-setfenv(opener, dank.environment.env)
+setfenv(opener, light.environment.env)
 
 local function combat()
     -- combat
@@ -23,6 +23,11 @@ local function combat()
     if not inCombat
 	--and target.in_range("Attack")
 	then cast("Attack") end
+
+	-- check if not in range
+	if not target.in_range("Sinister Strike") and target.in_range("Throw") and castable("Throw") then
+		cast("Throw")
+	end
 
 	-- add Gouge to get 1 combo point and recove energy or interrupt in spell casting?
 
@@ -50,8 +55,8 @@ local function resting()
 	if opener() then return end
 end
 
-dank.rotation.register({
-    class = dank.rotation.classes.rogue,
+light.rotation.register({
+    class = light.rotation.classes.rogue,
     name = 'rogue',
     label = 'Bundled Rogue',
     combat = combat,
@@ -59,7 +64,7 @@ dank.rotation.register({
 })
 
 
-dank.event.register("PLAYER_ENTER_COMBAT",
+light.event.register("PLAYER_ENTER_COMBAT",
                           function(...) inCombat = true end)
-dank.event.register("PLAYER_LEAVE_COMBAT",
+light.event.register("PLAYER_LEAVE_COMBAT",
                           function(...) inCombat = false end)

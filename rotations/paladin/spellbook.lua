@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation.spellbooks.paladin = {
+light.rotation.spellbooks.paladin = {
     Anticipation = {20096, 20097, 20098, 20099, 20100},
     Benediction = {20101, 20102, 20103, 20104, 20105},
     BlessingOfFreedom = 1044,

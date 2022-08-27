@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local spell = {}
 
@@ -7,7 +7,7 @@ function spell:cooldown()
     if not time or time == 0 then
         return 0
     end
-    local clip = dank.settings.fetch('_engine_castclip', 0)
+    local clip = light.settings.fetch('_engine_castclip', 0)
     local cd = (time + value - GetTime() - (select(4, GetNetStats()) / 1000)) - clip
     if cd > 0 then
         return cd
@@ -69,7 +69,7 @@ function spell:recharge()
 end
 
 function spell:lastcast()
-    local lastcast = dank.tmp.fetch('lastcast', false)
+    local lastcast = light.tmp.fetch('lastcast', false)
     return lastcast == self.spell
 end
 
@@ -97,16 +97,16 @@ function spell:current()
     return false
 end
 
-GetSpellName = dank.environment.GetSpellName
-function dank.environment.conditions.spell(unit)
+GetSpellName = light.environment.GetSpellName
+function light.environment.conditions.spell(unit)
     return setmetatable({
         unitID = unit.unitID
     }, {
         __index = function(self, key)
             if self.unitID then
                 local result = spell[key](self)
-                dank.console.debug(4, 'spell', 'indigo',
-                    self.unitID .. '.spell(' .. self.spell .. ').' .. key .. ' = ' .. dank.format(result))
+                light.console.debug(4, 'spell', 'indigo',
+                    self.unitID .. '.spell(' .. self.spell .. ').' .. key .. ' = ' .. light.format(result))
                 return result
             end
             return false
@@ -129,8 +129,8 @@ function dank.environment.conditions.spell(unit)
         end,
         __unm = function(t)
             local result = spell['cooldown'](t)
-            dank.console.debug(4, 'spell', 'indigo',
-                t.unitID .. '.spell(' .. t.spell .. ').cooldown = ' .. dank.format(result))
+            light.console.debug(4, 'spell', 'indigo',
+                t.unitID .. '.spell(' .. t.spell .. ').cooldown = ' .. light.format(result))
             return result
         end
     })

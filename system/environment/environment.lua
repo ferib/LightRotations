@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.environment = {
+light.environment = {
   conditions = { },
   hooks = { },
   unit_cache = { },
@@ -14,15 +14,15 @@ local function UnitHealth(unit)
   -- if the unit is on cooldown then its health hasn't been updated yet so..
   -- lowest shouldn't be selecting it. and. the health checking in a CR
   -- shouldn't see the stale health value. so report MaxHealth instead.
-  if dank.healthCooldown[unit] ~= nil then
-    if dank.healthCooldown[unit] > GetTime() then
-      dank.console.debug(1, 'engine', 'engine', string.format('unit %s (health/max %s/%s) is on cooldown', UnitName(unit), _G.UnitHealth(unit), UnitHealthMax(unit)))
+  if light.healthCooldown[unit] ~= nil then
+    if light.healthCooldown[unit] > GetTime() then
+      light.console.debug(1, 'engine', 'engine', string.format('unit %s (health/max %s/%s) is on cooldown', UnitName(unit), _G.UnitHealth(unit), UnitHealthMax(unit)))
       return UnitHealthMax(unit)
     end
   end
   return _G.UnitHealth(unit)
 end
-dank.environment.UnitHealth = UnitHealth
+light.environment.UnitHealth = UnitHealth
 
 local GetSpellName = function(spellid)
   local rank = GetSpellSubtext(spellid)
@@ -32,47 +32,47 @@ local GetSpellName = function(spellid)
   end
   return spellname
 end
-dank.environment.GetSpellName = GetSpellName
+light.environment.GetSpellName = GetSpellName
 
-dank.environment.env = setmetatable(env, {
+light.environment.env = setmetatable(env, {
   __index = function(_env, called)
     local ds = debugstack(2, 1, 0)
     local file, line = string.match(ds, '^.-\(%a-%.lua):(%d+):.+$')
-    dank.console.file = file
-    dank.console.line = line
-    if dank.environment.logical.validate(called) then
-      if not dank.environment.unit_cache[called] then
-        dank.environment.unit_cache[called] = dank.environment.conditions.unit(called)
+    light.console.file = file
+    light.console.line = line
+    if light.environment.logical.validate(called) then
+      if not light.environment.unit_cache[called] then
+        light.environment.unit_cache[called] = light.environment.conditions.unit(called)
       end
-      return dank.environment.unit_cache[called]
-    elseif dank.environment.virtual.validate(called) then
-      local resolved, virtual_type = dank.environment.virtual.resolve(called)
+      return light.environment.unit_cache[called]
+    elseif light.environment.virtual.validate(called) then
+      local resolved, virtual_type = light.environment.virtual.resolve(called)
       if virtual_type == 'unit' then
-        if not dank.environment.unit_cache[resolved] then
-          dank.environment.unit_cache[resolved] = dank.environment.conditions.unit(resolved)
+        if not light.environment.unit_cache[resolved] then
+          light.environment.unit_cache[resolved] = light.environment.conditions.unit(resolved)
         end
-        return dank.environment.unit_cache[resolved]
+        return light.environment.unit_cache[resolved]
       elseif virtual_type == 'group' then
-        if not dank.environment.group_cache then
-          dank.environment.group_cache = dank.environment.conditions.group()
+        if not light.environment.group_cache then
+          light.environment.group_cache = light.environment.conditions.group()
         end
-        return dank.environment.group_cache
+        return light.environment.group_cache
       end
-    elseif dank.environment.hooks[called] then
-      if not dank.environment.hook_cache[called] then
-        dank.environment.hook_cache[called] = dank.environment.hooks[called]
+    elseif light.environment.hooks[called] then
+      if not light.environment.hook_cache[called] then
+        light.environment.hook_cache[called] = light.environment.hooks[called]
       end
-      return dank.environment.hook_cache[called]
+      return light.environment.hook_cache[called]
     end
     return _G[called]
   end
 })
 
-function dank.environment.hook(func)
-  setfenv(func, dank.environment.env)
+function light.environment.hook(func)
+  setfenv(func, light.environment.env)
 end
 
-function dank.environment.iterator(raw)
+function light.environment.iterator(raw)
   local members = GetNumGroupMembers()
   local group_type = IsInRaid() and 'raid' or IsInGroup() and 'party' or 'solo'
   local index = 0
@@ -96,17 +96,17 @@ function dank.environment.iterator(raw)
       if raw then
         return called
       end
-      if not dank.environment.unit_cache[called] then
-        dank.environment.unit_cache[called] = dank.environment.conditions.unit(called)
+      if not light.environment.unit_cache[called] then
+        light.environment.unit_cache[called] = light.environment.conditions.unit(called)
       end
-      return dank.environment.unit_cache[called]
+      return light.environment.unit_cache[called]
     end
   end
 end
 
-dank.environment.hooks.each_member = dank.environment.iterator
+light.environment.hooks.each_member = light.environment.iterator
 
-dank.environment.unit_buff = function(target, spell, owner)
+light.environment.unit_buff = function(target, spell, owner)
   local buff, count, caster, expires, spellID
   local i = 0; local go = true
   while i <= 40 and go do
@@ -121,7 +121,7 @@ dank.environment.unit_buff = function(target, spell, owner)
   return buff, count, duration, expires, caster, stealable
 end
 
-dank.environment.unit_debuff = function(target, spell, owner)
+light.environment.unit_debuff = function(target, spell, owner)
   local debuff, count, caster, expires, spellID
   local i = 0; local go = true
   while i <= 40 and go do
@@ -136,7 +136,7 @@ dank.environment.unit_debuff = function(target, spell, owner)
   return debuff, count, duration, expires, caster
 end
 
-dank.environment.unit_reverse_debuff = function(target, candidates)
+light.environment.unit_reverse_debuff = function(target, candidates)
   local debuff, count, caster, expires, spellID
   local i = 0; local go = true
   while i <= 40 and go do

@@ -1,7 +1,7 @@
 ## Interface: 11302
-## Title: |cffebdec2Dank|r
-## Notes: AddOn
-## SavedVariablesPerCharacter: Dank
+## Title: |cffebdec2Light|r
+## Notes: May the light be with you!
+## SavedVariablesPerCharacter: Light
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 ## Version: 1.0.0
@@ -21,4 +21,4 @@ libs\LibDraw-1.0\LibDraw.lua
 libs\LibBossIDs-1.0\LibBossIDs-1.0.lua
 libs\json\json.lua
 libs\lua-multipart\multipart.lua
-dank.xml
+light.xml

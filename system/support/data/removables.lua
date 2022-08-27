@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.data.removables = {
+light.data.removables = {
     curse = {
         -- https://classic.wowhead.com/npc-abilities/dispel-type:2
         [16231] = {

@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation.spellbooks.druid = {
+light.rotation.spellbooks.druid = {
     AbolishPoison = 2893,
     AquaticForm = 1066,
     Barkskin = 22812,

@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local enemies = {}
 local enemies_cache = {}
@@ -40,7 +40,7 @@ function enemies:around(distance)
     return enemies_around
 end
 
-function dank.environment.conditions.enemies()
+function light.environment.conditions.enemies()
     return setmetatable({}, {
         __index = function(t, k)
             return enemies[k](t)
@@ -50,7 +50,7 @@ end
 
 local function add_enemy(unitID)
     if not enemies_cache[unitID] and not UnitIsFriend("player", unitID) then
-        enemies_cache[unitID] = dank.environment.conditions.unit(unitID)
+        enemies_cache[unitID] = light.environment.conditions.unit(unitID)
     end
 end
 
@@ -60,19 +60,19 @@ local function remove_enemy(unitID)
     end
 end
 
-dank.event.register("NAME_PLATE_UNIT_ADDED", function(...)
+light.event.register("NAME_PLATE_UNIT_ADDED", function(...)
     return add_enemy(...)
 end)
 
-dank.event.register("FORBIDDEN_NAME_PLATE_UNIT_ADDED", function(...)
+light.event.register("FORBIDDEN_NAME_PLATE_UNIT_ADDED", function(...)
     return add_enemy(...)
 end)
 
-dank.event.register("NAME_PLATE_UNIT_REMOVED", function(...)
+light.event.register("NAME_PLATE_UNIT_REMOVED", function(...)
     return remove_enemy(...)
 end)
 
-dank.event.register("FORBIDDEN_NAME_PLATE_UNIT_REMOVED", function(...)
+light.event.register("FORBIDDEN_NAME_PLATE_UNIT_REMOVED", function(...)
     return remove_enemy(...)
 end)
 

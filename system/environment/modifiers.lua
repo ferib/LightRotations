@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local modifiers = {}
 
@@ -38,7 +38,7 @@ function modifiers:ralt()
     return IsRightAltKeyDown() and GetCurrentKeyBoardFocus() == nil
 end
 
-dank.environment.hooks.modifier = setmetatable({}, {
+light.environment.hooks.modifier = setmetatable({}, {
     __index = function(t, k)
         return modifiers[k](t)
     end

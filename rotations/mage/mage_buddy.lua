@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local function combat()
     -- combat
@@ -8,8 +8,8 @@ local function resting()
     -- resting
 end
 
-dank.rotation.register({
-    class = dank.rotation.classes.mage,
+light.rotation.register({
+    class = light.rotation.classes.mage,
     name = 'mage_buddy',
     label = 'Bundled Mage Buddy',
     combat = combat,

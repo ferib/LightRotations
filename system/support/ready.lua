@@ -1,10 +1,10 @@
-local addon, dank = ...
+local addon, light = ...
 
 local ticker
 
 ticker = C_Timer.NewTicker(0.1, function()
-    if dank.settings_ready then
-        for _, callback in pairs(dank.ready_callbacks) do
+    if light.settings_ready then
+        for _, callback in pairs(light.ready_callbacks) do
             callback()
         end
         ticker:Cancel()

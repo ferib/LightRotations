@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-local UnitDebuff = dank.environment.unit_debuff
+local UnitDebuff = light.environment.unit_debuff
 
 local debuff = {}
 
@@ -52,14 +52,14 @@ function debuff:duration()
     return 0
 end
 
-function dank.environment.conditions.debuff(unit)
+function light.environment.conditions.debuff(unit)
     return setmetatable({
         unitID = unit.unitID
     }, {
         __index = function(self, arg)
             local result = debuff[arg](self)
-            dank.console.debug(4, 'debuff', 'teal', self.unitID .. '.debuff(' .. tostring(self.spell) .. ').' .. arg ..
-                ' = ' .. dank.format(result))
+            light.console.debug(4, 'debuff', 'teal', self.unitID .. '.debuff(' .. tostring(self.spell) .. ').' .. arg ..
+                ' = ' .. light.format(result))
             return result
         end,
         __call = function(self, arg)
@@ -74,8 +74,8 @@ function dank.environment.conditions.debuff(unit)
         end,
         __unm = function(t)
             local result = debuff['exists'](t)
-            dank.console.debug(4, 'debuff', 'teal',
-                t.unitID .. '.debuff(' .. tostring(t.spell) .. ').exists = ' .. dank.format(result))
+            light.console.debug(4, 'debuff', 'teal',
+                t.unitID .. '.debuff(' .. tostring(t.spell) .. ').exists = ' .. light.format(result))
             return debuff['exists'](t)
         end
     })

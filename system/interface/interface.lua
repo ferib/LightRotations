@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.interface = { }
+light.interface = { }
 
 -- OpenSans-Bold.ttf
 -- OpenSans-Regular.ttf
@@ -1594,7 +1594,7 @@ local icons = {
   ['yin-yang'] = 0xf6ad
 }
 
-dank.interface.loading_messages = {
+light.interface.loading_messages = {
   "Reticulating splines...",
   "Swapping time and space...",
   "Tokenizing real life...",
@@ -1641,6 +1641,6 @@ dank.interface.loading_messages = {
   "Yes, yes. Yes. Without the oops."
 }
 
-function dank.interface.icon(icon)
+function light.interface.icon(icon)
   return utf8(icons[icon])
 end

@@ -1,6 +1,6 @@
-local addon, dark_rotation = ...
+local addon, light = ...
 
-dark_rotation.rotation.spellbooks.priest = {
+light.rotation.spellbooks.priest = {
     AbolishDisease = {552, 522},
     Blackout = {15268, 15323, 15324, 15325, 15326},
     BlessedRecovery = {27811, 27815, 27816},

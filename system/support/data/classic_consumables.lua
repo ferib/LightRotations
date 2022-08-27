@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation.consumables = {
+light.rotation.consumables = {
 
     HealingPotionID = {8932, 13935, 4457, 16166, 18635, 3726, 13810, 3220, 13546, 5525, 1119, 6290, 4593, 21031, 11584,
                        7807, 17344, 12213, 2679, 7808, 5526, 16971, 1113, 22895, 5349, 1487, 1114, 8075, 8076, 2682,

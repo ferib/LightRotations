@@ -1,33 +1,33 @@
-local addon, dank = ...
+local addon, light = ...
 -- local rc = LibStub("LibRangeCheck-2.0")
 -- local disp = LibStub("LibDispellable-1.0")
-local UnitReverseDebuff = dank.environment.unit_reverse_debuff
+local UnitReverseDebuff = light.environment.unit_reverse_debuff
 
 local unit = {}
 local calledUnit
 
 function unit:buff()
-    return dank.environment.conditions.buff(self)
+    return light.environment.conditions.buff(self)
 end
 
 function unit:debuff()
-    return dank.environment.conditions.debuff(self)
+    return light.environment.conditions.debuff(self)
 end
 
 function unit:health()
-    return dank.environment.conditions.health(self)
+    return light.environment.conditions.health(self)
 end
 
 function unit:spell()
-    return dank.environment.conditions.spell(self)
+    return light.environment.conditions.spell(self)
 end
 
 function unit:power()
-    return dank.environment.conditions.power(self)
+    return light.environment.conditions.power(self)
 end
 
 function unit:enemies()
-    return dank.environment.conditions.enemies(self)
+    return light.environment.conditions.enemies(self)
 end
 
 function unit:alive()
@@ -63,7 +63,7 @@ function unit:guid()
 end
 
 function unit:canloot()
-    if dank.adv_protected then
+    if light.adv_protected then
         local obj = GetObjectWithGUID(UnitGUID(self.unitID))
         if obj ~= nil and UnitCanBeLooted(obj) then
             return true
@@ -73,7 +73,7 @@ function unit:canloot()
 end
 
 function unit:canskin()
-    if dank.adv_protected then
+    if light.adv_protected then
         local obj = GetObjectWithGUID(UnitGUID(self.unitID))
         if obj ~= nil and UnitCanBeSkinned(obj) then
             return true
@@ -84,7 +84,7 @@ end
 
 -- TODO: remove?
 function unit:distance()
-    --[[if dank.luaboxdev then
+    --[[if light.luaboxdev then
     if UnitExists(self.unitID) then
       local px, py, pz = __LB__.ObjectPosition('player')
       local tx, ty, tz = __LB__.ObjectPosition(self.unitID)
@@ -99,7 +99,7 @@ function unit:distance()
       return 100
     end
   else]] --
-    if dank.adv_protected then
+    if light.adv_protected then
         -- if ObjectExists(self.unitID) then
         --  local dist = GetDistanceBetweenObjects('player', self.unitID)
         --  if dist then
@@ -304,10 +304,10 @@ local function spell_castable(spell)
     local usable, noMana = IsUsableSpell(spell)
     local inRange = IsSpellInRange(spell, calledUnit.unitID)
     local onCooldown = false
-    if dank.healthCooldown[calledUnit.unitID] ~= nil and dank.healthCooldown[calledUnit.unitID] > GetTime() then
+    if light.healthCooldown[calledUnit.unitID] ~= nil and light.healthCooldown[calledUnit.unitID] > GetTime() then
         onCooldown = true
     end
-    dank.console.debug(1, 'engine', 'engine', string.format('in unit:castable unit %s onCooldown %s',
+    light.console.debug(1, 'engine', 'engine', string.format('in unit:castable unit %s onCooldown %s',
         UnitName(calledUnit.unitID), tostring(onCooldown)))
     if usable and inRange == 1 and not onCooldown then
         if spell_cooldown(spell) == 0 then
@@ -325,7 +325,7 @@ end
 
 local function check_removable(removable_type)
     local debuff, count, duration, expires, caster, found_debuff =
-        UnitReverseDebuff(calledUnit.unitID, dank.data.removables[removable_type])
+        UnitReverseDebuff(calledUnit.unitID, light.data.removables[removable_type])
     if debuff and (count == 0 or count >= found_debuff.count) and calledUnit.health.percent <= found_debuff.health then
         return unit
     end
@@ -335,7 +335,7 @@ end
 local function unit_removable(...)
     for i = 1, select('#', ...) do
         local removable_type, _ = select(i, ...)
-        if dank.data.removables[removable_type] then
+        if light.data.removables[removable_type] then
             local possible_unit = check_removable(removable_type)
             if possible_unit then
                 return possible_unit
@@ -449,7 +449,7 @@ function unit:target(...)
     return unit_target
 end
 
-function dank.environment.conditions.unit(unitID)
+function light.environment.conditions.unit(unitID)
     return setmetatable({
         unitID = unitID
     }, {
@@ -457,7 +457,7 @@ function dank.environment.conditions.unit(unitID)
             if t and k then
                 calledUnit = t
                 if unit[k] == nil then
-                    dank.error("unit:", k, " doesn't exist")
+                    light.error("unit:", k, " doesn't exist")
                 end
                 return unit[k](t, k2)
             end
@@ -465,21 +465,21 @@ function dank.environment.conditions.unit(unitID)
     })
 end
 
-local player_hook = dank.environment.conditions.unit('player')
+local player_hook = light.environment.conditions.unit('player')
 local player_spell_hook = player_hook['spell']
-dank.environment.hooks.spell = player_spell_hook
-dank.environment.hooks.buff = player_hook['buff']
-dank.environment.hooks.debuff = player_hook['debuff']
-dank.environment.hooks.power = player_hook['power']
-dank.environment.hooks.health = player_hook['health']
-dank.environment.hooks.talent = player_hook['talent']
-dank.environment.hooks.totem = player_hook['totem']
-dank.environment.hooks.enemies = player_hook['enemies']
+light.environment.hooks.spell = player_spell_hook
+light.environment.hooks.buff = player_hook['buff']
+light.environment.hooks.debuff = player_hook['debuff']
+light.environment.hooks.power = player_hook['power']
+light.environment.hooks.health = player_hook['health']
+light.environment.hooks.talent = player_hook['talent']
+light.environment.hooks.totem = player_hook['totem']
+light.environment.hooks.enemies = player_hook['enemies']
 
-dank.environment.hooks.castable = function(spell)
+light.environment.hooks.castable = function(spell)
     return player_spell_hook(spell)['castable']
 end
 
-dank.environment.hooks.lastcast = function(spell)
+light.environment.hooks.lastcast = function(spell)
     return player_spell_hook(spell)['lastcast']
 end

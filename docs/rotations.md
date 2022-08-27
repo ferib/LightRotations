@@ -8,7 +8,7 @@ Class rotation files are located at `/rotations/class_name/`, the directory usua
 
 Example template for a class rotations:
 ```lua
-local addon, dank = ...
+local addon, light = ...
 
 local function combat()
     -- combat routine
@@ -18,8 +18,8 @@ local function resting()
     -- resting routine
 end
 
-dank.rotation.register({
-  class = dank.rotation.classes.class_name, -- TODO set class
+light.rotation.register({
+  class = light.rotation.classes.class_name, -- TODO set class
   name = 'class_name',
   label = 'Demo Class',
 
@@ -132,7 +132,7 @@ unit.power:
 - `insanity`
 - `arcanecharges`
 - `fury`
-- `pain` 
+- `pain`
 
 unit.runes:
 - `count`
@@ -149,5 +149,7 @@ group:
 - `under`
 
 #### Examples
-Obtain player health `player.health.max`
-Obtain mana left of focus `focus.power.mana`
+Get player health `-player.health.max`
+Get player energy `-player.power.energy`
+Check if player has buff `player.buff('Power Word: Fortitude').any`
+Get mana left of focus `-focus.power.mana`

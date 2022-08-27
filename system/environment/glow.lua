@@ -1,7 +1,7 @@
-local addon, dank = ...
+local addon, light = ...
 
 local glow = {}
-dank.glow = glow
+light.glow = glow
 
 -- find spell in spellbar?
 
@@ -87,7 +87,7 @@ function glow.updateActionsList()
 end
 
 -- update cache on events
-dank.event.register("ACTIONBAR_SLOT_CHANGED", function(...)
+light.event.register("ACTIONBAR_SLOT_CHANGED", function(...)
     glow.updateActionsList()
 end)
 

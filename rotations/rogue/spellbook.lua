@@ -1,6 +1,6 @@
-local addon, dark_addon = ...
+local addon, light = ...
 
-dark_addon.rotation.spellbooks.rogue = {
+light.rotation.spellbooks.rogue = {
     AdrenalineRush = 13750,
     Aggression = {18427, 18428, 18429},
     Ambush = {8676, 8724, 8725, 11267, 11268, 11269},

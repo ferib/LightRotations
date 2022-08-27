@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation.spellbooks.shaman = {
+light.rotation.spellbooks.shaman = {
     AncestralHealing = {16176, 16235, 16240},
     AncestralKnowledge = {17485, 17486, 17487, 17488, 17489},
     AncestralSpirit = {2008, 20609, 20610, 20776, 20777},

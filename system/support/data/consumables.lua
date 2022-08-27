@@ -1,10 +1,10 @@
-local addon, dank = ...
+local addon, light = ...
 
 if usable(item.CombatHealingPotion) then
     return use(item.CombatHealingPotion)
 end
 
-dank.data.consumables = {
+light.data.consumables = {
     CombatHealingPotion = 18839,
     CombatManaPotion = 18841,
     CowardlyFlightPotion = 5632,

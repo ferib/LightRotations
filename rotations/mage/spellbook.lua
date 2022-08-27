@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation.spellbooks.mage = {
+light.rotation.spellbooks.mage = {
     AmplifyMagic = {1008, 8455, 10169, 10170},
     ArcaneBrilliance = {23028},
     ArcaneConcentration = {11213, 12574, 12575, 12576, 12577},

@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.rotation = {
+light.rotation = {
     classes = {
         druid = 11,
         hunter = 3,
@@ -20,49 +20,49 @@ dank.rotation = {
     active_rotation = false
 }
 
-function dank.rotation.register(config)
+function light.rotation.register(config)
     if config.gcd then
-        setfenv(config.gcd, dank.environment.env)
+        setfenv(config.gcd, light.environment.env)
     end
     if config.combat then
-        setfenv(config.combat, dank.environment.env)
+        setfenv(config.combat, light.environment.env)
     end
     if config.resting then
-        setfenv(config.resting, dank.environment.env)
+        setfenv(config.resting, light.environment.env)
     end
     if config.combat_movement then
-        setfenv(config.combat_movement, dank.environment.env)
+        setfenv(config.combat_movement, light.environment.env)
     end
-    dank.rotation.rotation_store[config.name] = config
+    light.rotation.rotation_store[config.name] = config
 end
 
-function dank.rotation.load(name)
+function light.rotation.load(name)
     local rotation
-    for _, rot in pairs(dank.rotation.rotation_store) do
+    for _, rot in pairs(light.rotation.rotation_store) do
         if rot.name == name then
             rotation = rot
         end
     end
 
     if rotation then
-        dank.settings.store('active_rotation', name)
-        dank.rotation.active_rotation = rotation
-        dank.interface.buttons.reset()
+        light.settings.store('active_rotation', name)
+        light.rotation.active_rotation = rotation
+        light.interface.buttons.reset()
         if rotation.interface then
             rotation.interface(rotation)
         end
-        if dank.settings.fetch("netload_rotation_release", nil) then
-            dank.log('Loaded rotation: ' .. name .. ' (network)')
+        if light.settings.fetch("netload_rotation_release", nil) then
+            light.log('Loaded rotation: ' .. name .. ' (network)')
         else
-            dank.log('Loaded rotation: ' .. name)
+            light.log('Loaded rotation: ' .. name)
         end
-        dank.interface.status('Ready...')
+        light.interface.status('Ready...')
     else
-        dank.error('Unable to load rotation: ' .. name)
+        light.error('Unable to load rotation: ' .. name)
     end
 end
 
-function dank.environment.selectrank(ranks, p)
+function light.environment.selectrank(ranks, p)
     local ispet = p or false
     if #ranks == 0 then
         return
@@ -76,15 +76,15 @@ end
 
 local rank_cache = {}
 
-GetSpellName = dank.environment.GetSpellName
-dank.environment.hooks['SB'] = setmetatable({}, {
+GetSpellName = light.environment.GetSpellName
+light.environment.hooks['SB'] = setmetatable({}, {
     __index = function(self, key)
         local _, _, class = UnitClass('player') -- TODO: Use a global...
-        local value = dank.rotation.spellbook_map[class][key]
+        local value = light.rotation.spellbook_map[class][key]
         if value then
             local spell_id = nil
             if type(value) == 'table' then
-                local rank = dank.environment.selectrank(value)
+                local rank = light.environment.selectrank(value)
                 if rank then
                     spell_namerank = GetSpellName(rank)
                     spell_name = GetSpellInfo(rank)
@@ -137,8 +137,8 @@ dank.environment.hooks['SB'] = setmetatable({}, {
     end,
     __call = function(self, key, rank)
         local _, _, class = UnitClass('player')
-        if dank.rotation.spellbook_map[class] then
-            local value = dank.rotation.spellbook_map[class][key]
+        if light.rotation.spellbook_map[class] then
+            local value = light.rotation.spellbook_map[class][key]
             if type(value) == 'table' then
                 local id = value[rank]
                 if not id then
@@ -153,8 +153,8 @@ dank.environment.hooks['SB'] = setmetatable({}, {
     end
 })
 
-dank.environment.hooks['Spell'] = dank.environment.hooks['SB']
-dank.environment.hooks['Spells'] = dank.environment.hooks['SB']
+light.environment.hooks['Spell'] = light.environment.hooks['SB']
+light.environment.hooks['Spells'] = light.environment.hooks['SB']
 
 local loading_wait = false
 
@@ -162,27 +162,27 @@ local timer
 local function init()
     if not loading_wait then
         timer = C_Timer.NewTicker(0.3, function()
-            if dank.protected then
-                dank.rotation.spellbook_map = {
-                    [1] = dank.rotation.spellbooks.warrior,
-                    [2] = dank.rotation.spellbooks.paladin,
-                    [3] = dank.rotation.spellbooks.hunter,
-                    [4] = dank.rotation.spellbooks.rogue,
-                    [5] = dank.rotation.spellbooks.priest,
-                    [7] = dank.rotation.spellbooks.shaman,
-                    [8] = dank.rotation.spellbooks.mage,
-                    [9] = dank.rotation.spellbooks.warlock,
-                    [11] = dank.rotation.spellbooks.druid
+            if light.protected then
+                light.rotation.spellbook_map = {
+                    [1] = light.rotation.spellbooks.warrior,
+                    [2] = light.rotation.spellbooks.paladin,
+                    [3] = light.rotation.spellbooks.hunter,
+                    [4] = light.rotation.spellbooks.rogue,
+                    [5] = light.rotation.spellbooks.priest,
+                    [7] = light.rotation.spellbooks.shaman,
+                    [8] = light.rotation.spellbooks.mage,
+                    [9] = light.rotation.spellbooks.warlock,
+                    [11] = light.rotation.spellbooks.druid
                 }
-                local active_rotation = dank.settings.fetch('active_rotation', false)
-                local netload_rotation_release = dank.settings.fetch('netload_rotation_release', false)
+                local active_rotation = light.settings.fetch('active_rotation', false)
+                local netload_rotation_release = light.settings.fetch('netload_rotation_release', false)
                 if active_rotation and netload_rotation_release then
                     RotationLoader:LoadRotation(active_rotation, netload_rotation_release)
                 elseif active_rotation then
-                    dank.rotation.load(active_rotation)
-                    dank.interface.status('Ready...')
+                    light.rotation.load(active_rotation)
+                    light.interface.status('Ready...')
                 else
-                    dank.interface.status('Load a rotation...')
+                    light.interface.status('Load a rotation...')
                 end
                 loading_wait = false
                 timer:Cancel()
@@ -191,7 +191,7 @@ local function init()
     end
 end
 
-dank.on_ready(function()
+light.on_ready(function()
     init()
     loading_wait = true
 end)

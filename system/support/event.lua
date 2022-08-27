@@ -1,24 +1,24 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.event = {
+light.event = {
     events = {},
     callbacks = {}
 }
 
 local frame = CreateFrame('frame')
 
-function dank.event.register(event, callback)
-    if not dank.event.events[event] then
+function light.event.register(event, callback)
+    if not light.event.events[event] then
         frame:RegisterEvent(event)
-        dank.event.events[event] = true
-        dank.event.callbacks[event] = {}
+        light.event.events[event] = true
+        light.event.callbacks[event] = {}
     end
-    table.insert(dank.event.callbacks[event], callback)
+    table.insert(light.event.callbacks[event], callback)
 end
 
 frame:SetScript('OnEvent', function(self, event, ...)
-    if dank.event.callbacks[event] then
-        for key, callback in ipairs(dank.event.callbacks[event]) do
+    if light.event.callbacks[event] then
+        for key, callback in ipairs(light.event.callbacks[event]) do
             callback(...)
         end
     end

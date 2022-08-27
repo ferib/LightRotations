@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local runes = {}
 
@@ -12,7 +12,7 @@ function runes:count()
     return runes_ready
 end
 
-function dank.environment.conditions.runes(unit)
+function light.environment.conditions.runes(unit)
     return setmetatable({
         unitID = unit.unitID
     }, {

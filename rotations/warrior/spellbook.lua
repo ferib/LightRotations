@@ -1,6 +1,6 @@
-local addon, dark_rotation = ...
+local addon, light = ...
 
-dark_rotation.rotation.spellbooks.warrior = {
+light.rotation.spellbooks.warrior = {
     AngerManagement = 12296,
     Anticipation = {12297, 12750, 12751, 12752, 12753},
     AxeSpecialization = {12700, 12781, 12783, 12784, 12785},

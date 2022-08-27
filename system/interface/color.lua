@@ -1,9 +1,9 @@
 -- http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
 -- https://github.com/EmmanuelOga/columns/blob/master/utils/color.lua
-local addon, dank = ...
+local addon, light = ...
 
 -- TODO: update colors to fit in the Wheat color palette, dark_color is +35% of color
-dank.interface.color = {
+light.interface.color = {
     red = '#c62828',
     dark_red = '#b71c1c',
     pink = '#F58CBA',
@@ -45,7 +45,7 @@ dank.interface.color = {
     warrior_brown = '#C79C6E'
 }
 
-dank.interface.color_string = {
+light.interface.color_string = {
     red = '|cfff44336%s|r',
     purple = '|cff9c27b0%s|r',
     indigo = '|cff5c6bc0%s|r',
@@ -54,31 +54,31 @@ dank.interface.color_string = {
     green = '|cff66bb6a%s|r',
     yellow = '|cffffee58%s|r',
     orange = '|cffffa726%s|r',
-    engine = '|cff' .. dank.color .. '%s|r'
+    engine = '|cff' .. light.color .. '%s|r'
 }
 
-function dank.interface.colorize(color, str)
-    if dank.interface.color_string[color] ~= nil then
-        return string.format(dank.interface.color_string[color], str)
+function light.interface.colorize(color, str)
+    if light.interface.color_string[color] ~= nil then
+        return string.format(light.interface.color_string[color], str)
     else
-        return string.format(dank.interface.color_string['engine'], str)
+        return string.format(light.interface.color_string['engine'], str)
     end
 end
 
-function dank.interface.color.ratio(color, ratio)
-    local r, g, b = dank.interface.color.hexToRgb(color)
-    local h, s, l, a = dank.interface.color.rgbToHsl(r, g, b, 1)
-    r, g, b = dank.interface.color.hslToRgb(h, s, l * ratio, 1)
-    return dank.interface.color.rgbToHex({r * 255, g * 255, b * 255})
+function light.interface.color.ratio(color, ratio)
+    local r, g, b = light.interface.color.hexToRgb(color)
+    local h, s, l, a = light.interface.color.rgbToHsl(r, g, b, 1)
+    r, g, b = light.interface.color.hslToRgb(h, s, l * ratio, 1)
+    return light.interface.color.rgbToHex({r * 255, g * 255, b * 255})
 end
 
-function dank.interface.color.hexToRgb(hex)
+function light.interface.color.hexToRgb(hex)
     hex = hex:gsub('#', '')
     return tonumber('0x' .. hex:sub(1, 2)) / 255, tonumber('0x' .. hex:sub(3, 4)) / 255,
         tonumber('0x' .. hex:sub(5, 6)) / 255
 end
 
-function dank.interface.color.rgbToHex(rgb)
+function light.interface.color.rgbToHex(rgb)
     local hexadecimal = '#'
     for key = 1, #rgb do
         local value = rgb[key]
@@ -98,7 +98,7 @@ function dank.interface.color.rgbToHex(rgb)
     return hexadecimal
 end
 
-function dank.interface.color.rgbToHsl(r, g, b, a)
+function light.interface.color.rgbToHsl(r, g, b, a)
     local max, min = math.max(r, g, b), math.min(r, g, b)
     local h, s, l
 
@@ -129,7 +129,7 @@ function dank.interface.color.rgbToHsl(r, g, b, a)
     return h, s, l, a or 1
 end
 
-function dank.interface.color.hue2rgb(p, q, t)
+function light.interface.color.hue2rgb(p, q, t)
     if t < 0 then
         t = t + 1
     end
@@ -148,7 +148,7 @@ function dank.interface.color.hue2rgb(p, q, t)
     return p
 end
 
-function dank.interface.color.hslToRgb(h, s, l, a)
+function light.interface.color.hslToRgb(h, s, l, a)
     local r, g, b
 
     if s == 0 then
@@ -162,15 +162,15 @@ function dank.interface.color.hslToRgb(h, s, l, a)
         end
         local p = 2 * l - q
 
-        r = dank.interface.color.hue2rgb(p, q, h + 1 / 3)
-        g = dank.interface.color.hue2rgb(p, q, h)
-        b = dank.interface.color.hue2rgb(p, q, h - 1 / 3)
+        r = light.interface.color.hue2rgb(p, q, h + 1 / 3)
+        g = light.interface.color.hue2rgb(p, q, h)
+        b = light.interface.color.hue2rgb(p, q, h - 1 / 3)
     end
 
     return r, g, b, a
 end
 
-function dank.interface.color.rgbToHsv(r, g, b, a)
+function light.interface.color.rgbToHsv(r, g, b, a)
     local max, min = math.max(r, g, b), math.min(r, g, b)
     local h, s, v
     v = max
@@ -201,7 +201,7 @@ function dank.interface.color.rgbToHsv(r, g, b, a)
     return h, s, v, a
 end
 
-function dank.interface.color.hsvToRgb(h, s, v, a)
+function light.interface.color.hsvToRgb(h, s, v, a)
     local r, g, b
 
     local i = Math.floor(h * 6);

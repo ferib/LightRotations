@@ -1,4 +1,4 @@
-local addon, dank = ...
+local addon, light = ...
 
 local builder = {}
 
@@ -518,12 +518,12 @@ local function buildElements(table, parent)
             tmp:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset)
 
             tmp:SetEventListener('OnValueChanged', function(this, event, checked)
-                dank.settings.store(table.key .. '_' .. element.key, checked)
+                light.settings.store(table.key .. '_' .. element.key, checked)
             end)
 
             tmp.checkBoxStyle = checkBoxStyle
 
-            tmp:SetChecked(dank.settings.fetch(table.key .. '_' .. element.key, element.default or false))
+            tmp:SetChecked(light.settings.fetch(table.key .. '_' .. element.key, element.default or false))
             tmp:SetText(element.text)
 
             if element.desc then
@@ -551,7 +551,7 @@ local function buildElements(table, parent)
             parent:AddChild(tmp_spin)
             tmp_spin:SetParent(parent.content)
             tmp_spin:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset)
-            tmp_spin:SetNumber(dank.settings.fetch(table.key .. '_' .. element.key, element.default))
+            tmp_spin:SetNumber(light.settings.fetch(table.key .. '_' .. element.key, element.default))
 
             if element.width then
                 tmp_spin.settings.width = element.width
@@ -578,7 +578,7 @@ local function buildElements(table, parent)
                 if not userInput then
                     return
                 end
-                dank.settings.store(table.key .. '_' .. element.key, tonumber(number))
+                light.settings.store(table.key .. '_' .. element.key, tonumber(number))
             end)
 
             local tmp_text = DiesalGUI:Create("FontString")
@@ -633,7 +633,7 @@ local function buildElements(table, parent)
                 tmp_spin.settings.shiftStep = element.shiftStep
             end
 
-            tmp_spin:SetNumber(dank.settings
+            tmp_spin:SetNumber(light.settings
                                    .fetch(table.key .. '_' .. element.key .. '.spin', element.default_spin or 0))
             if tmp_spin.SetStylesheet then
                 tmp_spin:SetStylesheet(spinnerStyleSheet)
@@ -644,7 +644,7 @@ local function buildElements(table, parent)
                 if not userInput then
                     return
                 end
-                dank.settings.store(table.key .. '_' .. element.key .. '.spin', tonumber(number))
+                light.settings.store(table.key .. '_' .. element.key .. '.spin', tonumber(number))
             end)
 
             local tmp_check = DiesalGUI:Create('Toggle')
@@ -655,10 +655,10 @@ local function buildElements(table, parent)
             tmp_check.checkBoxStyle = checkBoxStyle
 
             tmp_check:SetEventListener('OnValueChanged', function(this, event, checked)
-                dank.settings.store(table.key .. '_' .. element.key .. '.check', checked)
+                light.settings.store(table.key .. '_' .. element.key .. '.check', checked)
             end)
 
-            tmp_check:SetChecked(dank.settings.fetch(table.key .. '_' .. element.key .. '.check',
+            tmp_check:SetChecked(light.settings.fetch(table.key .. '_' .. element.key .. '.check',
                 element.default_check or false))
             tmp_check:SetText(element.text)
 
@@ -700,10 +700,10 @@ local function buildElements(table, parent)
             tmp_list:SetList(list, orderdKeys)
 
             tmp_list:SetEventListener('OnValueChanged', function(this, event, value)
-                dank.settings.store(table.key .. '_' .. element.key, value)
+                light.settings.store(table.key .. '_' .. element.key, value)
             end)
 
-            tmp_list:SetValue(dank.settings.fetch(table.key .. '_' .. element.key, element.default))
+            tmp_list:SetValue(light.settings.fetch(table.key .. '_' .. element.key, element.default))
 
             local tmp_text = DiesalGUI:Create("FontString")
             tmp_text:SetParent(parent.content)
@@ -789,10 +789,10 @@ local function buildElements(table, parent)
                 tmp_input:SetWidth(element.width)
             end
 
-            tmp_input:SetText(dank.settings.fetch(table.key .. '_' .. element.key, element.default or ''))
+            tmp_input:SetText(light.settings.fetch(table.key .. '_' .. element.key, element.default or ''))
 
             tmp_input:SetEventListener('OnEditFocusLost', function(this)
-                dank.settings.store(table.key .. '_' .. element.key, this:GetText())
+                light.settings.store(table.key .. '_' .. element.key, this:GetText())
             end)
 
             local tmp_text = DiesalGUI:Create("FontString")
@@ -913,7 +913,7 @@ function builder.buildGUI(template)
             profileButton:SetText("Create New Profile")
             profileButton:SetEventListener('OnClick', function()
 
-                local profiles = dank.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
+                local profiles = light.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
                     key = 'default',
                     text = 'Default'
                 }})
@@ -933,8 +933,8 @@ function builder.buildGUI(template)
                         key = pkey,
                         text = profileName
                     })
-                    dank.settings.store(template.key_orig .. '_' .. 'profiles', profiles)
-                    dank.settings.store(template.key_orig .. '_' .. 'profile', pkey)
+                    light.settings.store(template.key_orig .. '_' .. 'profiles', profiles)
+                    light.settings.store(template.key_orig .. '_' .. 'profile', pkey)
                     newWindow:Hide()
                     parent:Hide()
                     parent:Release()
@@ -944,7 +944,7 @@ function builder.buildGUI(template)
             end)
             profileInput:SetEventListener("OnEnterPressed", function()
 
-                local profiles = dank.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
+                local profiles = light.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
                     key = 'default',
                     text = 'Default'
                 }})
@@ -964,8 +964,8 @@ function builder.buildGUI(template)
                         key = pkey,
                         text = profileName
                     })
-                    dank.settings.store(template.key_orig .. '_' .. 'profiles', profiles)
-                    dank.settings.store(template.key_orig .. '_' .. 'profile', pkey)
+                    light.settings.store(template.key_orig .. '_' .. 'profiles', profiles)
+                    light.settings.store(template.key_orig .. '_' .. 'profile', pkey)
                     newWindow:Hide()
                     parent:Hide()
                     parent:Release()
@@ -1011,8 +1011,8 @@ function builder.buildGUI(template)
             deleteButton:SetStyle('frame', ButtonOver)
         end)
         deleteButton:SetEventListener('OnClick', function()
-            local selectedProfile = dank.settings.fetch(template.key_orig .. '_' .. 'profile', 'Default Profile')
-            local profiles = dank.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
+            local selectedProfile = light.settings.fetch(template.key_orig .. '_' .. 'profile', 'Default Profile')
+            local profiles = light.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
                 key = 'default',
                 text = 'Default'
             }})
@@ -1020,8 +1020,8 @@ function builder.buildGUI(template)
                 for i, p in ipairs(profiles) do
                     if p.key == selectedProfile then
                         profiles[i] = nil
-                        dank.settings.store(template.key_orig .. '_' .. 'profiles', profiles)
-                        dank.settings.store(template.key_orig .. '_' .. 'profile', 'default')
+                        light.settings.store(template.key_orig .. '_' .. 'profiles', profiles)
+                        light.settings.store(template.key_orig .. '_' .. 'profile', 'default')
                         parent:Hide()
                         parent:Release()
                         builder.buildGUI(template)
@@ -1032,11 +1032,11 @@ function builder.buildGUI(template)
             end
         end)
 
-        local profiles = dank.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
+        local profiles = light.settings.fetch(template.key_orig .. '_' .. 'profiles', {{
             key = 'default',
             text = 'Default'
         }})
-        local selectedProfile = dank.settings.fetch(template.key_orig .. '_' .. 'profile', 'default')
+        local selectedProfile = light.settings.fetch(template.key_orig .. '_' .. 'profile', 'default')
         local profile_dropdown = DiesalGUI:Create('Dropdown')
         parent:AddChild(profile_dropdown)
         profile_dropdown:SetParent(parent.footer)
@@ -1055,20 +1055,20 @@ function builder.buildGUI(template)
 
         -- profile_dropdown:SetEventListener('OnValueChanged', function(this, event, value)
         --   if selectedProfile ~= value then
-        --     dank.settings.store(template.key_orig .. '_' .. 'profile', value)
+        --     light.settings.store(template.key_orig .. '_' .. 'profile', value)
         --     parent:Hide()
         --     parent:Release()
         --     builder.buildGUI(template)
         --   end
         -- end)
 
-        profile_dropdown:SetValue(dank.settings.fetch(template.key_orig .. '_' .. 'profile', 'Default Profile'))
+        profile_dropdown:SetValue(light.settings.fetch(template.key_orig .. '_' .. 'profile', 'Default Profile'))
         -- function whChangedProfile(thisprofile)
-        --  profile_dropdown:SetValue(dank.settings.fetch(template.key_orig . .. '_' .. '.' .. thisprofile))
+        --  profile_dropdown:SetValue(light.settings.fetch(template.key_orig . .. '_' .. '.' .. thisprofile))
         --  if string.lower(list[thisprofile]) ~= string.lower(thisprofile) then
         --    return engine.alert.Notify("WaterHack", "Profile does not exist!")
         --  end
-        --    --dank.settings.store(template.key_orig .. '_' .. 'profile', thisprofile)
+        --    --light.settings.store(template.key_orig .. '_' .. 'profile', thisprofile)
         --  parent:Hide()
         --  parent:Release()
         --  builder.buildGUI(template)
@@ -1079,14 +1079,14 @@ function builder.buildGUI(template)
         end
 
     else
-        dank.settings.store(template.key_orig .. '_' .. 'profile', false)
+        light.settings.store(template.key_orig .. '_' .. 'profile', false)
     end
 
     if template.key_orig then
         parent:SetEventListener('OnDragStop', function(self, event, left, top)
-            dank.settings.store(template.key_orig .. '_' .. 'window', {left, top})
+            light.settings.store(template.key_orig .. '_' .. 'window', {left, top})
         end)
-        local left, top = unpack(dank.settings.fetch(template.key_orig .. '_' .. 'window', {false, false}))
+        local left, top = unpack(light.settings.fetch(template.key_orig .. '_' .. 'window', {false, false}))
         if left and top then
             parent.settings.left = left
             parent.settings.top = top
@@ -1101,7 +1101,7 @@ function builder.buildGUI(template)
     window.parent = parent
 
     if not template.color then
-        template.color = dank.color
+        template.color = light.color
     end
     spinnerStyleSheet['bar-background']['gradient'] = {'VERTICAL', template.color, ShadeColor(template.color, .1)}
     checkBoxStyle['enabled']['color'] = template.color
@@ -1153,13 +1153,13 @@ function builder.buildGUI(template)
     return window
 end
 
-dank.interface.builder = builder
+light.interface.builder = builder
 
-dank.on_ready(function()
+light.on_ready(function()
     local engine = {
         key = "_engine",
         title = 'DarkEngine',
-        subtitle = 'Build ' .. dank.version,
+        subtitle = 'Build ' .. light.version,
         color = '1F8FB5',
         profiles = false,
         width = 250,
@@ -1241,5 +1241,5 @@ dank.on_ready(function()
     }
     configWindow = builder.buildGUI(engine)
     configWindow.parent:Hide()
-    dank.econf = configWindow
+    light.econf = configWindow
 end)

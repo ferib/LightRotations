@@ -1,6 +1,6 @@
-local addon, dank = ...
+local addon, light = ...
 
-dank.data.food = {
+light.data.food = {
     AlteracMannaBiscuit = 19301,
     AlteracSwiss = 8932,
     BadEggNog = 17199,
