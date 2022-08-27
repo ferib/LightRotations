@@ -2,6 +2,7 @@
 -- https://github.com/EmmanuelOga/columns/blob/master/utils/color.lua
 local addon, dank = ...
 
+-- TODO: update colors to fit in the Wheat color palette, dark_color is +35% of color
 dank.interface.color = {
     red = '#c62828',
     dark_red = '#b71c1c',
@@ -15,11 +16,21 @@ dank.interface.color = {
     dark_blue = '#0d47a1',
     cyan = '#00838f',
     dark_cyan = '#006064',
-    teal = '#00695c',
-    dark_teal = '#004d40',
-    green = '#2e7d32',
-    dark_green = '#1b5e20',
-    lime = '#9e9d24',
+
+	--teal = '#00695c',
+    --dark_teal = '#004d40',
+	teal = '#d470a2',
+	dark_teal = '#a13069',
+
+	--green = '#2e7d32',
+    --dark_green = '#1b5e20',
+	--green = '#009b7d',
+	--dark_green = '#006451',
+
+	green = '#ee24e6', --'#f9aff6', -- '#ff5ccd', --'#ff2052',
+	dark_green = '#a50c9f', -- '#ee24e6', -- '#e1009c', --'#ff2052',
+
+	lime = '#9e9d24',
     dark_lime = '#827717',
     yellow = '#fdd835',
     dark_yellow = '#fbc02d',

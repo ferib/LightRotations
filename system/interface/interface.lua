@@ -10,7 +10,7 @@ local fontObject
 fontObject = CreateFont("dank_regular")
 fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", 14)
 
-fontObject = CreateFont("dank_bold")
+fontObject = CreateFont("dark_bold")
 fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", 14)
 
 fontObject = CreateFont("dank_icon")

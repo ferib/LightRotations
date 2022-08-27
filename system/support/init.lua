@@ -1,11 +1,12 @@
 local addon, dank = ...
 
-_G['dark_interface'] = dank
+_G['light_interface'] = dank
 dank.name = 'DankRotations Classic'
 dank.version = 'r300'
-dank.color = 'ebdec2'
-dank.color2 = 'ebdec2'
+dank.color = 'f5deb3'
+dank.color2 = 'ebbd68'
 dank.color3 = 'ebdec2'
+dank.fontColor = '424242' -- dank.interface.color.grey
 dank.ready = false
 dank.settings_ready = false
 dank.ready_callbacks = {}

@@ -29,7 +29,7 @@ consoleFrame:Hide()
 consoleFrame.background = consoleFrame:CreateTexture('background')
 consoleFrame.background:SetPoint('TOPLEFT', consoleFrame, 'TOPLEFT', -5, 5)
 consoleFrame.background:SetPoint('BOTTOMRIGHT', consoleFrame, 'BOTTOMRIGHT', 5, -5)
-consoleFrame.background:SetColorTexture(0, 0, 0, 0.75)
+consoleFrame.background:SetColorTexture(0.74, 0.6, 0.36, 0.75)
 
 consoleFrame.background2 = consoleFrame:CreateTexture('background')
 consoleFrame.background2:SetPoint('TOPLEFT', consoleFrame, 'TOPLEFT', -7, 7)

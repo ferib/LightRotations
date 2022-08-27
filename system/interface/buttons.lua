@@ -1,4 +1,4 @@
-local dank = _G['dark_interface']
+local dank = _G['light_interface']
 -- local addon, dank = ...
 
 dank.interface.buttons = {
@@ -18,7 +18,7 @@ fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", butto
 fontObject = CreateFont("dank_small")
 fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", 12)
 
-fontObject = CreateFont("dank_bold")
+fontObject = CreateFont("dark_bold")
 fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", button_size / 4)
 
 fontObject = CreateFont("dank_icon")
@@ -35,12 +35,14 @@ container_frame:SetScript('OnDragStop', container_frame.StopMovingOrSizing)
 
 container_frame.text = container_frame:CreateFontString()
 container_frame.text:SetAllPoints(true)
-container_frame.text:SetFontObject("dank_bold")
+container_frame.text:SetFontObject("dark_bold")
 container_frame.text:SetText('Drag Me!')
+local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+container_frame.text:SetTextColor(r, g, b, 1)
 container_frame.text:Hide()
 
 container_frame.background = container_frame:CreateTexture()
-container_frame.background:SetColorTexture(0, 0, 0, 0.75)
+container_frame.background:SetColorTexture(0.74, 0.6, 0.36, 0.75)
 container_frame.background:SetAllPoints(container_frame)
 container_frame.background:SetDrawLayer('BACKGROUND')
 
@@ -48,28 +50,30 @@ local tooltip_frame = CreateFrame('frame', 'dr_tooltip_frame', container_frame)
 
 tooltip_frame.text = tooltip_frame:CreateFontString()
 tooltip_frame.text:SetFontObject("dank_small")
+local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+tooltip_frame.text:SetTextColor(r, g, b, 1)
 tooltip_frame:SetFrameStrata('HIGH')
 
 tooltip_frame:SetWidth(100)
 tooltip_frame:SetHeight(100)
 
 tooltip_frame.background = tooltip_frame:CreateTexture()
-tooltip_frame.background:SetColorTexture(0, 0, 0, 0.75)
+tooltip_frame.background:SetColorTexture(0.74, 0.6, 0.36, 0.75)
 tooltip_frame.background:SetAllPoints(tooltip_frame)
 tooltip_frame.background:SetDrawLayer('BACKGROUND')
 
 tooltip_frame.gradient = tooltip_frame:CreateTexture()
 tooltip_frame.gradient:SetDrawLayer('ARTWORK')
 do
-    local minR, minG, minB = dank.interface.color.hexToRgb(dank.interface.color.grey)
-    local maxR, maxG, maxB = dank.interface.color.hexToRgb(dank.interface.color.dark_grey)
+    local minR, minG, minB = dank.interface.color.hexToRgb(dank.color)
+    local maxR, maxG, maxB = dank.interface.color.hexToRgb(dank.color2)
     tooltip_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
     tooltip_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
 end
 tooltip_frame.gradient:SetPoint("TOPLEFT", tooltip_frame, "TOPLEFT", button_padding, -button_padding)
 tooltip_frame.gradient:SetPoint("BOTTOMRIGHT", tooltip_frame, "BOTTOMRIGHT", -button_padding, button_padding)
 
--- dank_bold
+-- dark_bold
 local info_frame = CreateFrame('frame', 'dr_info_frame', container_frame)
 info_frame:SetPoint('BOTTOMLEFT', container_frame, 'TOPLEFT', 0, 2)
 info_frame:SetPoint('BOTTOMRIGHT', container_frame, 'TOPRIGHT', 0, 2)
@@ -83,16 +87,18 @@ info_frame:SetScript('OnDragStop', container_frame.StopMovingOrSizing)
 
 info_frame:SetHeight(button_size / 1.5)
 info_frame.background = info_frame:CreateTexture()
-info_frame.background:SetColorTexture(0, 0, 0, 0.75)
+--info_frame.background:SetColorTexture(0.74, 0.6, 0.36, 0.75)
+info_frame.background:SetColorTexture(0.74, 0.6, 0.36, 0.75) -- dark-ish what?
 info_frame.background:SetAllPoints(info_frame)
 info_frame.background:SetDrawLayer('BACKGROUND')
 
 info_frame.gradient = info_frame:CreateTexture()
 info_frame.gradient:SetDrawLayer('ARTWORK')
 do
-    local minR, minG, minB = dank.interface.color.hexToRgb(dank.interface.color.grey)
-    local maxR, maxG, maxB = dank.interface.color.hexToRgb(dank.interface.color.dark_grey)
-    info_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
+    local minR, minG, minB = dank.interface.color.hexToRgb(dank.color) --"#f5deb3") --dank.color)
+    local maxR, maxG, maxB = dank.interface.color.hexToRgb(dank.color2) --"#ebbd68") -- dank.color2)
+	info_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
+	-- 0.96, 0.87, 0.7
     info_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
 end
 info_frame.gradient:SetPoint("TOPLEFT", info_frame, "TOPLEFT", button_padding, -button_padding)
@@ -104,6 +110,8 @@ info_frame.text:SetPoint("BOTTOMRIGHT", info_frame, "BOTTOMRIGHT", 5, 0)
 
 info_frame.text:SetJustifyH('LEFT')
 info_frame.text:SetFontObject("dank_regular")
+local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+info_frame.text:SetTextColor(r, g, b, 1)
 info_frame.text:SetText('')
 
 info_frame.text_right = info_frame:CreateFontString()
@@ -112,12 +120,16 @@ info_frame.text_right:SetPoint("BOTTOMRIGHT", info_frame, "BOTTOMRIGHT", -5, 0)
 
 info_frame.text_right:SetJustifyH('RIGHT')
 info_frame.text_right:SetFontObject("dank_regular")
+local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+info_frame.text:SetTextColor(r, g, b, 1)
 info_frame.text_right:SetText('')
 
 dank.interface.status_text_override = false
 function dank.interface.status_override(text, duration, colorA, colorB)
     dank.interface.status_text_override = true
     info_frame.text:SetText(text)
+	local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+	info_frame.text:SetTextColor(r, g, b, 1)
     if not colorA or not colorB then
         colorA = dank.interface.color.teal
         colorB = dank.interface.color.dark_teal
@@ -130,13 +142,16 @@ function dank.interface.status_override(text, duration, colorA, colorB)
     end
     C_Timer.After(duration, function()
         do
-            local minR, minG, minB = dank.interface.color.hexToRgb(dank.interface.color.grey)
-            local maxR, maxG, maxB = dank.interface.color.hexToRgb(dank.interface.color.dark_grey)
+            local minR, minG, minB = dank.interface.color.hexToRgb(dank.color)
+            local maxR, maxG, maxB = dank.interface.color.hexToRgb(dank.color2)
             info_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
             info_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
         end
         dank.interface.status_text_override = false
         info_frame.text:SetText(dank.interface.status_text)
+		local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+		info_frame.text:SetTextColor(r, g, b, 1)
+
     end)
 end
 
@@ -185,7 +200,7 @@ function dank.interface.buttons.add(button)
     end
 
     if button.color2 then
-        frame.background:setColor('#ffffff')
+        frame.background:setColor(dank.fontColor)
         frame.background:setGradient(button.color, button.color2)
     else
         frame.background:setColor(button.color)
@@ -199,7 +214,9 @@ function dank.interface.buttons.add(button)
 
     frame.text = frame:CreateFontString()
     frame.text:SetAllPoints(true)
-    frame.text:SetFontObject("dank_bold")
+    frame.text:SetFontObject("dark_bold")
+	local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+	frame.text:SetTextColor(r, g, b, 1)
     frame.text:SetText(button.label)
 
     button.frame = frame
@@ -217,6 +234,8 @@ function dank.interface.buttons.add(button)
         local x, y = GetCursorPosition()
         tooltip_frame:Show()
         tooltip_frame.text:SetText(button.button.label)
+		local r, g, b = dank.interface.color.hexToRgb(dank.fontColor)
+		tooltip_frame.text:SetTextColor(r, g, b, 1)
         tooltip_frame:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -3)
         tooltip_frame.text:SetPoint("TOPLEFT", tooltip_frame, "TOPLEFT", 5, -5)
         tooltip_frame:SetWidth(tooltip_frame.text:GetStringWidth() + 11)
@@ -255,7 +274,8 @@ function dank.interface.buttons.add_toggle(button)
         state = false,
         set_color_on = function(self, ratio)
             if button.on.color2 then
-                self.frame.background:setColor('#ffffff')
+
+                self.frame.background:setColor(dank.fontColor) -- TODO
                 self.frame.background:setGradient(dank.interface.color.ratio(button.on.color, ratio),
                     dank.interface.color.ratio(button.on.color2, ratio))
             else
@@ -271,7 +291,7 @@ function dank.interface.buttons.add_toggle(button)
         end,
         set_color_off = function(self, ratio)
             if button.off.color2 then
-                self.frame.background:setColor('#ffffff')
+                self.frame.background:setColor(dank.fontColor)
                 self.frame.background:setGradient(dank.interface.color.ratio(button.off.color, ratio),
                     dank.interface.color.ratio(button.off.color2, ratio))
             else
@@ -303,7 +323,7 @@ function dank.interface.buttons.add_toggle(button)
             if state then
                 self.frame.text:SetText(button.on.label)
                 if button.on.color2 then
-                    self.frame.background:setColor('#ffffff')
+                    self.frame.background:setColor(dank.fontColor)
                     self.frame.background:setGradient(button.on.color, button.on.color2)
                 else
                     self.frame.background:setColor(button.on.color)
@@ -311,7 +331,7 @@ function dank.interface.buttons.add_toggle(button)
             else
                 self.frame.text:SetText(button.off.label)
                 if button.off.color2 then
-                    self.frame.background:setColor('#ffffff')
+                    self.frame.background:setColor(dank.fontColor)
                     self.frame.background:setGradient(button.off.color, button.off.color2)
                 else
                     self.frame.background:setColor(button.off.color)
@@ -352,7 +372,7 @@ function dank.interface.buttons.resize()
     fontObject = CreateFont("dank_regular")
     fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", button_size / 4)
 
-    fontObject = CreateFont("dank_bold")
+    fontObject = CreateFont("dark_bold")
     fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", button_size / 4)
 
     fontObject = CreateFont("dank_icon")
@@ -374,7 +394,7 @@ dank.on_ready(function()
     fontObject = CreateFont("dank_regular")
     fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Regular.ttf", button_size / 4)
 
-    fontObject = CreateFont("dank_bold")
+    fontObject = CreateFont("dark_bold")
     fontObject:SetFont("Interface\\Addons\\dank\\media\\OpenSans-Bold.ttf", button_size / 4)
 
     fontObject = CreateFont("dank_icon")
@@ -427,8 +447,8 @@ dank.on_ready(function()
         },
         off = {
             label = dank.interface.icon('toggle-off'),
-            color = dank.interface.color.grey,
-            color2 = dank.interface.color.dark_grey
+            color = dank.color, --interface.color.grey,
+            color2 = dank.color2, --interface.color.dark_grey
         }
     })
 
@@ -444,8 +464,8 @@ dank.on_ready(function()
         },
         off = {
             label = dank.interface.icon('clock'),
-            color = dank.interface.color.grey,
-            color2 = dank.interface.color.dark_grey
+            color = dank.color,
+            color2 = dank.color2
         }
     })
 
@@ -461,8 +481,8 @@ dank.on_ready(function()
         },
         off = {
             label = dank.interface.icon('hand-paper'),
-            color = dank.interface.color.grey,
-            color2 = dank.interface.color.dark_grey
+            color = dank.color,
+            color2 = dank.color2
         }
     })
 
@@ -478,8 +498,8 @@ dank.on_ready(function()
         },
         off = {
             label = dank.interface.icon('user'),
-            color = dank.interface.color.grey,
-            color2 = dank.interface.color.dark_grey
+            color = dank.color,
+            color2 = dank.color2
         }
     })
 
