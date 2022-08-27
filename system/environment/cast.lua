@@ -4,7 +4,6 @@ local addon, dank = ...
 
 function _CastSpellByName(spell, target)
     local target = target or "target"
-	_G['dark_interface'].glow.trigger(spell)
     if dank.adv_protected then
         -- if Unlock then
         Nn.Unlock("CastSpellByName", spell, target)
@@ -247,6 +246,7 @@ function dank.environment.hooks.cast(spell, target)
             end
         end
     end
+	dank.glow.trigger(spell)
 end
 
 function dank.environment.hooks.sequenceactive(sequence)

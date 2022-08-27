@@ -35,6 +35,7 @@ function glow.trigger(spell)
 
 	local duration = glow.durations[btnName]
 	ActionButton_ShowOverlayGlow(btn)
+	-- TODO: rm C_Timer and use clean queue?
 	C_Timer.After(duration, function(id)
 		ActionButton_HideOverlayGlow(btn)
 	end)
@@ -64,8 +65,9 @@ function glow.updateActionsList()
                     actionName = GetItemInfo(id)
                 elseif actionType == 'spell' or (actionType == 'macro' and id) then
                     actionName, _, _, castTime = GetSpellInfo(id)
-					actionRank = "(" .. GetSpellSubtext(id) .. ")"
-					print(string.sub(actionRank, 1, 5))
+					local rank = GetSpellSubtext(id) or ""
+					actionRank = "(" .. rank .. ")"
+					--print(string.sub(actionRank, 1, 5))
 					if actionRank == "()" or string.sub(actionRank, 1, 5) ~= "(Rank" then
 						actionRank = nil
 					end
