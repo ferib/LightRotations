@@ -1,11 +1,28 @@
 # ☠ LightRotations
 
-[LightRotations](https://github.com/ferib/LightRotations), yet another [DarkRotations](https://gitlab.com/dark_rotations) fork.
+[LightRotations](https://github.com/ferib/LightRotations) is a combat rotations framework based on [DarkRotations](https://gitlab.com/dark_rotations). The purpose of the framework is similar to something like WeakAuras2 as its goal is to enhance your combat gameplay, but it does so in a much different way. LightRotations allows you to easly create 'class profiles' aka '[combat rotations](./rotations/)' for a given class or spec, these combat rotations can then be used to assist you during your gameplay.
 
+### Example Use
+![in-game AddOn on a Rogue](./img/demo_rogue.jpg)
+
+The UI prompts which spells to cast in the UI as well as highlighting the spells in your action bars _(if found, does __not work with macros!__)_
+
+## in-game commands
+
+```
+/dr move		Locks and unlocks the button frame for moving
+/dr econf		Shows the core engine config window
+/dr load x		Loads the specified rotation name x
+/dr help		Display the list of known commands
+/dr list		List available rotations
+/dr toggle x	Toggles the on/off state of the specified button name x
+/dr debug lvl	Enable the debug console at the specific debug level (0-6)
+/dr size		Adjusts the size of the on-screen buttons/UI
+```
 
 ## ⚔️ Combat Rotations
 
-NOTE: The current state of the project includes none of my rotations as they are private,
+The current rotations included are a work in progress as I only recently got picked back up TBC, however, I tend to update these as I go.
 
 | Name | Class | Type | Dev | Status |
 |------|-------|------|-----|--------|
@@ -14,9 +31,10 @@ NOTE: The current state of the project includes none of my rotations as they are
 | Mage | Mage | | | 🔴 TODO |
 | Paladin | Paladin | | | 🔴 TODO |
 | Priest | Priest | | | 🔴 TODO |
-| Rogue | Rogue | | | 🔴 TODO |
+| [Rogue](rotations/rogue/rogue.lua) | Rogue _(Low lvl)_ | Basic | [ferib](https://github.com/ferib) | 🟠 Lvl 1-10 |
 | Shaman | Shaman | | | 🔴 TODO |
-| [Dotlock](#) | Warlock _(affliction)_ | Advanced | [ferib](https://github.com/ferib) |  🟠 WIP _(private)_ |
+| ~~Warlock~~ | Warlock | Basic | [ferib](https://github.com/ferib) | 🔴 TODO _(58+ leveling build)_ |
+| ~~[Dotlock](#)~~ | Warlock _(affliction)_ | Advanced | [ferib](https://github.com/ferib) |  🟠 WIP _(private)_ |
 | Warrior | Warrior | | | 🔴 TODO |
 
 
