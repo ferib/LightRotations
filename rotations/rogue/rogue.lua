@@ -24,6 +24,14 @@ local function combat()
 	--and target.in_range("Attack")
 	then cast("Attack") end
 
+	-- check for evasion CD
+	if toggle("cooldowns", false) then
+		if -player.health.percent < 33 and castable(SB.Evasion) then
+			return cast(SB.Evasion)
+		end
+	end
+
+
 	-- check if not in range
 	if not target.in_range("Sinister Strike") and target.in_range("Throw") and castable("Throw") then
 		cast("Throw")
@@ -32,17 +40,22 @@ local function combat()
 	-- add Gouge to get 1 combo point and recove energy or interrupt in spell casting?
 
 	-- slice and dice if not already
-	if not player.buff("Slice and Dice").any and -player.power.combopoints >= 1 and -player.power.energy > 25 and castable(SB.SliceAndDice) and target.in_range("Slice and Dice") then
+	if not player.buff("Slice and Dice").any and -player.power.combopoints >= 1 and -player.power.energy > 25 and castable(SB.SliceAndDice, target) and target.in_range("Slice and Dice") then
 		return cast(SB.SliceAndDice, target)
 	end
 
+	-- expose Armor
+	if not target.debuff("Expose Armor") and -player.power.energy > 25 and -player.power.combopoints >= 1 and castable(SB.ExposeArmor, target) then
+		return cast(SB.ExposeArmor, target)
+	end
+
 	-- Eviscerate on 3+ while SliceAndDice already on
-	if -player.power.combopoints >= 3 and -player.power.energy > 35 and castable(SB.Eviscerate) and target.in_range("Eviscerate") then
+	if -player.power.combopoints >= 3 and -player.power.energy > 35 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
 		return cast(SB.Eviscerate, target)
 	end
 
 	-- sinister strike
-	if -player.power.energy > 45 and castable(SB.SinisterStrike) and target.in_range("Sinister Strike") then
+	if -player.power.energy > 45 and castable(SB.SinisterStrike, target) and target.in_range("Sinister Strike") then
         return cast(SB.SinisterStrike, target)
     end
 

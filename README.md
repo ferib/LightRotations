@@ -1,11 +1,16 @@
-# ☠ LightRotations
+# 💡 LightRotations
 
-[LightRotations](https://github.com/ferib/LightRotations) is a combat rotations framework based on [DarkRotations](https://gitlab.com/dark_rotations). The purpose of the framework is similar to something like WeakAuras2 as its goal is to enhance your combat gameplay, but it does so in a much different way. LightRotations allows you to easly create 'class profiles' aka '[combat rotations](./rotations/)' for a given class or spec, these combat rotations can then be used to assist you during your gameplay.
+[LightRotations](https://github.com/ferib/LightRotations) is a combat rotations framework based on [DarkRotations](https://gitlab.com/dark_rotations).
+
+![LightRotations UI](./img/lightrotations.jpg)
+
+## Summary
+The purpose of the framework is similar to something like WeakAuras2 as its goal is to enhance your combat gameplay, but it does so in a unique way. LightRotations allows you to easily create 'class profiles' aka '[combat rotations](./rotations/)' for a given class or spec, these combat rotations can then be used to assist you during your gameplay.
 
 ### Example Use
 ![in-game AddOn on a Rogue](./img/demo_rogue.jpg)
 
-The UI prompts which spells to cast in the UI as well as highlighting the spells in your action bars _(if found, does __not work with macros!__)_
+The UI prompts which spells to cast in the UI as well as highlights the spells in your action bars _(if found, does __not work with macros!__)_
 
 ## in-game commands
 
@@ -54,11 +59,13 @@ git clone https://github.com/ferib/LightRotations
 mv LightRotations Light
 ```
 
+### 🔐 PROTECTED Lua and Vanilla Wow
+Wow introduced protected Lua somewhere around patch 2.x, __LightRotations does NOT support PROTECTED Lua APIs__, however, we provide a way to [downgrade to Vanilla Wow](./docs/vanilla_wow.md).
+
+
 ## ⚠ Warning: AddOn Name Detection
 It is public knowledge that AddOn names are uploaded to the game server for analysis! Both folder/toc names *(`Light`, `Light.toc`)* and Lua globals `_G.Light` may be tracked.
 
-TODO: add auto renaming script?
-
 # ✍ Getting Started: Writing Combat Rotations
 
-To get started creating combat routines, check out the [docs](docs/readme.md).
+To get started creating combat rotations, check out the [docs](docs/readme.md).
