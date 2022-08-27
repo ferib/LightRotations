@@ -158,36 +158,38 @@ light.environment.hooks['Spells'] = light.environment.hooks['SB']
 
 local loading_wait = false
 
-local timer
+--local timer
 local function init()
     if not loading_wait then
-        timer = C_Timer.NewTicker(0.3, function()
-            if light.protected then
-                light.rotation.spellbook_map = {
-                    [1] = light.rotation.spellbooks.warrior,
-                    [2] = light.rotation.spellbooks.paladin,
-                    [3] = light.rotation.spellbooks.hunter,
-                    [4] = light.rotation.spellbooks.rogue,
-                    [5] = light.rotation.spellbooks.priest,
-                    [7] = light.rotation.spellbooks.shaman,
-                    [8] = light.rotation.spellbooks.mage,
-                    [9] = light.rotation.spellbooks.warlock,
-                    [11] = light.rotation.spellbooks.druid
-                }
-                local active_rotation = light.settings.fetch('active_rotation', false)
-                local netload_rotation_release = light.settings.fetch('netload_rotation_release', false)
-                if active_rotation and netload_rotation_release then
-                    RotationLoader:LoadRotation(active_rotation, netload_rotation_release)
-                elseif active_rotation then
-                    light.rotation.load(active_rotation)
-                    light.interface.status('Ready...')
-                else
-                    light.interface.status('Load a rotation...')
-                end
-                loading_wait = false
-                timer:Cancel()
-            end
-        end)
+        --timer = C_Timer.NewTicker(0.3, function()
+            --if light.protected then
+				light.rotation.spellbook_map = {
+					[1] = light.rotation.spellbooks.warrior,
+					[2] = light.rotation.spellbooks.paladin,
+					[3] = light.rotation.spellbooks.hunter,
+					[4] = light.rotation.spellbooks.rogue,
+					[5] = light.rotation.spellbooks.priest,
+					[7] = light.rotation.spellbooks.shaman,
+					[8] = light.rotation.spellbooks.mage,
+					[9] = light.rotation.spellbooks.warlock,
+					[11] = light.rotation.spellbooks.druid
+				}
+				local active_rotation = light.settings.fetch('active_rotation', false)
+				--local netload_rotation_release = light.settings.fetch('netload_rotation_release', false)
+				--if active_rotation then and netload_rotation_release then
+				--	RotationLoader:LoadRotation(active_rotation, netload_rotation_release)
+
+				-- auto load
+				if active_rotation then
+					light.rotation.load(active_rotation)
+					light.interface.status('Ready...')
+				else
+					light.interface.status('Load a rotation...')
+				end
+				loading_wait = false
+				--timer:Cancel()
+            --end
+        --end)
     end
 end
 
