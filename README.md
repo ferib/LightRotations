@@ -39,7 +39,7 @@ The current rotations included are a work in progress as I only recently got pic
 | [Rogue](rotations/rogue/rogue.lua) | Rogue _(Low lvl)_ | Basic | [ferib](https://github.com/ferib) | 🟠 Lvl 1-10 |
 | Shaman | Shaman | | | 🔴 TODO |
 | ~~Warlock~~ | Warlock | Basic | [ferib](https://github.com/ferib) | 🔴 TODO _(58+ leveling build)_ |
-| ~~[Dotlock](#)~~ | Warlock _(affliction)_ | Advanced | [ferib](https://github.com/ferib) |  🟠 WIP _(private)_ |
+| [Dotlock](./rotations/warlock/) | Warlock _(affliction)_ | Advanced | [ferib](https://github.com/ferib) | 🟢 Lvl 70 |
 | Warrior | Warrior | | | 🔴 TODO |
 
 
