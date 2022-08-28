@@ -1,3 +1,4 @@
 *.lua
 *.txt
 !warlock.lua
+!dotlock.lua

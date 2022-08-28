@@ -56,7 +56,7 @@
 	<Script file="rotations\shaman\shaman.lua" />
 	<Script file="rotations\warlock\warlock.lua" />
 	<Script file="rotations\warlock\dotlock.lua" />
-	<Script file="rotations\warlock\furrylock.lua" />
+	<!--<Script file="rotations\warlock\furrylock.lua" />-->
 	<Script file="rotations\warrior\warrior.lua" />
 
 	<!-- MISC -->
