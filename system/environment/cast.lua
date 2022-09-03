@@ -4,6 +4,7 @@ light.cast = { }
 
 function _CastSpellByName(spell, target)
     local target = target or "target"
+	local spell = spell or ""
 
 	--CastSpellByName(spell, target)
 	light.glow.trigger(spell)

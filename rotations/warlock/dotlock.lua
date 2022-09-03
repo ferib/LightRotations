@@ -57,10 +57,10 @@ setfenv(buffs, light.environment.env)
 
 local function opener()
     -- TODO: add check to prevent double cast!
-    if castable(SB.SiphonLife) and target.exists and target.alive and target.in_range("Siphon Life") and
+    if castable(SB.Corruption) and target.exists and target.alive and target.in_range("Corruption") and
     (GetTime() > OpenerCD) then
         OpenerCD = GetTime() + SpellCD
-        cast(SB.SiphonLife)
+        cast(SB.Corruption)
         --cast(SB.Torment) -- pet attack taunt
         return true
     end

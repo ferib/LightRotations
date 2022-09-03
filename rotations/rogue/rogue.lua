@@ -3,14 +3,15 @@ local addon, light = ...
 local inCombat = false
 
 local function opener()
-	if target.exists and target.alive and target.enemy then
+	if player.alive and target.exists and target.alive and target.enemy then
 		-- either throw or attack
 		-- TODO: castable check?
 		if target.in_range("Throw") then
 			cast("Throw")
+			return cast("Attack")
 		--elseif target.in_range("Attack") then
 		elseif target.in_range("Sinister Strike") then -- melee range check
-			cast("Attack")
+			return cast("Attack")
 		end
 	end
 end
@@ -45,9 +46,9 @@ local function combat()
 	end
 
 	-- expose Armor
-	if not target.debuff("Expose Armor") and -player.power.energy > 25 and -player.power.combopoints >= 1 and castable(SB.ExposeArmor, target) then
-		return cast(SB.ExposeArmor, target)
-	end
+	--if not target.debuff("Expose Armor") and -player.power.energy > 25 and -player.power.combopoints >= 1 and castable(SB.ExposeArmor, target) then
+	--	return cast(SB.ExposeArmor, target)
+	--end
 
 	-- Eviscerate on 3+ while SliceAndDice already on
 	if -player.power.combopoints >= 3 and -player.power.energy > 35 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
