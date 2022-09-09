@@ -27,7 +27,7 @@ The UI prompts which spells to cast in the UI as well as highlights the spells i
 
 ## ⚔️ Combat Rotations
 
-The current rotations included are a work in progress as I only recently got picked back up TBC, however, I tend to update these as I go.
+The current rotations included are a work in progress as I only recently picked TBC back up, however, I tend to update these as I go.
 
 | Name | Class | Type | Dev | Status |
 |------|-------|------|-----|--------|
