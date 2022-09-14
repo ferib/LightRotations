@@ -297,18 +297,21 @@ local function spell_cooldown(spell)
 end
 
 local function spell_castable(spell)
-    if type(spell) == 'table' then
-        spell = spell.namerank
-    end
-    spell = GetSpellInfo(spell)
-    local usable, noMana = IsUsableSpell(spell)
+	   if not type(spell) == "string" then
+		if type(spell) == 'table' then
+			spell = spell.namerank
+		end
+		spell = GetSpellInfo(spell)
+	end
+
+	local usable, noMana = IsUsableSpell(spell)
     local inRange = IsSpellInRange(spell, calledUnit.unitID)
     local onCooldown = false
     if light.healthCooldown[calledUnit.unitID] ~= nil and light.healthCooldown[calledUnit.unitID] > GetTime() then
         onCooldown = true
     end
     light.console.debug(1, 'engine', 'engine', string.format('in unit:castable unit %s onCooldown %s',
-        UnitName(calledUnit.unitID), tostring(onCooldown)))
+        tostring(UnitName(calledUnit.unitID)), tostring(onCooldown)))
     if usable and inRange == 1 and not onCooldown then
         if spell_cooldown(spell) == 0 then
             return true

@@ -1,4 +1,5 @@
-*.lua
+*_private.lua
 *.txt
 !warlock.lua
 !dotlock.lua
+!spellbook.lua
