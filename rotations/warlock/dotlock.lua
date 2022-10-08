@@ -218,7 +218,7 @@ local function combat()
         end
 
 		-- handle Haunt & Unstable Affliction
-		if target.debuff(SB.UnstableAffliction).down and castbale(SB.UnstableAffliction) then
+		if target.debuff(SB.UnstableAffliction).down and castable(SB.UnstableAffliction) then
 			return cast(SB.UnstableAffliction)
 		elseif target.debuff(SB.Haunt).down and castable(SB.Haunt) then
 			return cast(SB.Haunt)
