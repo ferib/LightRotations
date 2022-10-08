@@ -57,10 +57,10 @@ setfenv(buffs, light.environment.env)
 
 local function opener()
     -- TODO: add check to prevent double cast!
-    if castable(SB.Corruption) and target.exists and target.alive and target.in_range("Corruption") and
+    if castable(SB.UnstableAffliction) and target.exists and target.alive and target.in_range("Unstable Affliction") and
     (GetTime() > OpenerCD) then
         OpenerCD = GetTime() + SpellCD
-        cast(SB.Corruption)
+        cast(SB.UnstableAffliction)
         --cast(SB.Torment) -- pet attack taunt
         return true
     end
@@ -191,7 +191,8 @@ local function combat()
     --if modi
 
     -- lifetap on full hp when needed
-    if player.health.percent >= 98 and player.power.mana.percent < 95 then
+    if player.health.percent >= 85 and player.power.mana.percent < 95 or
+		player.power.mana.percent < 5 then -- tap until we feint
         return cast(SB.LifeTap)
     end
 
@@ -215,6 +216,13 @@ local function combat()
         and not DeadlockFound and player.buff(SB.ShadowTrance).up then -- and target.in_range("Shadow Bolt") then
             return cast(SB.ShadowBolt)
         end
+
+		-- handle Haunt & Unstable Affliction
+		if target.debuff(SB.UnstableAffliction).down and castbale(SB.UnstableAffliction) then
+			return cast(SB.UnstableAffliction)
+		elseif target.debuff(SB.Haunt).down and castable(SB.Haunt) then
+			return cast(SB.Haunt)
+		end
 
         -- single target dots
         if toggle("dagony") and target.debuff(SB.CurseOfAgony).down then
@@ -256,7 +264,7 @@ local function combat()
                                 local old = Nn.GetMouseover()
                                 Nn.SetMouseover(atar.id)
                                 --cast(SB.ShadowBolt)
-                                Nn.Unlock("CastSpellByName", "Shadow Bolt(Rank 11)", "mouseover")
+                                Nn.Unlock("CastSpellByName", "Shadow Bolt(Rank 12)", "mouseover")
                                 Nn.SetMouseover(old)
                                 print("Auto-Shadowbolted: " .. atar.name .. " (" .. atar.hp .. ")")
                                 return
@@ -266,11 +274,11 @@ local function combat()
                         -- check dot
                         castName = nil
                         if not atar.hasAgony and toggle("dagony", false) then
-                            castName = "Curse of Agony(Rank 7)"
+                            castName = "Curse of Agony(Rank 8)"
                         elseif not atar.hasCorruption and toggle("dcorruption", false) then
-                            castName = "Corruption(Rank 8)"
-                        elseif not atar.hasSiphon and toggle("interrupts", false) then
-                            castName = "Siphon Life(Rank 6)"
+                            castName = "Corruption(Rank 10)"
+                        --elseif not atar.hasSiphon and toggle("interrupts", false) then
+                        --    castName = "Siphon Life(Rank 6)"
                         end
 
                         if castName ~= nil then
