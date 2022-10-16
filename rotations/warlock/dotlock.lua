@@ -22,6 +22,7 @@ local CorruptionCD = 0
 local CurseOfAgonyCD = 0
 local LifeTapCD = 0
 local OpenerCD = 0
+local UnstableAfflictionCD = 0
 local DeadlockFound = false
 
 local LifeTapAmount = 899
@@ -191,7 +192,7 @@ local function combat()
     --if modi
 
     -- lifetap on full hp when needed
-    if player.health.percent >= 85 and player.power.mana.percent < 95 or
+    if player.health.percent >= 85 and player.power.mana.percent < 90 or
 		player.power.mana.percent < 5 then -- tap until we feint
         return cast(SB.LifeTap)
     end
@@ -217,12 +218,16 @@ local function combat()
             return cast(SB.ShadowBolt)
         end
 
-		-- handle Haunt & Unstable Affliction
-		if target.debuff(SB.UnstableAffliction).down and castable(SB.UnstableAffliction) then
-			return cast(SB.UnstableAffliction)
-		elseif target.debuff(SB.Haunt).down and castable(SB.Haunt) then
-			return cast(SB.Haunt)
-		end
+		-- handle Haunt & Unstable Affliction if NOT moving
+        local speed = GetUnitSpeed("player")
+        if speed == 0 then
+            if target.debuff(SB.UnstableAffliction).down and UnstableAfflictionCD < GetTime() and castable(SB.UnstableAffliction) then
+                UnstableAfflictionCD = GetTime() + SpellCD
+                return cast(SB.UnstableAffliction)
+            elseif target.debuff(SB.Haunt).down and castable(SB.Haunt) then
+                return cast(SB.Haunt)
+            end
+        end
 
         -- single target dots
         if toggle("dagony") and target.debuff(SB.CurseOfAgony).down then
@@ -264,7 +269,7 @@ local function combat()
                                 local old = Nn.GetMouseover()
                                 Nn.SetMouseover(atar.id)
                                 --cast(SB.ShadowBolt)
-                                Nn.Unlock("CastSpellByName", "Shadow Bolt(Rank 12)", "mouseover")
+                                Nn.Unlock("CastSpellByName", "Shadow Bolt(Rank 13)", "mouseover")
                                 Nn.SetMouseover(old)
                                 print("Auto-Shadowbolted: " .. atar.name .. " (" .. atar.hp .. ")")
                                 return
@@ -274,7 +279,7 @@ local function combat()
                         -- check dot
                         castName = nil
                         if not atar.hasAgony and toggle("dagony", false) then
-                            castName = "Curse of Agony(Rank 8)"
+                            castName = "Curse of Agony(Rank 9)"
                         elseif not atar.hasCorruption and toggle("dcorruption", false) then
                             castName = "Corruption(Rank 10)"
                         --elseif not atar.hasSiphon and toggle("interrupts", false) then
