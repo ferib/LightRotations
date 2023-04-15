@@ -1,4 +1,4 @@
-## Interface: 11302
+## Interface: 11403
 ## Title: |cffebdec2Light|r
 ## Notes: May the light be with you!
 ## SavedVariablesPerCharacter: Light

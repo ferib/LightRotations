@@ -58,7 +58,6 @@
 	<Script file="rotations\warlock\dotlock.lua" />
 	<!--<Script file="rotations\warlock\furrylock.lua" />-->
 	<Script file="rotations\warrior\warrior.lua" />
-	<script file="rotations\deathknight\deathknight_private.lua"/>
 
 	<!-- MISC -->
 	<Script file="system\support\patches.lua" />

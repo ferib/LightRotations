@@ -39,7 +39,7 @@ The current rotations included are a work in progress as I only recently picked 
 | [Rogue](rotations/rogue/rogue.lua) | Rogue _(Low lvl)_ | Basic | [ferib](https://github.com/ferib) | 🟠 Lvl 1-10 |
 | Shaman | Shaman | | | 🔴 TODO |
 | ~~Warlock~~ | Warlock | Basic | [ferib](https://github.com/ferib) | 🔴 TODO _(58+ leveling build)_ |
-| [Dotlock](./rotations/warlock/) | Warlock _(affliction)_ | Advanced | [ferib](https://github.com/ferib) | 🟢 Lvl 80 |
+| ~~[Dotlock](./rotations/warlock/)~~ | ~~Warlock _(affliction)_~~ | ~~Advanced~~ | [ferib](https://github.com/ferib) | ~~🟢 Lvl 80~~ |
 | Warrior | Warrior | | | 🔴 TODO |
 
 
@@ -55,8 +55,7 @@ Advanced installation for git users:
 
 ```bash
 cd C:\Program Files (x86)\World of Warcraft\_classic_\Interface\AddOns\
-git clone https://github.com/ferib/LightRotations
-mv LightRotations Light
+git clone https://github.com/ferib/LightRotations Light
 ```
 
 ### 🔐 PROTECTED Lua and Vanilla Wow
