@@ -19,5 +19,5 @@
 	<Script file="Objects\Tree.lua"/>
 	<Script file="Objects\Branch.lua"/>
 	<Script file="Objects\Bar.lua"/>
-  <Script file="Objects\Toggle.lua"/>
+  	<Script file="Objects\Toggle.lua"/>
 </Ui>

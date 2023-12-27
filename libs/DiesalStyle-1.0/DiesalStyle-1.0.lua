@@ -116,12 +116,26 @@ local function formatAlpha(alpha)
   return type(alpha) == 'number' and {alpha,alpha} or alpha
 end
 
+local function CreateColor(r,g,b,a)
+    return {
+      r = r,
+      g = g,
+      b = b,
+      a = a
+    }
+end
+
 -- error handling
 local function setColor(texture, r, g, b, a)
   local status, err = pcall( texture.SetColorTexture, texture, r, g, b, a )
   if not status then errorhandler('error in "'..(texture.style.name or 'texture')..'" '..texture.style.mode..' or alpha setting',r, g, b, a) end
 end
 local function setGradient(texture, orientation, r1, g1, b1, a1, r2, g2, b2, a2)
+  if not texture.SetGradientAlpha then
+    local status, err = pcall( texture.SetGradient, texture, orientation, CreateColor(r1, g1, b1, a1), CreateColor(r2, g2, b2, a2) )
+    if not status then errorhandler('error in "'..(texture.style.name or 'texture')..'" '..texture.style.mode..' or alpha setting.') end
+    return
+  end
   local status, err = pcall( texture.SetGradientAlpha, texture, orientation, r1, g1, b1, a1, r2, g2, b2, a2 )
   if not status then errorhandler('error in "'..(texture.style.name or 'texture')..'" '..texture.style.mode..' or alpha setting.') end
 end
@@ -496,9 +510,9 @@ do -- | Add LibSharedMedia |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 end
 do -- | Set Fonts |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   CreateFont("DiesalFontNormal")
-  DiesalFontNormal:SetFont( getMedia('font','calibrib'),11 )
+  DiesalFontNormal:SetFont( getMedia('font','calibrib'),11 ,'')
   CreateFont("DiesalFontPixel")
-  DiesalFontPixel:SetFont( getMedia('font','Standard0755'), 8 )
+  DiesalFontPixel:SetFont( getMedia('font','Standard0755'), 8 ,'')
   CreateFont("DiesalFontPixelOutLine")
   DiesalFontPixelOutLine:SetFont( getMedia('font','Standard0755'), 8, "OUTLINE, MONOCHROME" )
   DiesalFontPixelOutLine:SetSpacing(2)
@@ -611,7 +625,7 @@ function DiesalStyle:StyleTexture(texture,style)
     -- set mode
     texture.style.mode = 'image'
     -- clear any old settings
-    texture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1) -- clear gradient
+    setGradient(texture,'HORIZONTAL',1,1,1,1,1,1,1,1)  -- clear gradient
     texture:SetColorTexture(1,1,1,1) -- clear color
     -- apply settings
     texture:SetTexCoord(texture.style.image.coords[1],texture.style.image.coords[2],texture.style.image.coords[3],texture.style.image.coords[4])
@@ -636,7 +650,7 @@ function DiesalStyle:StyleTexture(texture,style)
     texture.style.mode = 'color'
     -- clear any old settings
     texture:SetTexture() -- clear image
-    texture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1) -- clear gradient
+    setGradient(texture,'HORIZONTAL',1,1,1,1,1,1,1,1) -- clear gradient
     -- apply settings
     local r,g,b = GetBlizzColorValues(texture.style.color)
     setColor(texture, r, g, b, texture.style.alpha[1])
@@ -645,7 +659,7 @@ function DiesalStyle:StyleTexture(texture,style)
     texture.style.mode = 'none!'
     -- clear the texture
     texture:SetTexture() -- clear image
-    texture:SetGradientAlpha('HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
+    setGradient(texture,'HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
     texture:SetColorTexture(0,0,0,0) -- clear color
   end
 end
@@ -734,8 +748,8 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 
     if texture.style.gradient.orientation == 'HORIZONTAL' then
       -- clear settings
-      leftTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
-      rightTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
+      setGradient(leftTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
+      setGradient(rightTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
       topTexture:SetColorTexture(1,1,1,1) -- clear color
       bottomTexture:SetColorTexture(1,1,1,1) -- clear color
 
@@ -752,8 +766,8 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
       -- clear settings
       leftTexture:SetColorTexture(1,1,1,1) -- clear color
       rightTexture:SetColorTexture(1,1,1,1) -- clear color
-      topTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
-      bottomTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
+      setGradient(topTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
+      setGradient(bottomTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
 
       -- aply settings
       r1,g1,b1 = GetBlizzColorValues(texture.style.gradient.color[2])
@@ -772,10 +786,10 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
     -- set mode
     texture.style.mode = 'color'
     -- clear any old settings
-    leftTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
-    rightTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
-    topTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
-    bottomTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)
+    setGradient(leftTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
+    setGradient(rightTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
+    setGradient(topTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
+    setGradient(bottomTexture,'HORIZONTAL',1,1,1,1,1,1,1,1)
     -- apply settings
     local r,g,b = GetBlizzColorValues(texture.style.color)
 
@@ -788,23 +802,23 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
     texture.style.mode = 'none!'
     -- clear the texture
     leftTexture:SetTexture() -- clear image
-    leftTexture:SetGradientAlpha('HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
+    setGradient(leftTexture,'HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
     leftTexture:SetColorTexture(0,0,0,0) -- clear color
     rightTexture:SetTexture() -- clear image
-    rightTexture:SetGradientAlpha('HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
+    setGradient(rightTexture,'HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
     rightTexture:SetColorTexture(0,0,0,0) -- clear color
     topTexture:SetTexture() -- clear image
-    topTexture:SetGradientAlpha('HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
+    setGradient(topTexture,'HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
     topTexture:SetColorTexture(0,0,0,0) -- clear color
     bottomTexture:SetTexture() -- clear image
-    bottomTexture:SetGradientAlpha('HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
+    setGradient(bottomTexture,'HORIZONTAL',0,0,0,0,0,0,0,0) -- clear gradient
     bottomTexture:SetColorTexture(0,0,0,0) -- clear color
   end
 end
 
 
 function DiesalStyle:StyleShadow(object,frame,style)
-  object.shadow = object.shadow or CreateFrame("Frame",nil,frame)
+  object.shadow = object.shadow or CreateFrame("Frame",nil,frame,BackdropTemplateMixin and "BackdropTemplate") --CreateFrame("Frame",nil,frame) 
   object.shadow:Show()
   if not object.shadow.style or style.clear then object.shadow.style = {} end
   local shadowStyle = object.shadow.style
@@ -828,8 +842,8 @@ function DiesalStyle:StyleShadow(object,frame,style)
   if shadowStyle.offset[3] then object.shadow:SetPoint("TOP", 0,shadowStyle.offset[3]) end
   if shadowStyle.offset[4] then object.shadow:SetPoint("BOTTOM", 0,-shadowStyle.offset[4]) end
 
-  -- object.shadow:SetBackdrop({ edgeFile = shadowStyle.edgeFile, edgeSize = shadowStyle.edgeSize })
-  -- object.shadow:SetBackdropBorderColor(shadowStyle.red, shadowStyle.green, shadowStyle.blue, shadowStyle.alpha)
+  object.shadow:SetBackdrop({ edgeFile = shadowStyle.edgeFile, edgeSize = shadowStyle.edgeSize })
+  object.shadow:SetBackdropBorderColor(shadowStyle.red, shadowStyle.green, shadowStyle.blue, shadowStyle.alpha)
 end
 --[[ Font style table format
 TODO style.offset ( offset|{ Left, Right, Top, Bottom })
@@ -847,6 +861,12 @@ function DiesalStyle:StyleFont(fontInstance,name,style)
   local filename, fontSize, flags = fontInstance:GetFont()
   local red,green,blue,alpha = fontInstance:GetTextColor()
   local lineSpacing = fontInstance:GetSpacing()
+   -- Fallback to DiesalFontNormal for Patch 8.1
+   if not filename then 
+    filename, fontSize, flags = DiesalFontNormal:GetFont()
+    red,green,blue,alpha = DiesalFontNormal:GetTextColor()
+    lineSpacing = DiesalFontNormal:GetSpacing()
+  end
   style.red, style.green, style.blue = DiesalTools.GetColor(style.color)
   -- ~~ Set Settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   style.filename = style.filename or filename
@@ -859,9 +879,7 @@ function DiesalStyle:StyleFont(fontInstance,name,style)
   style.alpha = style.alpha or alpha
   style.lineSpacing = style.lineSpacing or lineSpacing
   -- ~~ Apply Settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  if style.filename then
-    fontInstance:SetFont( style.filename, style.fontSize >= 1 and style.fontSize or 1, style.flags )
-  end
+  fontInstance:SetFont( style.filename, style.fontSize, style.flags )
   fontInstance:SetTextColor(style.red, style.green, style.blue, style.alpha)
   fontInstance:SetSpacing(style.lineSpacing)
 
