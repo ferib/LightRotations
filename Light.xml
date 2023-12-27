@@ -54,6 +54,7 @@
 	<Script file="rotations\hunter\hunter.lua" />
 	<Script file="rotations\rogue\rogue.lua" />
 	<Script file="rotations\shaman\shaman.lua" />
+	<Script file="rotations\shaman\elemental.lua" />
 	<Script file="rotations\warlock\warlock.lua" />
 	<Script file="rotations\warlock\dotlock.lua" />
 	<!--<Script file="rotations\warlock\furrylock.lua" />-->
