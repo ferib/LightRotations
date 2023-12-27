@@ -5,6 +5,18 @@ light.interface.buttons = {
     buttons = {}
 }
 
+local createColor = function(r,g,b,a)
+    return {
+      r = r or 0,
+      g = g or 0,
+      b = b or 0,
+      a = a or 1
+    }
+  end
+  local function SetGradient(tex, orientation, minR, minG, minB, maxR, maxG, maxB)
+    tex:SetGradient(orientation,createColor(minR, minG, minB),createColor(maxR, maxG, maxB))
+  end
+  
 local buttons = light.interface.buttons.buttons
 local button_size = 42
 local button_padding = 2
@@ -68,7 +80,7 @@ do
     local minR, minG, minB = light.interface.color.hexToRgb(light.color)
     local maxR, maxG, maxB = light.interface.color.hexToRgb(light.color2)
     tooltip_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
-    tooltip_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
+    SetGradient(tooltip_frame.gradient,'VERTICAL', maxR, maxG, maxB, minR, minG, minB)
 end
 tooltip_frame.gradient:SetPoint("TOPLEFT", tooltip_frame, "TOPLEFT", button_padding, -button_padding)
 tooltip_frame.gradient:SetPoint("BOTTOMRIGHT", tooltip_frame, "BOTTOMRIGHT", -button_padding, button_padding)
@@ -99,7 +111,7 @@ do
     local maxR, maxG, maxB = light.interface.color.hexToRgb(light.color2) --"#ebbd68") -- light.color2)
 	info_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
 	-- 0.96, 0.87, 0.7
-    info_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
+    SetGradient(info_frame.gradient,'VERTICAL', maxR, maxG, maxB, minR, minG, minB)
 end
 info_frame.gradient:SetPoint("TOPLEFT", info_frame, "TOPLEFT", button_padding, -button_padding)
 info_frame.gradient:SetPoint("BOTTOMRIGHT", info_frame, "BOTTOMRIGHT", -button_padding, button_padding)
@@ -138,14 +150,14 @@ function light.interface.status_override(text, duration, colorA, colorB)
         local minR, minG, minB = light.interface.color.hexToRgb(colorA)
         local maxR, maxG, maxB = light.interface.color.hexToRgb(colorB)
         info_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
-        info_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
+        SetGradient(info_frame.gradient,'VERTICAL', maxR, maxG, maxB, minR, minG, minB)
     end
     C_Timer.After(duration, function()
         do
             local minR, minG, minB = light.interface.color.hexToRgb(light.color)
             local maxR, maxG, maxB = light.interface.color.hexToRgb(light.color2)
             info_frame.gradient:SetColorTexture(1, 1, 1, 0.75)
-            info_frame.gradient:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
+            SetGradient(info_frame.gradient,'VERTICAL', maxR, maxG, maxB, minR, minG, minB)
         end
         light.interface.status_text_override = false
         info_frame.text:SetText(light.interface.status_text)
@@ -196,7 +208,7 @@ function light.interface.buttons.add(button)
         local minR, minG, minB = light.interface.color.hexToRgb(colorA)
         local maxR, maxG, maxB = light.interface.color.hexToRgb(colorB)
         self:SetColorTexture(1, 1, 1, 0.85)
-        self:SetGradient('VERTICAL', maxR, maxG, maxB, minR, minG, minB)
+        SetGradient(self,'VERTICAL', maxR, maxG, maxB, minR, minG, minB)
     end
 
     if button.color2 then
