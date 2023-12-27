@@ -13,16 +13,16 @@ local first_button
 local last_button
 
 fontObject = CreateFont("dark_regular")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", button_size / 4)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", button_size / 4, "")
 
 fontObject = CreateFont("dark_small")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", 12)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", 12, "")
 
 fontObject = CreateFont("dark_bold")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Bold.ttf", button_size / 4)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Bold.ttf", button_size / 4, "")
 
 fontObject = CreateFont("dark_icon")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\FontAwesomeProRegular.otf", button_size / 2)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\FontAwesomeProRegular.otf", button_size / 2, "")
 
 container_frame.moving = false
 container_frame:SetPoint('CENTER', UIParent)
@@ -370,13 +370,13 @@ function light.interface.buttons.resize()
     button_size = light.settings.fetch('button_size', 32)
 
     fontObject = CreateFont("dark_regular")
-    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", button_size / 4)
+    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", button_size / 4, "")
 
     fontObject = CreateFont("dark_bold")
-    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "OpenSans-Bold.ttf", button_size / 4)
+    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "OpenSans-Bold.ttf", button_size / 4, "")
 
     fontObject = CreateFont("dark_icon")
-    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\FontAwesomeProRegular.otf", button_size / 2)
+    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\FontAwesomeProRegular.otf", button_size / 2, "")
 
     for key, button in pairs(buttons) do
         local offset = (button.frame.index * button_size) + (button.frame.index * button_padding)
@@ -392,13 +392,13 @@ light.on_ready(function()
     button_size = light.settings.fetch('button_size', button_size)
 
     fontObject = CreateFont("dark_regular")
-    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", button_size / 4)
+    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", button_size / 4, "")
 
     fontObject = CreateFont("dark_bold")
-    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Bold.ttf", button_size / 4)
+    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Bold.ttf", button_size / 4, "")
 
     fontObject = CreateFont("dark_icon")
-    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\FontAwesomeProRegular.otf", button_size / 2)
+    fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\FontAwesomeProRegular.otf", button_size / 2, "")
 
     light.commands.register({
         command = 'move',

@@ -8,13 +8,13 @@ light.interface = { }
 local fontObject
 
 fontObject = CreateFont("dark_regular")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", 14)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "-Regular.ttf", 14, "")
 
 fontObject = CreateFont("dark_bold")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "OpenSans-Bold.ttf", 14)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "OpenSans-Bold.ttf", 14, "")
 
 fontObject = CreateFont("dark_icon")
-fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "FontAwesomeProRegular.otf", 18)
+fontObject:SetFont("Interface\\AddOns\\" .. light.name .. "\\media\\" .. light.fontFamily .. "FontAwesomeProRegular.otf", 18, "")
 
 local bytemarkers = { {0x7FF,192}, {0xFFFF,224}, {0x1FFFFF,240} }
 local function utf8(decimal)
