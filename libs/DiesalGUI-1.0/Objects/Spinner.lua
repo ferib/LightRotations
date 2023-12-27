@@ -199,6 +199,7 @@ local methods = {
 			self.bar:Show()
 			self.bar:SetWidth(width)
 		end
+		self.value = settings.number
 	end,
 	['SetTextColor'] = function(self,color,alpha)
 		alpha = alpha or 1
@@ -274,7 +275,7 @@ local function Constructor()
 	buttonUp:SetPoint('RIGHT')
 	buttonUp:SetScript("OnClick", function(this)
 		DiesalGUI:OnMouse(this,button)
-		PlaySound("gsTitleOptionExit")
+		PlaySound(799)
 		self:OnSpin(1)
 	end)
 	local buttonDown = self:CreateRegion("Button", 'buttonDown', frame)
@@ -282,7 +283,7 @@ local function Constructor()
 	buttonDown:SetPoint('RIGHT')
 	buttonDown:SetScript("OnClick", function(this)
 		DiesalGUI:OnMouse(this,button)
-		PlaySound("gsTitleOptionExit")
+		PlaySound(799)
 		self:OnSpin(-1)
 	end)
 

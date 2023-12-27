@@ -140,7 +140,7 @@ local methods = {
 	['AddMessage'] = function(self,msg)			
 		if not msg then return end	
 		self.scrollingMessageFrame:AddMessage(msg) 
-		ChatFrame1:AddMessage(self.scrollingMessageFrame:GetNumRegions()		)
+		-- ChatFrame1:AddMessage(self.scrollingMessageFrame:GetNumRegions()		)
 	end,
 	['SetText'] = function(self,txt)			
 		-- self.editBox:SetText(txt or '')			

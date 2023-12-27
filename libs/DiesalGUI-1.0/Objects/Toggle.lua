@@ -110,6 +110,7 @@ local methods = {
   end,
   ["SetText"] = function(self, text)
     self.fontString:SetText(text)
+    self.frame:SetHitRectInsets(0,-self.fontString:GetWidth(),0,0)
   end,
 }
 -- ~~| Button Constructor |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,6 +120,11 @@ local function Constructor()
   local fontString = frame:CreateFontString()
   self.frame    = frame
   self.fontString  = fontString
+
+  local c,a = 0.5,0.5
+  local tex = frame:CreateTexture(nil, "BACKGROUND")
+  tex:SetAllPoints()
+  tex:SetColorTexture(0, 0, 0, 0)
 
   -- ~~ Default Settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   self.defaults = {
@@ -152,9 +158,13 @@ local function Constructor()
   end)
   frame:SetScript('OnEnter', function(this)
     self:FireEvent("OnEnter")
+    tex:SetColorTexture(c, c, c, a)
+    -- SetCursor([[Interface\Cursor\Cast]])
   end)
   frame:SetScript('OnLeave', function(this)
     self:FireEvent("OnLeave")
+    tex:SetColorTexture(0, 0, 0, 0)
+    -- SetCursor(nil)
   end)
   frame:SetScript("OnDisable", function(this)
     self:FireEvent("OnDisable")
