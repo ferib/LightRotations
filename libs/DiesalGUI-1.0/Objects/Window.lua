@@ -9,6 +9,7 @@ local Colors = DiesalStyle.Colors
 local type, select, pairs, tonumber			= type, select, pairs, tonumber
 local floor, ceil = math.floor, math.ceil
 -- | WoW Upvalues |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 -- | Window |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 local Type 		= "Window"
 local Version 	= 14
@@ -25,16 +26,9 @@ local Stylesheet = {
 	['titleBar-color'] = {
 		type			= 'texture',
 		layer			= 'BACKGROUND',
-		color			= Colors.UI_400_GR[2],
+		color			= '000000',
 		alpha			= .95,
 	},
-  -- ['titleBar-background'] = {
-  --   type      = 'texture',
-  --   layer     = 'BACKGROUND',
-  --   gradient  = {'VERTICAL',Colors.UI_400_GR[1],Colors.UI_400_GR[2]},
-  --   alpha     = .95,
-  --   position  = {-1,-1,-1,0},
-  -- },
 	['titletext-Font'] = {
 		type			= 'font',
 		color			= 'd8d8d8',
@@ -193,8 +187,7 @@ local methods = {
 		local headerHeight 	= settings.header and settings.headerHeight or 0
 		local footerHeight 	= settings.footer and settings.footerHeight or 0
 
-		frame:SetMinResize(settings.minWidth,settings.minHeight)
-		frame:SetMaxResize(settings.maxWidth,settings.maxHeight)
+		frame:SetResizeBounds(settings.minWidth, settings.minHeight, settings.maxWidth, settings.maxHeight)
 
 		self:UpdatePosition()
 		self:UpdateSizers()
@@ -329,7 +322,7 @@ local function Constructor()
 	closeButton:SetPoint("TOPRIGHT", -1, 1)
 	closeButton:SetScript("OnClick", function(this,button)
 		DiesalGUI:OnMouse(this,button)
-		--PlaySound("gsTitleOptionExit")
+		PlaySound(799)
 		self:FireEvent("OnClose")
 		self:Hide()
 	end)

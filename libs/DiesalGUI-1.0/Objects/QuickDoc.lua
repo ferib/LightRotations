@@ -32,13 +32,15 @@ local doc = {
 		margin = {0,0,0,0},
 		padding = {0,0,0,0},
 		style = {},
-		{ type = 'single-line',	text = 'Editor',
-			font = nil.
+		{
+			type = 'single-line',
+			font = nil,
 			fontSize = 14,
 			text = 'Editor',
 		},
-		{ type = 'columns',	text = 'Editor',
-			font = nil.
+		{
+			type = 'columns',
+			font = nil,
 			fontSize = 14,
 			text = 'Editor',
 		},
@@ -59,63 +61,63 @@ local methods = {
 
 	end,
 	['BuildDoc'] = function(self,doc)
-		if #doc == 0 then error('BuildDoc(doc) doc requires atleast one section')
-		local settings = self.settings
-		-- reset
-		self:ReleaseChildren()
-		-- setup
-		settings.doc = doc
-
-		if #doc == 0 then
-			tree:UpdateHeight()
-			self.statusText:SetText('|cffff0000Table is empty.')
-		return end
-		-- sort tree table
-		local sortedTable = sortTable(settings.exploredTable)
-		-- build Tree Branches
-		for position, key in ipairs(sortedTable) do
-			if self.settings.endtime <= time() then	self:Timeout() return end
-			self:BuildBranch(self.tree,key[2],settings.exploredTable[key[2]],position,1,position == #sortedTable)
-		end
+-- 		if #doc == 0 then error('BuildDoc(doc) doc requires atleast one section')
+-- 		local settings = self.settings
+-- 		-- reset
+-- 		self:ReleaseChildren()
+-- 		-- setup
+-- 		settings.doc = doc
+--
+-- 		if #doc == 0 then
+-- 			tree:UpdateHeight()
+-- 			self.statusText:SetText('|cffff0000Table is empty.')
+-- 		return end
+-- 		-- sort tree table
+-- 		local sortedTable = sortTable(settings.exploredTable)
+-- 		-- build Tree Branches
+-- 		for position, key in ipairs(sortedTable) do
+-- 			if self.settings.endtime <= time() then	self:Timeout() return end
+-- 			self:BuildBranch(self.tree,key[2],settings.exploredTable[key[2]],position,1,position == #sortedTable)
+-- 		end
 	end,
 	['BuildSection'] = function(self,parent,key,value,position,depth,last)
-		local tree = self.tree
-		local leaf = type(value) ~= 'table' or next(value) == nil or depth >= self.settings.maxDepth
-		local branch = DiesalGUI:Create('Branch')
-		-- | Reset Branch	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		branch:ReleaseChildren()
-		-- | setup Branch |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		branch:SetParentObject(parent)
-		parent:AddChild(branch)
-		branch:SetSettings({
-			key				= key,
-			value			= value,
-			position 	= position,
-			depth			= depth,
-			last			= last,
-			leaf 			= leaf,
-		})
-		branch:SetEventListener('OnClick',function(this,event,button)
-			if button =='RightButton' then
-				if not next(this.settings.menuData) then return end
-				DiesalMenu:Menu(this.settings.menuData,this.frame,10,-10)
-			end
-		end)
-
-		self:SetBranchLabel(branch,key,value,leaf)
-		self:SetBranchMenu(branch,key,value)
-		self:SetBranchIcon(branch,type(value))
-
-		if value == tree or leaf then branch:ApplySettings() return end
-		-- | sort Branch Table |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		local sortedTable = sortTable(value)
-		-- | build Branch Branches |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		for position, key in ipairs(sortedTable) do
-			if self.settings.endtime <= time() then	self:Timeout() return end
-			self:BuildBranch(branch,key[2],value[key[2]],position,depth+1,position == #sortedTable)
-		end
-		-- | Update Branch | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		branch:ApplySettings()
+-- 		local tree = self.tree
+-- 		local leaf = type(value) ~= 'table' or next(value) == nil or depth >= self.settings.maxDepth
+-- 		local branch = DiesalGUI:Create('Branch')
+-- 		-- | Reset Branch	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 		branch:ReleaseChildren()
+-- 		-- | setup Branch |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 		branch:SetParentObject(parent)
+-- 		parent:AddChild(branch)
+-- 		branch:SetSettings({
+-- 			key				= key,
+-- 			value			= value,
+-- 			position 	= position,
+-- 			depth			= depth,
+-- 			last			= last,
+-- 			leaf 			= leaf,
+-- 		})
+-- 		branch:SetEventListener('OnClick',function(this,event,button)
+-- 			if button =='RightButton' then
+-- 				if not next(this.settings.menuData) then return end
+-- 				DiesalMenu:Menu(this.settings.menuData,this.frame,10,-10)
+-- 			end
+-- 		end)
+--
+-- 		self:SetBranchLabel(branch,key,value,leaf)
+-- 		self:SetBranchMenu(branch,key,value)
+-- 		self:SetBranchIcon(branch,type(value))
+--
+-- 		if value == tree or leaf then branch:ApplySettings() return end
+-- 		-- | sort Branch Table |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 		local sortedTable = sortTable(value)
+-- 		-- | build Branch Branches |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 		for position, key in ipairs(sortedTable) do
+-- 			if self.settings.endtime <= time() then	self:Timeout() return end
+-- 			self:BuildBranch(branch,key[2],value[key[2]],position,depth+1,position == #sortedTable)
+-- 		end
+-- 		-- | Update Branch | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- 		branch:ApplySettings()
 	end,
 	['Show'] = function(self)
 		self.window:Show()
