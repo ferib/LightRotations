@@ -51,6 +51,7 @@ light.rotation.spellbooks.shaman = {
     ImprovedLightningShield = {16261, 16290},
     ImprovedReincarnation = {16184, 16209},
     ImprovedWeaponTotems = {29192, 29193},
+    LavaBurst = {408490}, -- rune!
     LesserHealingWave = {8004, 8008, 8010, 10466, 10467, 10468},
     LightningBolt = {403, 529, 548, 915, 943, 6041, 10391, 10392, 15207, 15208},
     LightningMastery = {16578, 16579, 16580, 16581, 16582},
@@ -71,6 +72,7 @@ light.rotation.spellbooks.shaman = {
     RockbiterWeapon = {8017, 8018, 8019, 10399, 16314, 16315, 16316},
     SearingTotem = {3599, 6363, 6364, 6365, 10437, 10438},
     SentryTotem = 6495,
+    ShamanisticRage = {425336},
     ShieldSpecialization = {16253, 16298, 16299, 16300, 16301},
     StoneclawTotem = {5730, 6390, 6391, 6392, 10427, 10428},
     StoneskinTotem = {8071, 8154, 8155, 10406, 10407, 10408},
@@ -87,10 +89,12 @@ light.rotation.spellbooks.shaman = {
     TwoHandedAxesAndMaces = 16269,
     WaterBreathing = 131,
     WaterWalking = 546,
-    WarStomp = {20549, 20549, 20549},
+    WarStomp = {20549}, --{20549, 20549, 20549},
     WeaponMastery = {29082, 29084, 29086, 29087, 29088},
     WindfuryTotem = {8512, 10613, 10614},
     WindfuryWeapon = {8232, 8235, 10486, 16362},
-    WindwallTotem = {15107, 15111, 15112}
+    WindwallTotem = {15107, 15111, 15112},
+
+    --Warstomp = {20549},
 
 }

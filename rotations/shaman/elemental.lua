@@ -77,58 +77,185 @@ local function bestTotem()
     -- 4) Fire nova of big fire dmg/cast inc?
 end
 
+local function stompStopTargetCast()
+    local warstomp = 20549;
+    if not castable(warstomp, target) then
+        return false
+    end
+    
+    --print(target.castingpercent)
+
+    -- CheckInteractDistance, 3 - Duel, 9.9y range (warstom 8y)
+
+    if target.castingpercent > 0 and CheckInteractDistance("target", 3) 
+        --and castable(warstomp) 
+    then --and target.in_range("Attack") then
+        print(target.castingpercent, target.in_range("Attack"))
+        return cast(warstomp)
+        --return true
+    end
+
+end
+setfenv(stompStopTargetCast, light.environment.env)
+
 local function combat()
     if not target.alive or not target.exists or not target.enemy then return end
 
     -- check CD's
-    if toggle("cooldowns", false) then
+    local cooldowns = toggle("cooldowns", false)
+    
+    if cooldowns then
+        if 
+            player.power.mana.percent < 75 and 
+            castable(SB.ShamanisticRage, player) 
+        then
+            cast(SB.ShamanisticRage)
+        end
+    
+        -- try warstomp if tauren?
+        --if stompStopTargetCast() then
+        --    return 
+        --end
+        --local warstomp = 20549;
+        if castable(SB.WarStomp, target) and
+            target.castingpercent > 0 and 
+            CheckInteractDistance("target", 3) 
+        then --and target.in_range("Attack") then
+            print("WARSTOMP", target.castingpercent, target.in_range("Attack"))
+            --return cast(WarStomp)
+            Unlock(SpellStopCasting)
+            Unlock("RunMacroText", "/cast War Stomp")
+            return cast(SB.WarStomp, target)
+            
+            --return true
+        end
     end
 
-    -- Throw 8y agro if not in group?
-    if not GetTotemInfo(2) then -- Earth!
-        -- Tank totem if not in party? (only 50% uptime tho)
-        if not UnitInParty("player") then
-            if castable(SB.StoneclawTotem) then
-                return cast(SB.StoneclawTotem)
+    local inParty = UnitInParty("player");
+    local singleTarget = not toggle("multitarget", false)
+    
+    -- Totems and extra's if Mana high?
+    
+    local savemana = toggle("savemana", false)
+
+    if not savemana and player.power.mana.percent > 20 then
+        -- Throw 8y agro if not in group?
+        if not GetTotemInfo(2) then -- Earth!
+            -- Tank totem if not in party? (only 50% uptime tho)
+            if not inParty and not singleTarget then
+                if castable(SB.StoneclawTotem) then
+                    return cast(SB.StoneclawTotem)
+                end
+            else
+                if castable(SB.StoneskinTotem) then
+                    return cast(SB.StoneskinTotem)
+                end
             end
-        --else
-        --    if castable(SB.StoneskinTotem) then
-        --        return cast(SB.StoneskinTotem)
-        --    end
+        elseif not GetTotemInfo(1) then -- fire! 
+            -- always single target?
+            if singleTarget then
+                if castable(SB.SearingTotem) then
+                    return cast(SB.SearingTotem)
+                end
+            else
+                if castable(SB.FireNovaTotem) then
+                    return cast(SB.FireNovaTotem)
+                end
+            end
+        elseif not GetTotemInfo(3) then -- water!
+            if (not inParty and player.health.percent < 95) 
+            or (inParty and player.health.percent < 65) then
+                if castable(SB.HealingStreamTotem) then
+                    return cast(SB.HealingStreamTotem)
+                end
+            end
         end
-    elseif not GetTotemInfo(1) then -- fire! 
-        -- always single target?
-        if castable(SB.SearingTotem) then
-            return cast(SB.SearingTotem)
+
+        -- Cast  Flame Shock and refresh it once it expires;
+        if 
+            -- -player.power.mana > 30 and 
+            not target.debuff(SB.FlameShock).up and 
+            castable(SB.FlameShock, target) 
+            -- and target.in_range(SB.FlameShock)
+            then
+            return cast(SB.FlameShock, target)
+        end
+
+        -- Cast  Lava Burst if it will hit while Flame Shock is active on the target;
+        if target.debuff(SB.FlameShock).up and castable(SB.LavaBurst, target) then
+            return cast(SB.LavaBurst, target)
         end
     end
 
-    -- Cast  Flame Shock and refresh it once it expires;
-    if 
-        -- -player.power.mana > 30 and 
-        not target.debuff(SB.FlameShock).up and 
-        castable(SB.FlameShock, target) then
-        return cast(SB.FlameShock, target)
+    -- heal? quicky?
+    if player.health.percent < 30 and castable(SB.LesserHealingWave, player) then
+        return cast(SB.LesserHealingWave, player)
     end
-
-    -- Cast  Lava Burst if it will hit while Flame Shock is active on the target;
-    --if castable(SB.LavaBurst, target) then
-    --    return cast(SB.LavaBurst, target)
-    --end
-
-    -- Cast  Lightning Bolt otherwise, or exclusively if Mana is running out.
-    if castable(SB.LightningBolt, target) then
-        return cast(SB.LightningBolt, target)
+    -- TODO: Purge target?
+    
+    
+    local skipLightning = toggle("nolightning", false)
+    if not skipLightning then
+        -- Cast  Lightning Bolt otherwise, or exclusively if Mana is running out.
+        if castable(SB.LightningBolt, target) then
+            return cast(SB.LightningBolt, target)
+        end
     end
 
 end
 
 local function resting()
-    if not player.buff("Lightning Shield") then
-        return cast(SB.LightningShield)
+    
+    --if not player.buff("Lightning Shield") then
+    --    return cast(SB.LightningShield)
+    --end
+
+    if not isPlayerMoving() and 
+        player.health.percent < 30 and 
+        castable(SB.HealingWave, player) 
+    then
+        return cast(SB.HealingWave, player)
     end
+
     if opener() then return end
     -- resting
+end
+
+local function interface()
+    light.interface.buttons.add_toggle(
+        {
+            name = "nolightning",
+            label = "No lightning bolts",
+            font = "dark_icon",
+            on = {
+                label = light.interface.icon("plug"),
+                color = light.interface.color.red,
+                color2 = light.interface.color.dark_red,
+            },
+            off = {
+                label = light.interface.icon("plug"),
+                color = light.color,
+                color2 = light.color2
+            }
+        }
+    )
+    light.interface.buttons.add_toggle(
+        {
+            name = "savemana",
+            label = "Save Mana",
+            font = "dark_icon",
+            on = {
+                label = light.interface.icon("flask"),
+                color = light.interface.color.blue,
+                color2 = light.interface.color.dark_blue,
+            },
+            off = {
+                label = light.interface.icon("flask"),
+                color = light.color,
+                color2 = light.color2
+            }
+        }
+    )
 end
 
 light.rotation.register({
@@ -136,5 +263,6 @@ light.rotation.register({
     name = 'ele',
     label = 'Elemental Shaman',
     combat = combat,
-    resting = resting
+    resting = resting,
+    interface = interface
 })
