@@ -192,6 +192,7 @@ local function combat()
         end
 
         -- Cast  Lava Burst if it will hit while Flame Shock is active on the target;
+        print("LB", castable(SB.LavaBurst, target), castable("Lava Burst", target))
         if target.debuff(SB.FlameShock).up and castable(SB.LavaBurst, target) then
             -- pre-warstomp to get no kick?
             if cooldowns and castable(SB.WarStomp) and CheckInteractDistance("target", 3) then
@@ -263,11 +264,15 @@ local function resting()
     --    return cast(SB.LightningShield)
     --end
 
-    if not isPlayerMoving() and 
-        player.health.percent < 30 and 
-        castable(SB.HealingWave, player) 
-    then
-        return cast(SB.HealingWave, player)
+    if not isPlayerMoving() then
+        if player.health.percent < 30 and 
+            castable(SB.HealingWave, player) 
+        then
+            return cast(SB.HealingWave, player)
+        end
+        if not player.buff(SB.LightningShield) then
+            return cast(SB.LightningShield)
+        end
     end
 
     if opener() then return end
