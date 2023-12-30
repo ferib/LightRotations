@@ -35,8 +35,11 @@ end
 
 local function opener()
 	if not isPlayerMoving() and player.alive and target.exists and target.alive and target.enemy then
-		if target.in_range("Lightning Bolt") then
-			return cast(SB.LightningBolt)
+		--if target.in_range("Lightning Bolt") then
+		--	return cast(SB.LightningBolt)
+        --end
+        if target.in_range("Flame Shock") then
+            return cast(SB.FlameShock)
         end
 	end
 end
@@ -98,11 +101,44 @@ local function stompStopTargetCast()
 end
 setfenv(stompStopTargetCast, light.environment.env)
 
+local _MoveForwardStart = _G.MoveForwardStart
+local _MoveBackwardStart = _G.MoveBackwardStart
+local _StrafeLeftStart = _G.StrafeLeftStart
+local _StrafeRightStart = _G.StrafeRightStart
+
+
+local function StopMove()
+    _G.MoveForwardStart = function() end
+    _G.MoveBackwardStart = function() end
+    _G.StrafeLeftStart = function() end
+    _G.StrafeRightStart = function() end
+end
+local function StartMove()
+    
+    Unlock(function() _G.MoveForwardStart = _MoveForwardStart end)
+
+    _G.MoveBackwardStart = _MoveBackwardStart
+    _G.StrafeLeftStart = _StrafeLeftStart
+    _G.StrafeRightStart = _StrafeRightStart
+end
+
+_G.test = StopMove
+_G.test2 = StartMove
+
+
+local lastStopcast = GetTime() 
+
 local function combat()
     if not target.alive or not target.exists or not target.enemy then return end
 
+    -- always cast lightningb 
+    if castable(SB.LightningBolt, target) then
+            return cast(SB.LightningBolt)
+    end
+
     -- check CD's
     local cooldowns = toggle("cooldowns", false)
+    local interrupts = toggle("interrupts", false)
     
     if cooldowns then
         if 
@@ -117,17 +153,17 @@ local function combat()
         --    return 
         --end
         --local warstomp = 20549;
-        if castable(SB.WarStomp, target) and
-            target.castingpercent > 0 and 
-            CheckInteractDistance("target", 3) 
-        then --and target.in_range("Attack") then
-            print("WARSTOMP", target.castingpercent, target.in_range("Attack"))
+        if interrupts and castable(SB.WarStomp, target) and
+            target.castingpercent > 0 and  CheckInteractDistance("target", 3) 
+        then
+            print("WARSTOMP_1", target.castingpercent, target.in_range("Attack"))
             --return cast(WarStomp)
-            Unlock(SpellStopCasting)
+            if lastStopcast + 0.75 < GetTime() then
+                Unlock(SpellStopCasting)
+                lastStopcast = GetTime()
+            end
             Unlock("RunMacroText", "/cast War Stomp")
             return cast(SB.WarStomp, target)
-            
-            --return true
         end
     end
 
@@ -138,7 +174,39 @@ local function combat()
     
     local savemana = toggle("savemana", false)
 
-    if not savemana and player.power.mana.percent > 20 then
+
+    
+    if not savemana then --and player.power.mana.percent > 0 then
+        -- Cast  Flame Shock and refresh it once it expires;
+        if 
+            -- -player.power.mana > 30 and 
+            not target.debuff(SB.FlameShock).up and 
+            castable(SB.FlameShock, target) 
+            -- and target.in_range(SB.FlameShock)
+        then
+            return cast(SB.FlameShock, target)
+        end
+        
+        if target.health.actual < 130 and castable(SB.EarthShock, target) then
+            return cast(SB.EarthShock)
+        end
+
+        -- Cast  Lava Burst if it will hit while Flame Shock is active on the target;
+        if target.debuff(SB.FlameShock).up and castable(SB.LavaBurst, target) then
+            -- pre-warstomp to get no kick?
+            if cooldowns and castable(SB.WarStomp) and CheckInteractDistance("target", 3) then
+                print("WARSTOMP_2", target.castingpercent, target.in_range("Attack"))
+                --return cast(WarStomp)
+                if lastStopcast + 0.75 < GetTime() then
+                    Unlock(SpellStopCasting)
+                    lastStopcast = GetTime()
+                end
+                Unlock("RunMacroText", "/cast War Stomp")
+                return cast(SB.WarStomp, target)
+            end
+            return cast(SB.LavaBurst, target)
+        end
+
         -- Throw 8y agro if not in group?
         if not GetTotemInfo(2) then -- Earth!
             -- Tank totem if not in party? (only 50% uptime tho)
@@ -169,21 +237,6 @@ local function combat()
                     return cast(SB.HealingStreamTotem)
                 end
             end
-        end
-
-        -- Cast  Flame Shock and refresh it once it expires;
-        if 
-            -- -player.power.mana > 30 and 
-            not target.debuff(SB.FlameShock).up and 
-            castable(SB.FlameShock, target) 
-            -- and target.in_range(SB.FlameShock)
-            then
-            return cast(SB.FlameShock, target)
-        end
-
-        -- Cast  Lava Burst if it will hit while Flame Shock is active on the target;
-        if target.debuff(SB.FlameShock).up and castable(SB.LavaBurst, target) then
-            return cast(SB.LavaBurst, target)
         end
     end
 
