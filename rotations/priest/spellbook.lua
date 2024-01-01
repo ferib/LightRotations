@@ -85,5 +85,6 @@ light.rotation.spellbooks.priest = {
     TouchOfWeakness = {2652, 19261, 19262, 19264, 19265, 19266},
     UnbreakableWill = {14522, 14788, 14789, 14790, 14791},
     VampiricEmbrace = {15286, 15286},
-    WandSpecialization = {14524, 14525, 14526, 14527, 14528}
+    WandSpecialization = {14524, 14525, 14526, 14527, 14528},
+    Penance = {402174}
 }
