@@ -1,4 +1,4 @@
-# 💡 LightRotations
+# 💡 LightRotations - SoD
 
 [LightRotations](https://github.com/ferib/LightRotations) is a combat rotations framework based on [DarkRotations](https://gitlab.com/dark_rotations).
 
@@ -10,7 +10,7 @@ The purpose of the framework is similar to something like WeakAuras2 as its goal
 ### Example Use
 ![in-game AddOn on a Rogue](./img/demo_rogue.jpg)
 
-The UI prompts which spells to cast in the UI as well as highlights the spells in your action bars _(if found, does __not work with macros!__)_
+The UI prompts which spells to cast in the UI as well as highlight the spells in your action bars _(if found, does __not work with macros!__)_
 
 ## in-game commands
 
@@ -31,16 +31,18 @@ The current rotations included are a work in progress as I only recently picked 
 
 | Name | Class | Type | Dev | Status |
 |------|-------|------|-----|--------|
-| Druid | Druid | | | 🔴 TODO |
-| Hunter | Hunter | | | 🔴 TODO |
-| Mage | Mage | | | 🔴 TODO |
-| Paladin | Paladin | | | 🔴 TODO |
-| Priest | Priest | | | 🔴 TODO |
-| [Rogue](rotations/rogue/rogue.lua) | Rogue _(Low lvl)_ | Basic | [ferib](https://github.com/ferib) | 🟠 Lvl 1-10 |
-| Shaman | Shaman | | | 🔴 TODO |
+| `druid` | Druid | SoD 25 | [ferib](https://github.com/ferib) | 🟢 Balance SoD |
+| `hunter` | Hunter | | | 🔴 TODO |
+| `mage` | Mage | | | 🔴 TODO |
+| `paladin` | Paladin | | | 🔴 TODO |
+| `priest` | Priest | 25 SoD | [ferib](https://github.com/ferib) | 🟠 Lvl 20 Holy? SoD |
+| [Rogue](rotations/rogue/rogue.lua) | Rogue | Basic | [ferib](https://github.com/ferib) | 🟠 Lvl 1-10 |
+| `shaman` | Shaman | | | 🔴 TODO |
+| `resto` | Shaman | SoD 25 | [ferib](https://github.com/ferib) | 🟢 Lvl 25 Restoration SoD |
+| `ele` | Shaman |  SoD 25 | [ferib](https://github.com/ferib) | 🟢 Lvl 25 Elemental SoD |
 | ~~Warlock~~ | Warlock | Basic | [ferib](https://github.com/ferib) | 🔴 TODO _(58+ leveling build)_ |
 | ~~[Dotlock](./rotations/warlock/)~~ | ~~Warlock _(affliction)_~~ | ~~Advanced~~ | [ferib](https://github.com/ferib) | ~~🟢 Lvl 80~~ |
-| Warrior | Warrior | | | 🔴 TODO |
+| `warrior` | Warrior | | | 🔴 TODO |
 
 
 # ℹ How to install
@@ -56,6 +58,8 @@ Advanced installation for git users:
 ```bash
 cd C:\Program Files (x86)\World of Warcraft\_classic_\Interface\AddOns\
 git clone https://github.com/ferib/LightRotations Light
+cd Light
+git checkout classic_era
 ```
 
 ### 🔐 PROTECTED Lua and Vanilla Wow
