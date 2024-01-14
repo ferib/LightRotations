@@ -94,5 +94,9 @@ light.rotation.spellbooks.druid = {
     Tranquility = {740, 8918, 9862, 9863},
     TravelForm = 783,
     Vengeance = {16909, 16910, 16911, 16912, 16913},
-    Wrath = {5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912}
+    Wrath = {5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912},
+	
+	-- RUNES SoD
+	Starsurge = {417157},
+	Sunfire = {414684}
 }
