@@ -132,9 +132,9 @@ local function combat()
     if not target.alive or not target.exists or not target.enemy then return end
 
     -- always cast lightningb 
-    if castable(SB.LightningBolt, target) then
-            return cast(SB.LightningBolt)
-    end
+    --if castable(SB.LightningBolt, target) then
+    --    return cast(SB.LightningBolt)
+    --end
 
     -- check CD's
     local cooldowns = toggle("cooldowns", false)
@@ -192,7 +192,7 @@ local function combat()
         end
 
         -- Cast  Lava Burst if it will hit while Flame Shock is active on the target;
-        print("LB", castable(SB.LavaBurst, target), castable("Lava Burst", target))
+        --print("LB", castable(SB.LavaBurst, target), castable("Lava Burst", target))
         if target.debuff(SB.FlameShock).up and castable(SB.LavaBurst, target) then
             -- pre-warstomp to get no kick?
             if cooldowns and castable(SB.WarStomp) and CheckInteractDistance("target", 3) then

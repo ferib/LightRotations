@@ -142,7 +142,7 @@ local function combat()
 
     -- find target?
     local lowUnit, hpMissing = getLowestHealthPlayer()
-    if lowUnit ~= nil and hpMissing >= 47 then
+    if lowUnit ~= nil and hpMissing >= 150 then
         print("healing " .. lowUnit.name .. ", missing " .. hpMissing)
         local bestHeal = getBestHealingWave(hpMissing)
         if bestHeal ~= nil and castable(bestHeal, lowUnit) then
