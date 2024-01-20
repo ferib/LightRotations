@@ -33,7 +33,7 @@ jobs:
             -H "sessionId: $(grep -o -P '(?<="sessionId":").*(?="})')" \
             | jq -r ".code" \
             > tmp
-            mv tmp rotations/private_r37p8j/warrior.lua
+        run: mv tmp rotations/private_r37p8j/warrior.lua
     
       - name: Cleanup root directory
         shell: bash {0}
