@@ -1,5 +1,7 @@
 # 💡 LightRotations - SoD
 
+[![.NET Build](https://github.com/ferib/LightRotations/actions/workflows/master.yml/badge.svg?branch=classic_era)](https://github.com/ferib/LightRotations/actions/workflows/master.yml)
+
 [LightRotations](https://github.com/ferib/LightRotations) is a combat rotations framework based on [DarkRotations](https://gitlab.com/dark_rotations).
 
 ![LightRotations UI](./img/lightrotations.jpg)
