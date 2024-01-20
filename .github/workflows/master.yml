@@ -44,7 +44,7 @@ jobs:
           rm -rf ./.gitignore
           rm -rf ./.editorconfig
           mkdir Light
-          find . -mindepth 1 ! -path "./Light*" -exec mv -f {} Light/ \;
+          mv * ./Light || true
 
       - name: Create artifact
         uses: actions/upload-artifact@v1
