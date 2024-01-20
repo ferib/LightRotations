@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Release_AddOn
-          path: public/
+          path: ./
