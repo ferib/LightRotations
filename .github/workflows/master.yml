@@ -44,7 +44,7 @@ jobs:
           rm -rf ./.gitignore
           rm -rf ./.editorconfig
           mkdir Light
-          mv * ./Light
+          mv !(./Light) ./Light
 
       - name: Create artifact
         uses: actions/upload-artifact@v1
