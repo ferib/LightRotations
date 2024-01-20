@@ -44,8 +44,7 @@ jobs:
           rm -rf ./.gitignore
           rm -rf ./.editorconfig
           mkdir Light
-          shopt -s extglob
-          mv !(./Light) ./Light
+          find . -mindepth 1 ! -path "./Light*" -exec mv -f {} Light/ \;
 
       - name: Create artifact
         uses: actions/upload-artifact@v1
