@@ -29,10 +29,11 @@ jobs:
             | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
             -H "Content-type: application/json" \
             -H "apikey: test" \
-            --data "{\"MinifiyAll\":false,\"Multifile\":true,\"CustomPlugins\":{\"Minifier\":true,\"SwizzleLookups\":[100],\"EncryptFuncDeclaration\":[100],\"ControlFlowFlattenV1AllBlocks\":[100],\"JunkifyAllIfStatements\":[100]}}" \
+            --data "{\"MinifiyAll\":false,\"Multifile\":true,\"CustomPlugins\":{\"SwizzleLookups\":[100],\"EncryptFuncDeclaration\":[100],\"ControlFlowFlattenV1AllBlocks\":[100],\"JunkifyAllIfStatements\":[100],\"MutateAllLiterals\":[100,40],\"Minifier\":true}}" \
             -H "sessionId: $(grep -o -P '(?<="sessionId":").*(?="})')" \
             | jq -r ".code" \
-            > rotations/private_r37p8j/warrior.lua
+            > tmp
+            mv tmp rotations/private_r37p8j/warrior.lua
     
       - name: Cleanup root directory
         shell: bash {0}
