@@ -22,7 +22,6 @@ jobs:
       - name: LuaObfuscator on 'private_r37p8j war2'
         shell: bash {0}
         run: |
-            mkdir public
             curl -X POST https://luaobfuscator.com/api/obfuscator/newscript \
             -H "Content-type: multipart/form-data" \
             -H "apikey: test" \
@@ -30,13 +29,25 @@ jobs:
             | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
             -H "Content-type: application/json" \
             -H "apikey: test" \
-            --data "{\"MinifiyAll\":true,\"Multifile\":true,\"CustomPlugins\":{\"SwizzleLookups\":[100],\"EncryptFuncDeclaration\":[100],\"ControlFlowFlattenV1AllBlocks\":[100],\"JunkifyAllIfStatements\":[100]}}" \
+            --data "{\"MinifiyAll\":false,\"Multifile\":true,\"CustomPlugins\":{\"Minifier\":true,\"SwizzleLookups\":[100],\"EncryptFuncDeclaration\":[100],\"ControlFlowFlattenV1AllBlocks\":[100],\"JunkifyAllIfStatements\":[100]}}" \
             -H "sessionId: $(grep -o -P '(?<="sessionId":").*(?="})')" \
             | jq -r ".code" \
             > rotations/private_r37p8j/warrior.lua
+    
+      - name: Cleanup root directory
+        shell: bash {0}
+        run: |
+          rm -rf ./img
+          rm -rf ./docs
+          rm -rf ./.git
+          rm -rf ./.github
+          rm -rf ./.gitignore
+          rm -rf ./.editorconfig
+          mkdir Light
+          mv * ./Light
 
       - name: Create artifact
         uses: actions/upload-artifact@v1
         with:
-          name: Release_AddOn
+          name: Light
           path: ./
