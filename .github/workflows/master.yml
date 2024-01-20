@@ -25,7 +25,7 @@ jobs:
             curl -X POST https://luaobfuscator.com/api/obfuscator/newscript \
             -H "Content-type: multipart/form-data" \
             -H "apikey: test" \
-            -F rotations/private_r37p8j/warrior.lua=@rotations/private_r37p8j/warrior.lua \
+            --data @rotations/private_r37p8j/warrior.lua \
             | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
             -H "Content-type: application/json" \
             -H "apikey: test" \
