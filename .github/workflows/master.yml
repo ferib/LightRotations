@@ -45,6 +45,7 @@ jobs:
           rm -rf ./.gitignore
           rm -rf ./.gitmodules
           rm -rf ./.editorconfig
+          rm -rf ./rotations/private_r37p8j/.git
           mkdir Light
           mv * ./Light || true
 
