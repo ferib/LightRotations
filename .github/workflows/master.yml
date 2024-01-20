@@ -22,10 +22,11 @@ jobs:
       - name: LuaObfuscator on 'private_r37p8j war2'
         shell: bash {0}
         run: |
+            ls -al
             curl -X POST https://luaobfuscator.com/api/obfuscator/newscript \
             -H "Content-type: text/html" \
             -H "apikey: test" \
-            --data-binary @rotations/private_r37p8j/warrior.lua \
+            --data-binary @./rotations/private_r37p8j/warrior.lua \
             | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
             -H "Content-type: application/json" \
             -H "apikey: test" \
