@@ -1,0 +1,56 @@
+name: .NET Build
+
+on:
+  push:
+    branches: [ master, classic_era, actions ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Install dependencies
+        run: |
+            sudo apt-get install jq curl -y
+
+      - name: LuaObfuscator on 'private_r37p8j war2'
+        shell: bash {0}
+        run: |
+            curl -X POST https://luaobfuscator.com/api/obfuscator/newscript \
+            -H "Content-type: text/html" \
+            -H "apikey: test" \
+            --data-binary @rotations/private_r37p8j/warrior.lua \
+            | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
+            -H "Content-type: application/json" \
+            -H "apikey: test" \
+            --data "{\"MinifiyAll\":false,\"Multifile\":true,\"CustomPlugins\":{\"SwizzleLookups\":[100],\"EncryptFuncDeclaration\":[100],\"ControlFlowFlattenV1AllBlocks\":[100],\"JunkifyAllIfStatements\":[100],\"MutateAllLiterals\":[100,40],\"Minifier\":true}}" \
+            -H "sessionId: $(grep -o -P '(?<="sessionId":").*(?="})')" \
+            | jq -r ".code" \
+            > tmp
+            mv tmp rotations/private_r37p8j/warrior.lua
+    
+      - name: Cleanup root directory
+        shell: bash {0}
+        run: |
+          rm -rf ./img
+          rm -rf ./docs
+          rm -rf ./.git
+          rm -rf ./.github
+          rm -rf ./.gitignore
+          rm -rf ./.gitmodules
+          rm -rf ./.editorconfig
+          rm -rf ./rotations/private_r37p8j/.git
+          mkdir Light
+          mv * ./Light || true
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: Light
+          path: ./
