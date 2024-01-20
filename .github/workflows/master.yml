@@ -23,7 +23,7 @@ jobs:
         shell: bash {0}
         run: |
             curl -X POST https://luaobfuscator.com/api/obfuscator/newscript \
-            -H "Content-type: multipart/form-data" \
+            -H "Content-type: text/html" \
             -H "apikey: test" \
             --data @rotations/private_r37p8j/warrior.lua \
             | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
