@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: 'true'
-          ssh-key: ${{ secrets.PAT_TOKEN }}
+      steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        token: ${{ secrets.PAT_TOKEN }}
 
       - name: Install dependencies
         run: |
