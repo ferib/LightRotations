@@ -62,6 +62,9 @@
 	<!--<Script file="rotations\warlock\furrylock.lua" />-->
 	<Script file="rotations\warrior\warrior.lua" />
 
+	<!-- Private, not mine -->
+	<Script file="rotations\private_r37p8j\warrior.lua" />
+
 	<!-- MISC -->
 	<Script file="system\support\patches.lua" />
 	<Script file="system\support\ready.lua" />
