@@ -25,6 +25,19 @@ local function combat()
 	--and target.in_range("Attack")
 	then cast("Attack") end
 
+	if toggle("interrupts", false) then
+		--if target.casting
+		-- 	
+		-- "Shadow Crash"
+		-- "Shadowy Chains"
+		if target.casting then
+			print(target.cast)
+			if castable(SB.Kick, target) then
+				return cast(SB.Kick, target)
+			end
+		end
+	end
+
 	-- check for evasion CD
 	if toggle("cooldowns", false) then
 		if -player.health.percent < 33 and castable(SB.Evasion) then
@@ -50,9 +63,19 @@ local function combat()
 	--	return cast(SB.ExposeArmor, target)
 	--end
 
-	-- Eviscerate on 3+ while SliceAndDice already on
-	if -player.power.combopoints >= 3 and -player.power.energy > 35 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
+	-- Eviscerate on 4+ while SliceAndDice already on
+	if -player.power.combopoints >= 4 and -player.power.energy > 40 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
 		return cast(SB.Eviscerate, target)
+	end
+	
+	-- 424785
+	--print(target.debuff(SB.SaberSlash).up )
+	if -player.power.energy > 40 and castable(SB.SinisterStrike, target)
+		and (not target.debuff(SB.SaberSlash).up 
+			or target.debuff(SB.SaberSlash).count < 3
+			or (target.debuff(SB.SaberSlash).count == 3 and target.debuff(SB.SaberSlash).remains <= 3.25))
+	then
+		return cast(SB.SaberSlash, target)
 	end
 
 	-- sinister strike
