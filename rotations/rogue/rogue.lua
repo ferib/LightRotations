@@ -66,10 +66,13 @@ local function combat()
 
 	-- add Gouge to get 1 combo point and recove energy or interrupt in spell casting?
 
-	-- slice and dice if not already
+	-- slice and dice if not already 
+	-- NOTE: Nopem never in PvP
+	--[[
 	if not player.buff("Slice and Dice").any and -player.power.combopoints >= 1 and -player.power.energy > 25 and castable(SB.SliceAndDice, target) and target.in_range("Slice and Dice") then
 		return cast(SB.SliceAndDice, target)
 	end
+	]]--
 
 	-- expose Armor
 	--if not target.debuff("Expose Armor") and -player.power.energy > 25 and -player.power.combopoints >= 1 and castable(SB.ExposeArmor, target) then
@@ -77,10 +80,26 @@ local function combat()
 	--end
 
 	-- KidneyShot if in opener?
-	print(inOpener)
-	if inOpener and -player.power.combopoints >= 3 and -player.power.energy >= 25 and castable(SB.KidneyShot, target) then
-		inOpener = false
-		return cast(SB.KidneyShot, target)
+	--print(inOpener)
+
+	if toggle("snd", false) then
+		if not player.buff(SB.SliceAndDice).up and -player.power.combopoints >= 1 
+		and -player.power.energy >= 25 and castable(SB.SliceAndDice, target) then
+			return cast(SB.SliceAndDice, target)
+		end
+	else
+		if inOpener and not target.debuff("Cheap Shot").up 
+		and -player.power.combopoints >= 1 and -player.power.energy >= 25 and castable(SB.KidneyShot, target) then
+			inOpener = false
+			print("Kidney Shot at " .. tostring( -player.power.combopoints) .. " seconds!")
+			return cast(SB.KidneyShot, target)
+		end
+	end
+
+	if inOpener and -player.power.energy < 50 then
+		print("reserver energy " .. tostring(-player.power.energy) .. " for after opener!")
+		-- save some energy to ensure kidney ontime
+		return --cast(SB.Attack, target)
 	end
 
 	-- Eviscerate on 4+ while SliceAndDice already on
@@ -88,17 +107,33 @@ local function combat()
 	if (-player.power.combopoints >= 4 or (target.health.actual < 300 and -player.power.combopoints >= 2))
 		and -player.power.energy > 40 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
 		inOpener = false
+
 		if toggle("cooldowns", false) then
 			cast(SB.ColdBlood)
 		end
-		return cast(SB.Eviscerate, target)
+		
+		if toggle("envenom", false) then
+			return cast(SB.Envenom, target)
+		else
+			return cast(SB.Eviscerate, target)
+		end
 	end
 	
+	-- Mutilate
+	--if -player.power.energy >= 40 and castable(SB.Mutilate, target)
+	if -player.power.energy >= 40 and castable(SB.SinisterStrike, target) then
+		if inOpener then
+			print("Mutilate at " .. tostring(-player.power.energy))
+		end
+		return cast(SB.Mutilate, target)
+	end
+
 	-- 424785
 	--print(target.debuff(SB.SaberSlash).up )
 
 	-- NOTE: only keep this up for PvE long fights?
-	if -player.power.energy > 40 and castable(SB.SinisterStrike, target)
+
+	if -player.power.energy >= 40 and castable(SB.SaberSlash, target)
 		and (not target.debuff(SB.SaberSlash).up 
 			or target.debuff(SB.SaberSlash).count < 3
 			or (target.debuff(SB.SaberSlash).count == 3 and target.debuff(SB.SaberSlash).remains <= 3.25))
@@ -106,10 +141,13 @@ local function combat()
 		return cast(SB.SaberSlash, target)
 	end
 
-	-- sinister strike
+
+	-- sinister strike, NEVER?
+	--[[
 	if -player.power.energy > 45 and castable(SB.SinisterStrike, target) and target.in_range("Sinister Strike") then
         return cast(SB.SinisterStrike, target)
     end
+	]]--
 
 end
 
@@ -120,12 +158,51 @@ local function resting()
 	if opener() then return end
 end
 
+
+local function interface()
+    light.interface.buttons.add_toggle(
+        {
+            name = "envenom",
+            label = "Envenom",
+            font = "dark_icon",
+            on = {
+                label = light.interface.icon("flask"),
+                color = light.interface.color.green,
+                color2 = light.interface.color.dark_green,
+            },
+            off = {
+                label = light.interface.icon("flask"),
+                color = light.color,
+                color2 = light.color2
+            }
+        }
+    )
+	light.interface.buttons.add_toggle(
+        {
+            name = "snd",
+            label = "Slice & Dice",
+            font = "dark_icon",
+            on = {
+                label = light.interface.icon("utensils"),
+                color = light.interface.color.yellow,
+                color2 = light.interface.color.dark_yellow,
+            },
+            off = {
+                label = light.interface.icon("utensils"),
+                color = light.color,
+                color2 = light.color2
+            }
+        }
+    )
+end
+
 light.rotation.register({
     class = light.rotation.classes.rogue,
     name = 'rogue',
     label = 'Bundled Rogue',
     combat = combat,
-	resting = resting
+	resting = resting,
+    interface = interface
 })
 
 

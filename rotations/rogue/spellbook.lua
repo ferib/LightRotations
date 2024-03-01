@@ -84,5 +84,8 @@ light.rotation.spellbooks.rogue = {
     WeaponExpertise = {30919, 30920},
     WoundPoison = {13220, 13228, 13229, 13230},
 
-    SaberSlash = { 424785 }
+    SaberSlash = { 424785 },
+    --Mutilate = { 399956, 1329 } - spells scuffed?
+    Mutilate = { 399956 },
+    Envenom = { 399963 }, 
 }
