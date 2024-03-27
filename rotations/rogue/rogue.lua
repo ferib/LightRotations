@@ -97,24 +97,37 @@ local function combat()
 	end
 
 	if inOpener and -player.power.energy < 50 then
-		print("reserver energy " .. tostring(-player.power.energy) .. " for after opener!")
+		--print("reserver energy " .. tostring(-player.power.energy) .. " for after opener!")
 		-- save some energy to ensure kidney ontime
 		return --cast(SB.Attack, target)
 	end
 
-	-- Eviscerate on 4+ while SliceAndDice already on
-	-- OR 2+ combo points if target low health?
-	if (-player.power.combopoints >= 4 or (target.health.actual < 300 and -player.power.combopoints >= 2))
-		and -player.power.energy > 40 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
-		inOpener = false
+	-- fuck it just spam envenom 1cp+
+	if toggle("envenom", false) then
+		if not player.buff(SB.Envenom).up and -player.power.combopoints >= 4 
+		and -player.power.energy >= 35 then
 
-		if toggle("cooldowns", false) then
-			cast(SB.ColdBlood)
+			if toggle("cooldowns", false) then
+				cast(SB.ColdBlood)
+			end
+
+			cast(SB.Envenom, target)
+
+			-- in case target immune?
+			return cast(SB.Eviscerate, target)
 		end
-		
-		if toggle("envenom", false) then
-			return cast(SB.Envenom, target)
-		else
+	else
+
+		-- Eviscerate on 4+ while SliceAndDice already on
+		-- OR 2+ combo points if target low health?
+		if (-player.power.combopoints >= 4 or (target.health.actual < 300 and -player.power.combopoints >= 2))
+			and -player.power.energy > 40 and castable(SB.Eviscerate, target) and target.in_range("Eviscerate") then
+			inOpener = false
+
+			if toggle("cooldowns", false) then
+				cast(SB.ColdBlood)
+			end
+
 			return cast(SB.Eviscerate, target)
 		end
 	end

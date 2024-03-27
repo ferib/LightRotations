@@ -47,6 +47,7 @@
 	<!-- ROTATIONS -->
 	<Script file="rotations\druid\druid.lua" />
 	<Script file="rotations\priest\priest.lua" />
+	<Script file="rotations\priest\shadow.lua" />
 	<Script file="rotations\priest\holy.lua" />
 	<Script file="rotations\priest\priest_buddy.lua" />
 	<Script file="rotations\mage\mage.lua" />
