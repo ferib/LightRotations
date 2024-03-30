@@ -84,6 +84,7 @@ function light.rotation.tick(ticker)
             end
         end
 
+        local CastingInfo = _G.CastingInfo or _G.UnitCastingInfo
         local iscasting, _ = CastingInfo("player")
         local hcd = light.settings.fetch('_engine_healcd.spin', 0.8)
         if light.savedHealTarget ~= nil and not iscasting then

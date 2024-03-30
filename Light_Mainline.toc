@@ -21,4 +21,6 @@ libs\LibDraw-1.0\LibDraw.lua
 libs\LibBossIDs-1.0\LibBossIDs-1.0.lua
 libs\json\json.lua
 libs\lua-multipart\multipart.lua
+
 light.xml
+lightMainline.xml

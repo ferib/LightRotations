@@ -25,7 +25,6 @@
 	<Script file="rotations_sl\warlock\warlock.lua" />
 	<Script file="rotations_sl\warlock\dotlock.lua" />
 	<Script file="rotations_sl\warrior\warrior.lua" />
-	<script file="rotations_sl\deathknight\deathknight_private.lua"/>
 
 	<!-- Private, not mine -->
 	<Script file="rotations_vanilla\private_r37p8j\warrior.lua" />

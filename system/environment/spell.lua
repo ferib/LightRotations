@@ -86,6 +86,7 @@ function spell:castable()
 end
 
 function spell:current()
+    local CastingInfo = _G.CastingInfo or _G.UnitCastingInfo
     local casting, _ = CastingInfo(self.unitID)
     local channel, _ = ChannelInfo(self.unitID)
     if casting then
