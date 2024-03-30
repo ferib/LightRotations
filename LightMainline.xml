@@ -1,0 +1,36 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<!-- SPELLBOOKS -->
+	<Script file="rotations_sl\druid\spellbook.lua" />
+	<Script file="rotations_sl\priest\spellbook.lua" />
+	<Script file="rotations_sl\mage\spellbook.lua" />
+	<Script file="rotations_sl\paladin\spellbook.lua" />
+	<Script file="rotations_sl\hunter\spellbook.lua" />
+	<Script file="rotations_sl\rogue\spellbook.lua" />
+	<Script file="rotations_sl\shaman\spellbook.lua" />
+	<Script file="rotations_sl\warlock\spellbook.lua" />
+	<Script file="rotations_sl\warrior\spellbook.lua" />
+
+	<!-- ROTATIONS -->
+	<Script file="rotations_sl\druid\druid.lua" />
+	<Script file="rotations_sl\priest\priest.lua" />
+	<Script file="rotations_sl\priest\priest_buddy.lua" />
+	<Script file="rotations_sl\mage\mage.lua" />
+	<Script file="rotations_sl\mage\mage_buddy.lua" />
+	<Script file="rotations_sl\paladin\paladin.lua" />
+	<Script file="rotations_sl\hunter\hunter.lua" />
+	<Script file="rotations_sl\rogue\rogue.lua" />
+	<Script file="rotations_sl\shaman\shaman.lua" />
+	<Script file="rotations_sl\warlock\warlock.lua" />
+	<Script file="rotations_sl\warlock\dotlock.lua" />
+	<Script file="rotations_sl\warrior\warrior.lua" />
+	<script file="rotations_sl\deathknight\deathknight_private.lua"/>
+
+	<!-- Private, not mine -->
+	<Script file="rotations_vanilla\private_r37p8j\warrior.lua" />
+
+	<!-- MISC -->
+	<Script file="system\support\patches.lua" />
+	<Script file="system\support\ready.lua" />
+</Ui>
