@@ -1,8 +1,8 @@
 local addon, light = ...
 
 local function getBestHeal(hpMissing)
-    local healSpells = {2050, 2052, 2053} -- lesser heal only?
-    local maxHealing   = {  58,   91,  165}
+    local healSpells = {2050, 2052, 2053, 2061, 9472, 9473, 9474 } -- lesser heal only?
+    local maxHealing   = {  58,   91,  165, 202, 269, 339, 414 }
     -- find the one with least mana wasted
 
     hpMissing = hpMissing * 1.05 -- add err tolerance?
@@ -53,6 +53,17 @@ local function combat()
     local singleTarget = not toggle("multitarget", false)
     local savemana = toggle("savemana", false)
 
+    if player.isChanneling then
+        return
+    end
+
+    -- check self?
+    if player.health.percent < 60 then
+        if castable(SB.Renew, player) and not player.buff(SB.Renew) then
+            return cast(SB.Renew, player)
+        end
+    end
+
     -- priority on target
     if 
         target.exists and target.alive and not target.enemy 
@@ -63,61 +74,76 @@ local function combat()
             if 
                 --target.health.percent < 80 and 
                 castable(SB.Renew, target) 
-                and not player.buff(SB.Renew).up 
+                and not target.buff(SB.Renew).up 
             then
                 return cast(SB.Renew, target)
             end
             
-            if target.health.percent < 85 and castable(SB.Penance, target) then
+            if target.health.percent < 70 and castable(SB.Penance, target) then
                 return cast(SB.Penance, target)
             end
 
-            if
-                not target.debuff("Weakened Soul").up and 
-                castable(SB.PowerWordShield, target) 
-                and not target.buff(SB.PowerWordShield).up
-            then
-                return cast(SB.PowerWordShield, target)
-            end
-
             -- otherwise, cast some heals!
-            print("Target healing missing", target.health.missing)
-            local bestHeal = getBestHeal(target.health.missing)
-            if bestHeal and castable(bestHeal, target) then
-                return cast(bestHeal, target)
-            end
+            -- TODO: pop renew? check if already renew and heal?
+            if cooldowns then
+                print("Target healing missing", target.health.missing)
+                local bestHeal = getBestHeal(target.health.missing)
+                if bestHeal and castable(bestHeal, target) then
+                    return cast(bestHeal, target)
+                end
 
-            -- no match? check our best heal(s) instead?
-            if castable(SB.Heal, player) then
-                return cast(SB.Heal, target)
-            end
-            if castable(SB.LesserHeal, player) then
-                return cast(SB.LesserHeal, target)
+                -- no match? check our best heal(s) instead?
+                if castable(SB.Heal, player) then
+                    return cast(SB.Heal, target)
+                end
+                if castable(SB.LesserHeal, player) then
+                    return cast(SB.LesserHeal, target)
+                end
             end
         end
     end
 
     -- target OK, find party member instead?
-    local lowUnit, hpMissing = getLowestHealthPlayer()
-    if lowUnit ~= nil and hpMissing >= 47 then
-        if hpMissing < 80 then
-            return cast(SB.Renew, lowUnit)
-        end
-        
-        print("healing " .. lowUnit.name .. ", missing " .. hpMissing)
-        local bestHeal = getBestHeal(hpMissing)
-        if bestHeal ~= nil and castable(bestHeal, lowUnit) then
-            return cast(bestHeal, lowUnit)
-        end
-        -- no match? check our best heal(s) instead?
-        if castable(SB.Heal, player) then
-            return cast(SB.Heal, target)
-        end
-        if castable(SB.LesserHeal, player) then
-            return cast(SB.LesserHeal, target)
+    --if toggle()
+    if not singleTarget then
+        local lowUnit, hpMissing = getLowestHealthPlayer()
+        if lowUnit ~= nil and hpMissing >= 80 then
+            --if hpMissing < 150 then
+            --    return cast(SB.Renew, lowUnit)
+            --end
+            if hpMissing > 280 and castable(SB.Penance, lowUnit) then
+                return cast(SB.Penance, lowUnit)
+            end
+            if hpMissing > 100 then
+                if not lowUnit.buff(SB.Renew).up then
+                    return cast(SB.Renew, lowUnit)
+                end
+                
+                if cooldowns then 
+                    print("healing " .. lowUnit.name .. ", missing " .. hpMissing)
+                    local bestHeal = getBestHeal(hpMissing)
+                    if bestHeal ~= nil and castable(bestHeal, lowUnit) then
+                        return cast(bestHeal, lowUnit)
+                    end
+                    -- no match? check our best heal(s) instead?
+                    if castable(SB.Heal, player) then
+                        return cast(SB.Heal, target)
+                    end
+                    if castable(SB.LesserHeal, player) then
+                        return cast(SB.LesserHeal, target)
+                    end
+                end
+            end
         end
     end
 
+    -- /run Unlock(CastSpellByName, "Shoot")
+    if target.exists and target.enemy and target.alive then
+        --cast("Shoot", target)
+        --return cast("Shoot", target)
+    end
+    -- TODO: toggle 1 shoot on target? maybe 1 dot too?
+    -- Keep track of last mana fired?
 end
 
 local function resting()

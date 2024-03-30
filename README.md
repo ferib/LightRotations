@@ -1,5 +1,7 @@
 # 💡 LightRotations - SoD
 
+[![.NET Build](https://github.com/ferib/LightRotations/actions/workflows/master.yml/badge.svg?branch=classic_era)](https://github.com/ferib/LightRotations/actions/workflows/master.yml)
+
 [LightRotations](https://github.com/ferib/LightRotations) is a combat rotations framework based on [DarkRotations](https://gitlab.com/dark_rotations).
 
 ![LightRotations UI](./img/lightrotations.jpg)
@@ -35,7 +37,8 @@ The current rotations included are a work in progress as I only recently picked 
 | `hunter` | Hunter | | | 🔴 TODO |
 | `mage` | Mage | | | 🔴 TODO |
 | `paladin` | Paladin | | | 🔴 TODO |
-| `priest` | Priest | 25 SoD | [ferib](https://github.com/ferib) | 🟠 Lvl 20 Holy? SoD |
+| `priest` | Priest | 25 SoD | [ferib](https://github.com/ferib) | 🟠 Lvl 30 Holy SoD |
+| `priest` | Priest | 40 SoD | [ferib](https://github.com/ferib) | 🟠 Shadow, Leveling 10-35 |
 | [Rogue](rotations/rogue/rogue.lua) | Rogue | Basic | [ferib](https://github.com/ferib) | 🟠 Lvl 1-10 |
 | `shaman` | Shaman | | | 🔴 TODO |
 | `resto` | Shaman | SoD 25 | [ferib](https://github.com/ferib) | 🟢 Lvl 25 Restoration SoD |
