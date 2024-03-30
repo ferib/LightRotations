@@ -97,7 +97,7 @@ local function resting()
     -- opener xd
     if target.exists and target.enemy and target.alive then
         -- set a Renew b4 combat?
-        if not player.buff("Renew").up and castable(SB.Renew, player) then
+        if not player.buff(SB.Renew).up and castable(SB.Renew, player) then
             return cast(SB.Renew, player)
         end
 
@@ -109,13 +109,17 @@ local function resting()
         if castable(SB.MindBlast, target) then
             return cast(SB.MindBlast, target)
         end
+
+        if castable(SB.Smite, target) then
+            return cast(SB.Smite, target)
+        end
     end
     -- resting
     if player.alive and not player.buff("Drink").up and not player.buff("Food").up then
-        if not player.buff("Inner Fire").up then
+        if not player.buff("Inner Fire").up and castable(SB.InnerFire, player) then
             return cast(SB.InnerFire, player)
         end
-        if not player.buff("Power Word: Fortitude").up then
+        if not player.buff("Power Word: Fortitude").up and castable(SB.PowerWordFortitude, player) then
             return cast(SB.PowerWordFortitude, player)
         end
     end
