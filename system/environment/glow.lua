@@ -13,7 +13,7 @@ glow.spellNameActions = {}
 glow.durations = {}
 
 function glow.trigger(spell)
-	print("Glowing" .. spell)
+	--print("Glowing" .. spell)
 	--[[
 	-- check if Retail, then we can simplify things!
 	if C_ActionBar ~= nil and C_ActionBar.FindSpellActionButtons ~= nil then
@@ -67,7 +67,7 @@ function glow.updateActionsList()
 	local gcdTime = 1500 --GetSpellCooldown(61304); -- GCD
 
 
-	if C_ActionBar ~= nil and C_ActionBar.FindSpellActionButtons ~= nil then
+	if _G.CastingInfo == nil then -- hacky check to see if Retail, TODO add something better?
 		-- TODO: This did not work?
 		-- C_ActionBar.FindSpellActionButtons
 		local actionBars =    {'Action', 'MultiBarBottomLeft', 'MultiBarBottomRight', 'MultiBarRight', 'MultiBarLeft', 'MultiBar5', 'MultiBar6', 'MultiBar7'}
