@@ -25,7 +25,7 @@ jobs:
             curl -X POST https://luaobfuscator.com/api/obfuscator/newscript \
             -H "Content-type: text/html" \
             -H "apikey: test" \
-            --data-binary @rotations/private_r37p8j/warrior.lua \
+            --data-binary @rotations_vanilla/private_r37p8j/warrior.lua \
             | curl -X POST https://luaobfuscator.com/api/obfuscator/obfuscate \
             -H "Content-type: application/json" \
             -H "apikey: test" \
@@ -33,7 +33,7 @@ jobs:
             -H "sessionId: $(grep -o -P '(?<="sessionId":").*(?="})')" \
             | jq -r ".code" \
             > tmp
-            mv tmp rotations/private_r37p8j/warrior.lua
+            mv tmp rotations_vanilla/private_r37p8j/warrior.lua
     
       - name: Cleanup root directory
         shell: bash {0}
@@ -45,7 +45,7 @@ jobs:
           rm -rf ./.gitignore
           rm -rf ./.gitmodules
           rm -rf ./.editorconfig
-          rm -rf ./rotations/private_r37p8j/.git
+          rm -rf ./rotations_vanilla/private_r37p8j/.git
           mkdir Light
           mv * ./Light || true
 
