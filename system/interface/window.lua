@@ -442,7 +442,7 @@ local function buildElements(table, parent)
             else
                 tmp:SetJustifyH('LEFT')
             end
-            tmp:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 13)
+            tmp:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 13, "")
             tmp:SetWidth(parent.content:GetWidth() - 10)
 
             if element.align then
@@ -463,7 +463,7 @@ local function buildElements(table, parent)
             tmp:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset)
             tmp:SetText(element.text)
             tmp:SetJustifyH('LEFT')
-            tmp:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), element.size or 10)
+            tmp:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), element.size or 10, "")
             tmp:SetWidth(parent.content:GetWidth() - 10)
 
             if not element.offset then
@@ -534,7 +534,7 @@ local function buildElements(table, parent)
                 tmp_desc:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 15)
                 tmp_desc:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset - 15)
                 tmp_desc:SetText(element.desc)
-                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9)
+                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9, "")
                 tmp_desc:SetWidth(parent.content:GetWidth() - 10)
                 tmp_desc:SetJustifyH('LEFT')
                 push = tmp_desc:GetStringHeight() + 5
@@ -587,7 +587,7 @@ local function buildElements(table, parent)
             tmp_text = tmp_text.fontString
             tmp_text:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 4)
             tmp_text:SetText(element.text)
-            tmp_text:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10)
+            tmp_text:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10, "")
             tmp_text:SetJustifyH('LEFT')
             tmp_text:SetWidth(parent.content:GetWidth() - 10)
 
@@ -599,7 +599,7 @@ local function buildElements(table, parent)
                 tmp_desc:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 18)
                 tmp_desc:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset - 18)
                 tmp_desc:SetText(element.desc)
-                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10)
+                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10, "")
                 tmp_desc:SetWidth(parent.content:GetWidth() - 10)
                 tmp_desc:SetJustifyH('LEFT')
                 push = tmp_desc:GetStringHeight() + 5
@@ -670,7 +670,7 @@ local function buildElements(table, parent)
                 tmp_desc:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 18)
                 tmp_desc:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset - 18)
                 tmp_desc:SetText(element.desc)
-                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9)
+                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9, "")
                 tmp_desc:SetWidth(parent.content:GetWidth() - 10)
                 tmp_desc:SetJustifyH('LEFT')
                 push = tmp_desc:GetStringHeight() + 5
@@ -711,7 +711,7 @@ local function buildElements(table, parent)
             tmp_text = tmp_text.fontString
             tmp_text:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 3)
             tmp_text:SetText(element.text)
-            tmp_text:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10)
+            tmp_text:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10, "")
             tmp_text:SetJustifyH('LEFT')
             tmp_text:SetWidth(parent.content:GetWidth() - 10)
 
@@ -723,7 +723,7 @@ local function buildElements(table, parent)
                 tmp_desc:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 18)
                 tmp_desc:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset - 18)
                 tmp_desc:SetText(element.desc)
-                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9)
+                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9, "")
                 tmp_desc:SetWidth(parent.content:GetWidth() - 10)
                 tmp_desc:SetJustifyH('LEFT')
                 push = tmp_desc:GetStringHeight() + 5
@@ -764,7 +764,7 @@ local function buildElements(table, parent)
                 tmp_desc:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - element.height - 3)
                 tmp_desc:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset - element.height - 3)
                 tmp_desc:SetText(element.desc)
-                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9)
+                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9, "")
                 tmp_desc:SetWidth(parent.content:GetWidth() - 10)
                 tmp_desc:SetJustifyH('LEFT')
                 push = tmp_desc:GetStringHeight() + 5
@@ -801,7 +801,7 @@ local function buildElements(table, parent)
             tmp_text = tmp_text.fontString
             tmp_text:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 3)
             tmp_text:SetText(element.text)
-            tmp_text:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10)
+            tmp_text:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 10, "")
             tmp_text:SetJustifyH('LEFT')
 
             if element.desc then
@@ -812,7 +812,7 @@ local function buildElements(table, parent)
                 tmp_desc:SetPoint("TOPLEFT", parent.content, "TOPLEFT", 5, offset - 18)
                 tmp_desc:SetPoint("TOPRIGHT", parent.content, "TOPRIGHT", -5, offset - 18)
                 tmp_desc:SetText(element.desc)
-                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9)
+                tmp_desc:SetFont(SharedMedia:Fetch('font', 'Calibri Bold'), 9, "")
                 tmp_desc:SetWidth(parent.content:GetWidth() - 10)
                 tmp_desc:SetJustifyH('LEFT')
                 push = tmp_desc:GetStringHeight() + 5

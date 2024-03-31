@@ -32,35 +32,4 @@
 	<Script file="system\environment\unit.lua" />
 	<Script file="system\rotation\rotation.lua" />
 	<Script file="system\rotation\timer.lua" />
-
-	<!-- SPELLBOOKS -->
-	<Script file="rotations\druid\spellbook.lua" />
-	<Script file="rotations\priest\spellbook.lua" />
-	<Script file="rotations\mage\spellbook.lua" />
-	<Script file="rotations\paladin\spellbook.lua" />
-	<Script file="rotations\hunter\spellbook.lua" />
-	<Script file="rotations\rogue\spellbook.lua" />
-	<Script file="rotations\shaman\spellbook.lua" />
-	<Script file="rotations\warlock\spellbook.lua" />
-	<Script file="rotations\warrior\spellbook.lua" />
-
-	<!-- ROTATIONS -->
-	<Script file="rotations\druid\druid.lua" />
-	<Script file="rotations\priest\priest.lua" />
-	<Script file="rotations\priest\priest_buddy.lua" />
-	<Script file="rotations\mage\mage.lua" />
-	<Script file="rotations\mage\mage_buddy.lua" />
-	<Script file="rotations\paladin\paladin.lua" />
-	<Script file="rotations\hunter\hunter.lua" />
-	<Script file="rotations\rogue\rogue.lua" />
-	<Script file="rotations\shaman\shaman.lua" />
-	<Script file="rotations\warlock\warlock.lua" />
-	<Script file="rotations\warlock\dotlock.lua" />
-	<!--<Script file="rotations\warlock\furrylock.lua" />-->
-	<Script file="rotations\warrior\warrior.lua" />
-	<script file="rotations\deathknight\deathknight_private.lua"/>
-
-	<!-- MISC -->
-	<Script file="system\support\patches.lua" />
-	<Script file="system\support\ready.lua" />
 </Ui>

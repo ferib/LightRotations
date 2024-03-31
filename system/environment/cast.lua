@@ -83,9 +83,10 @@ function light.environment.hooks.cast(spell, target)
 		if tonumber(spell) then
 			spell, _ = GetSpellInfo(spell)
 		end
-		light.console.debug(1, 'engine', 'engine', string.format('casting spell %s on %s. UnitHealth %d', spell,
-			UnitName(target), UnitHealth(target)))
+		light.console.debug(1, 'engine', 'engine', string.format('casting spell %s on %s. UnitHealth %d', (spell or ""),
+			(UnitName(target) or ""), (UnitHealth(target) or -1)))
 	end
+	local CastingInfo = _G.CastingInfo or _G.UnitCastingInfo
 	if turbo or not CastingInfo('player') then
 		if target == 'ground' then
 			if tonumber(spell) then

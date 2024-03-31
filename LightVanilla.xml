@@ -1,0 +1,41 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<!-- SPELLBOOKS -->
+	<Script file="rotations_vanilla\druid\spellbook.lua" />
+	<Script file="rotations_vanilla\priest\spellbook.lua" />
+	<Script file="rotations_vanilla\mage\spellbook.lua" />
+	<Script file="rotations_vanilla\paladin\spellbook.lua" />
+	<Script file="rotations_vanilla\hunter\spellbook.lua" />
+	<Script file="rotations_vanilla\rogue\spellbook.lua" />
+	<Script file="rotations_vanilla\shaman\spellbook.lua" />
+	<Script file="rotations_vanilla\warlock\spellbook.lua" />
+	<Script file="rotations_vanilla\warrior\spellbook.lua" />
+
+	<!-- ROTATIONS -->
+	<Script file="rotations_vanilla\druid\druid.lua" />
+	<Script file="rotations_vanilla\priest\priest.lua" />
+	<Script file="rotations_vanilla\priest\shadow.lua" />
+	<Script file="rotations_vanilla\priest\holy.lua" />
+	<Script file="rotations_vanilla\priest\holyd.lua" />
+	<Script file="rotations_vanilla\priest\priest_buddy.lua" />
+	<Script file="rotations_vanilla\mage\mage.lua" />
+	<Script file="rotations_vanilla\mage\mage_buddy.lua" />
+	<Script file="rotations_vanilla\paladin\paladin.lua" />
+	<Script file="rotations_vanilla\hunter\hunter.lua" />
+	<Script file="rotations_vanilla\rogue\rogue.lua" />
+	<Script file="rotations_vanilla\shaman\shaman.lua" />
+	<Script file="rotations_vanilla\shaman\elemental.lua" />
+	<Script file="rotations_vanilla\shaman\restoration.lua" />
+	<Script file="rotations_vanilla\warlock\warlock.lua" />
+	<Script file="rotations_vanilla\warlock\dotlock.lua" />
+	<!--<Script file="rotations_vanilla\warlock\furrylock.lua" />-->
+	<Script file="rotations_vanilla\warrior\warrior.lua" />
+
+	<!-- Private, not mine -->
+	<Script file="rotations_vanilla\private_r37p8j\warrior.lua" />
+
+	<!-- MISC -->
+	<Script file="system\support\patches.lua" />
+	<Script file="system\support\ready.lua" />
+</Ui>

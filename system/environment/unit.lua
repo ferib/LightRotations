@@ -152,6 +152,7 @@ function unit:isChanneling()
 end
 
 function unit:castingpercent()
+    local CastingInfo = _G.CastingInfo or _G.UnitCastingInfo
     local castingname, _, _, startTime, endTime, notInterruptible = CastingInfo("player")
     if castingname then
         local castLength = (endTime - startTime) / 1000
@@ -170,6 +171,7 @@ function unit:casting()
     if not self.unitID == 'player' then
         return false
     end
+    local CastingInfo = _G.CastingInfo or _G.UnitCastingInfo
     local castingname, _ = CastingInfo("player")
     if castingname then
         return true
@@ -199,8 +201,9 @@ end
 local function unit_interrupt(percent, spell)
     local percent = tonumber(percent) or 100
     local spell = GetSpellInfo(spell) or false
+    local CastingInfo = _G.CastingInfo or _G.UnitCastingInfo
     local name, startTime, endTime, notInterruptible
-    name, _, _, startTime, endTime, _, _, notInterruptible, _ = UnitCastingInfo(calledUnit.unitID)
+    name, _, _, startTime, endTime, _, _, notInterruptible, _ = CastingInfo(calledUnit.unitID)
     if not name then
         name, _, _, startTime, endTime, _, _, notInterruptible, _ = UnitChannelInfo(calledUnit.unitID)
     end
