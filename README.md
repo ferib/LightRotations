@@ -29,7 +29,21 @@ The UI prompts which spells to cast in the UI as well as highlight the spells in
 
 ## ⚔️ Combat Rotations
 
-The current rotations included are a work in progress as I only recently picked TBC back up, however, I tend to update these as I go.
+For the time being, only Classic Era _(including SoD)_ has spellbooks and such. WotLK ain't even tested yet as we wait in Cata for MoP to drop.
+
+### Retail 
+
+| Name | Class | Type | Dev | Status |
+|------|-------|------|-----|--------|
+| `shaman` | Shaman | test | | Used for testing lol |
+
+### WotLK 
+
+| Name | Class | Type | Dev | Status |
+|------|-------|------|-----|--------|
+| N/A | N/A | N/A | N/A | N/A |
+
+### Classic Era
 
 | Name | Class | Type | Dev | Status |
 |------|-------|------|-----|--------|
@@ -64,6 +78,10 @@ git clone https://github.com/ferib/LightRotations Light
 cd Light
 git checkout classic_era
 ```
+
+### Bonus
+
+For windows users, you can `mklink /d SourcePath DestPath` to create symbolic links to all timelines of the game!
 
 ### 🔐 PROTECTED Lua and Vanilla Wow
 Wow introduced protected Lua somewhere around patch 2.x, __LightRotations does NOT support PROTECTED Lua APIs__, however, we provide a way to [downgrade to Vanilla Wow](./docs/vanilla_wow.md).
