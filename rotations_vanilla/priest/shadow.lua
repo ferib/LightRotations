@@ -4,11 +4,17 @@ local lastHeal = 0
 local mustPenance = false
 local lastPenanceReq = 0
 
+local isWanding = true
+local lastWand = 0
+local lastFire = 0
+
 local function combat()
     -- never interupt channeling? waste of mana?
     if player.isChanneling then
         return
     end
+
+    local cooldown = toggle("cooldowns", false)
 
     -- hibernating if low mana
     -- Just wand and Penance self? NOTE: Flakey AF
@@ -31,6 +37,11 @@ local function combat()
             Unlock(RunMacroText, "/castsequence !Shoot")
             return
         end
+    end
+
+    if isWanding and lastWand+2.5< GetTime() then
+        isWanding = false
+        cast("Shoot") -- stop wanding?
     end
 
     -- ???
@@ -73,23 +84,32 @@ local function combat()
         --if castable(SB.HolyFire, target) and target.health.actual > 90 then
         --    return cast(SB.HolyFire, target)
         --end
+        if castable(SB.VoidPlague, target) and not target.debuff(SB.VoidPlague).up then
+            return cast(SB.VoidPlague, target)
+        end
 
+        
         if not target.debuff("Shadow Word: Pain").up and target.health.percent > 20 and castable(SB.ShadowWordPain, target) then
             return cast(SB.ShadowWordPain, target)
         end
+
 
         if castable(SB.Penance, target) then
             return cast(SB.Penance, target)
         end
 
-        if castable(SB.MindBlast, target) and not player.isChanneling then
-            return cast(SB.MindBlast, target)
+        if cooldown then
+            if castable(SB.MindBlast, target) and not player.isChanneling then
+                return cast(SB.MindBlast, target)
+            end
+            if castable(SB.Smite, target) and not player.isChanneling then
+                return cast(SB.Smite, target)
+            end
+        else
+            Unlock(RunMacroText, "/castsequence !Shoot")
+            isWanding = true
+            lastWand = GetTime()
         end
-
-        if castable(SB.Smite, target) and not player.isChanneling then
-            return cast(SB.Smite, target)
-        end
-       
     end
 end
 
@@ -97,12 +117,13 @@ local function resting()
     -- opener xd
     if target.exists and target.enemy and target.alive then
         -- set a Renew b4 combat?
-        if not player.buff(SB.Renew).up and castable(SB.Renew, player) then
-            return cast(SB.Renew, player)
-        end
+        --if not player.buff(SB.Renew).up and castable(SB.Renew, player) then
+        --    return cast(SB.Renew, player)
+        --end
 
         -- 3.5sec cast, better have it out of combat (if learned)
-        if castable(SB.HolyFire, target) then
+        if castable(SB.HolyFire, target) and lastFire +2 < GetTime() then
+            lastFire = GetTime()
             return cast(SB.HolyFire, target)
         end
 
