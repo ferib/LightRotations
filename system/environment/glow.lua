@@ -39,6 +39,7 @@ function glow.trigger(spell)
 	-- not found?
 	if btnName == nil then
 		--print("btnName nil", spell)
+		print("No keybind was found for " .. GetSpellInfo(spell))
 		return
 	end
 
@@ -69,7 +70,7 @@ function glow.trigger(spell)
 			action = string.gsub(action, "RIGHT", "4")
 			
 		end
-		print("doing: " .. action .. "  (" .. action2 .. ")")
+		--print("doing: " .. action .. "  (" .. action2 .. ")")
 		Unlock(RunBinding, action, "down")
 		Unlock(RunBinding, action, "up")
 	end
