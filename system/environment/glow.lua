@@ -53,28 +53,6 @@ function glow.trigger(spell)
 	
 	local duration = glow.durations[btnName]
 	ActionButton_ShowOverlayGlow(btn)
-	
-	if Unlock ~= nil then
-		local action = string.upper(btnName)
-		local action2 = action
-		--action = string.gsub(action, "MULTIBAR", "ACTIONBAR")
-
-		-- TODO: fix these
-		if string.find(action, "ULTIBAR") then
-			action = string.gsub(action, "BUTTON", "") .. "BUTTON"
-			action = string.gsub(action, "MULTIBAR", "MULTIACTIONBAR")
-
-			action = string.gsub(action, "BOTTOMLEFT", "1")
-			action = string.gsub(action, "BOTTOMRIGHT", "2")
-			action = string.gsub(action, "LEFT", "3")
-			action = string.gsub(action, "RIGHT", "4")
-			
-		end
-		--print("doing: " .. action .. "  (" .. action2 .. ")")
-		Unlock(RunBinding, action, "down")
-		Unlock(RunBinding, action, "up")
-	end
-
 
 	-- TODO: rm C_Timer and use clean queue?
 	C_Timer.After(duration, function(id)
