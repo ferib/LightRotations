@@ -16,7 +16,7 @@ end
 light.rotation.register({
     class = light.rotation.classes.shaman,
     name = 'shaman',
-    label = 'Bundled Shaman',
+    label = 'DF Shaman',
     combat = combat,
     resting = resting
 })
