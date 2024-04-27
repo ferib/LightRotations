@@ -21,7 +21,8 @@
 	<Script file="rotations_df\paladin\paladin.lua" />
 	<Script file="rotations_df\hunter\hunter.lua" />
 	<Script file="rotations_df\rogue\rogue.lua" />
-	<Script file="rotations_df\shaman\shaman.lua" />
+	<Script file="rotations_df\shaman\shaman_arena.lua" />
+	<Script file="rotations_df\shaman\shaman_pve.lua" />
 	<Script file="rotations_df\warlock\warlock.lua" />
 	<Script file="rotations_df\warlock\dotlock.lua" />
 	<Script file="rotations_df\warrior\warrior.lua" />

@@ -1,7 +1,7 @@
 local addon, light = ...
 
 light.rotation.spellbooks.shaman = {
-
+    AutoAttack = 6603,
     FlameShock = 188389,
     PrimordialWave = 375982,
     FeralSpirit = 51533,
@@ -14,5 +14,17 @@ light.rotation.spellbooks.shaman = {
     IceStrike = 342240,
     FrostShock = 196840,
     Hailstorm = 334195,
-    
+    Stormstrike = 17364,
+    LightningShield = 192106,
+    FlametongueWeapon = 318038,
+    Flametongue = 295543,
+    Flametongue2 = 295541,
+    Stormbringer = 201845,
+    HealingStreamTotem = 5394,
+    EarthElement = 198103,
+    EarthShield = 974,
+    GroundingTotem = 204336,
+    GiftOfTheNaruu = 59547,
+    AstralShift = 108271,
+    EarthgrabTotem = 51485,
 }
