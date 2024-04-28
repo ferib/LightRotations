@@ -143,7 +143,7 @@ local function combat()
 
     
     -- quick totem check here
-    if castable(SB.WindfuryTotem, target) and not GetTotemInfo(2) then -- wind totem
+    if castable(SB.WindfuryTotem, target) and not GetTotemInfo(1) then -- wind totem
         return cast(SB.WindfuryTotem, target)
     end
 

@@ -27,4 +27,18 @@ light.rotation.spellbooks.shaman = {
     GiftOfTheNaruu = 59547,
     AstralShift = 108271,
     EarthgrabTotem = 51485,
+
+    HealingTideTotem = 108280,
+    Riptide = 61295,
+    Ascendance = 114052,
+    EarthWallTotem = 198838,
+    SpiritLinkTotem = 98008,
+    HealingSurge = 8004,
+    HealingWave = 77472,
+    TidalWaves = 53390,
+    UnleashLife = 73685,
+    EarthWall = 201633,
+    SpiritLinkTotem_Buff = 325174,
+    WaterShield = 52127,
+    WindShear = 57994,
 }
