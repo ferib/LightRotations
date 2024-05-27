@@ -131,7 +131,7 @@ local function Constructor()
 	local text = self:CreateRegion("FontString", 'text', frame)
 	text:SetPoint("TOP",0,-2)
 	text:SetPoint("BOTTOM",0,0)
-	text:SetJustifyH("TOP")
+	text:SetJustifyV("TOP")
 	text:SetJustifyH("LEFT")
 	text:SetWordWrap(false)
 

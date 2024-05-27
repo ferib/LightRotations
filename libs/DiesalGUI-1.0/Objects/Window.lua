@@ -330,7 +330,7 @@ local function Constructor()
 	titletext:SetWordWrap(false)
 	titletext:SetPoint("TOPLEFT", 4, -5)
 	titletext:SetPoint("TOPRIGHT", -20, -5)
-	titletext:SetJustifyH("TOP")
+	titletext:SetJustifyV("TOP")
 	titletext:SetJustifyH("LEFT")
 
 	self:CreateRegion("Frame", 'header', 	frame)

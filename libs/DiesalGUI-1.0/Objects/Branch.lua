@@ -263,7 +263,7 @@ local function Constructor()
 	text:SetPoint("TOPLEFT",14,-1)
 	text:SetPoint("BOTTOMRIGHT",-4,0)
 	text:SetHeight(0)
-	text:SetJustifyH("TOP")
+	text:SetJustifyV("TOP")
 	text:SetJustifyH("LEFT")
 	text:SetWordWrap(false)
 
