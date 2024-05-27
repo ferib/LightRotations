@@ -41,4 +41,11 @@ light.rotation.spellbooks.shaman = {
     SpiritLinkTotem_Buff = 325174,
     WaterShield = 52127,
     WindShear = 57994,
+
+    CounterstrikeTotem = 204331,
+    AncestralGuidance = 108281,
+    TotemicRecall = 108285,
+    UnleashShield = 356736,
+    CapacitorTotem = 192058,
+    SpiritwalkersGrace = 79206,
 }
