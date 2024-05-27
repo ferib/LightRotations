@@ -115,5 +115,9 @@ light.rotation.spellbooks.warlock = {
   UnstableAffliction = { 30108, 30404, 30405, 47841, 47843 },
   UnholyPower = { 18769, 18770, 18771, 18772, 18773 },
 
-  Torment = { 11774 }
+  Torment = { 11774 },
+
+  Backlash = { 387384 },
+  Backdraft = { 117828 },
+  Incinerate = { 29722 },
 }
