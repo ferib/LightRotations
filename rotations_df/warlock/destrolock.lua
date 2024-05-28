@@ -1,7 +1,31 @@
 local addon, light = ...
 
+local function autoTarget()
+    if not Objects or not GetFocus then return end
+    local os = Objects()
+    local old = GetFocus()
+    for i=1, #os do
+        local o = os[i]
+        if ObjectType(o) == 5 then
+            SetFocus(o)
+            if focus.alive and focus.enemy and focus.exists and CheckInteractDistance("focus", 1)  then
+                Unlock(TargetUnit, "focus")
+                --print('setting focus', focus.name)
+                SetFocus(old)
+                return
+            end
+        end
+
+    end
+    SetFocus(old)
+end
+setfenv(autoTarget, light.environment.env)
+
 local function combat()
     if not target.exists or not target.enemy or not target.alive then
+        if toggle("multitarget", false) then
+            autoTarget()
+        end
         return
     end
 
@@ -27,9 +51,18 @@ local function combat()
 end
 
 local function resting()
-    --if UnitExists('target') then
-    --    return cast('Attack', 'target')
-    --end
+    if not target.exists or not target.enemy or not target.alive then
+        if toggle("multitarget", false) then
+            autoTarget()
+        end
+        return
+    end
+
+    if castable(SB.Immolate, target) and not target.debuff(SB.Immolate).up then
+        return cast(SB.Immolate, target)
+    elseif castable(SB.Incinerate, target) then
+        return cast(SB.Incinerate, target)
+    end
 end
 
 light.rotation.register({
