@@ -1,5 +1,7 @@
 local addon, light = ...
 
+--local GetSpellTabInfo = GetSpellTabInfo or C_SpellBook.GetSpellBookSkillLineInfo
+
 light.rotation.timer = {
     lag = 0
 }
@@ -7,20 +9,47 @@ light.rotation.timer = {
 local gcd_spell, gcd_spell_name
 
 local function find_gcd_spell()
-    local _, _, offset, numSpells = GetSpellTabInfo(2)
-    for i = offset + 1, offset + numSpells do
-        local slotType, slotID = GetSpellBookItemInfo(i, 'spell')
-        if slotType == 'SPELL' then
-            local slotName = GetSpellBookItemName(i, 'spell')
-            local spellName, _, _, _, _, _, spellID = GetSpellInfo(slotName)
-            local spellCD = GetSpellBaseCooldown(spellID or 0) -- spellID can be nil during loading
-            local spellCharges = GetSpellCharges(spellID)
-            if spellCD == 0 and spellCharges == nil then
-                gcd_spell = spellID
-                gcd_spell_name = spellName
-                break
+
+    -- classic
+    if GetSpellTabInfo ~= nil then
+        local _, _, offset, numSpells = GetSpellTabInfo(2)
+        for i = offset + 1, offset + numSpells do
+            local slotType, slotID = GetSpellBookItemInfo(i, 'spell')
+            if slotType == 'SPELL' then
+                local slotName = GetSpellBookItemName(i, 'spell')
+                local spellName, _, _, _, _, _, spellID = GetSpellInfo(slotName)
+                local spellCD = GetSpellBaseCooldown(spellID or 0) -- spellID can be nil during loading
+                local spellCharges = GetSpellCharges(spellID)
+                if spellCD == 0 and spellCharges == nil then
+                    gcd_spell = spellID
+                    gcd_spell_name = spellName
+                    break
+                end
             end
         end
+    elseif C_SpellBook.GetSpellBookSkillLineInfo ~= nil then
+        --local _, _, numSpellBookItems, _, _, itemIndexOffset = C_SpellBook.GetSpellBookSkillLineInfo(2) -- class spellbook
+        local skillLineInfo = C_SpellBook.GetSpellBookSkillLineInfo(2)
+        local offset, numSlots = skillLineInfo.itemIndexOffset, skillLineInfo.numSpellBookItems
+        for i = offset+1, offset+numSlots do
+            local slotType, slotID = C_SpellBook.GetSpellBookItemInfo(i, Enum.SpellBookItemType.Spell)
+            --
+            --local spellID = select(2, C_SpellBook.GetSpellBookItemType(i, Enum.SpellBookSpellBank.Player))
+            --print(i, name, subName, spellID)
+            if slotType == 'SPELL' then
+                local slotName, subName = C_SpellBook.GetSpellBookItemName(i, Enum.SpellBookSpellBank.Spell)
+
+                local spellName, _, _, _, _, _, spellID = C_Spell.GetSpellInfo(slotName)
+                local spellCD = C_Spell.GetSpellBaseCooldown(spellID or 0) -- spellID can be nil during loading
+                local spellCharges = C_Spell.GetSpellCharges(spellID)
+                if spellCD == 0 and spellCharges == nil then
+                    gcd_spell = spellID
+                    gcd_spell_name = spellName
+                    break
+                end
+            end
+        end
+    
     end
 
     C_Timer.After(0.5, function()

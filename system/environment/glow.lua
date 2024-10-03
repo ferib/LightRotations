@@ -12,6 +12,9 @@ glow.spellIdActions = {}
 glow.spellNameActions = {}
 glow.durations = {}
 
+local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
+
+
 function glow.trigger(spell)
 	--print("Glowing" .. spell)
 	--[[
@@ -94,7 +97,7 @@ function glow.updateActionsList()
 
 					local buttonName = barName .. "Button" .. (i-(base-1));
 					local button = _G[buttonName];
-					if actionName then
+					if actionName and type(actionName) ~= "table" then
 						--print(actionName, buttonName, button)
 						--print(buttonName, button:GetName(), actionType, (GetSpellLink(id)), id, actionName)
 						glow.spellIdActions[id] = buttonName
