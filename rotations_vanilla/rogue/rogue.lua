@@ -3,6 +3,7 @@ local addon, light = ...
 local inCombat = false
 
 local inOpener = false
+local lastPick = 0
 
 local function opener()
 	if player.alive and target.exists and target.alive and target.enemy then
@@ -15,6 +16,28 @@ local function opener()
 		--elseif target.in_range("Attack") then
 		else ]]--
 		
+		-- stealth?
+		if target.in_range("Sinister Strike", target) and not player.buff(SB.Stealth).any then
+			if castable(SB.Stealth) then
+				print("stealth?")
+				return cast(SB.Stealth)
+			end
+		end
+
+		if _G.pick then
+			if not (lastPick + 0.5 < GetTime()) then
+				return
+			end
+
+			
+			if lastPick + 0.1 < GetTime() and player.buff(SB.Stealth).any and castable(SB.Pickpocket, target) then
+				print("PICK POCKET xd")
+				cast(SB.Pickpocket, target)
+				lastPick = GetTime()
+				--return
+			end
+		end
+
 		--if target.in_range("Sinister Strike") then -- melee range check
 		--	return cast("Attack")
 		--end
@@ -22,10 +45,18 @@ local function opener()
 		--if target.in_range("Sinister Strike", target) and castable(SB.Ambush, target) then
 		--	return cast(SB.Ambush, target)
 		--end
+		
+		if target.in_range("Sinister Strike", target) and castable(SB.Garrote, target) then
+			inOpener = true
+			cast(SB.Garrote, target)
+		end
+
+		--[[
 		if target.in_range("Sinister Strike", target) and castable(SB.CheapShot, target) then
 			inOpener = true
 			return cast(SB.CheapShot, target)
 		end
+		]]
 	end
 end
 setfenv(opener, light.environment.env)
@@ -38,6 +69,17 @@ local function combat()
 	--and target.in_range("Attack")
 	then cast("Attack") end
 
+	if target.buff("Gouge").any then
+		-- stand idle?
+		print("Wait for regen!")
+		return
+	end
+
+	if player.health.actual < 50 and castable(SB.Gauge) then
+		print("Deffence regen?")
+		return cast(SB.Gauge, target)
+	end
+
 	if toggle("interrupts", false) then
 		--if target.casting
 		-- 	
@@ -49,6 +91,10 @@ local function combat()
 				return cast(SB.Kick, target)
 			end
 		end
+	end
+
+	if castable(SB.GhostlyStrike, target) then
+		return cast(SB.GhostlyStrike, target)
 	end
 
 	-- check for evasion CD
@@ -133,13 +179,14 @@ local function combat()
 	end
 	
 	-- Mutilate
-	--if -player.power.energy >= 40 and castable(SB.Mutilate, target)
-	if -player.power.energy >= 40 and castable(SB.SinisterStrike, target) then
+	--[[
+	if -player.power.energy >= 40 and castable(SB.Mutilate, target) then
+	--if -player.power.energy >= 40 and castable(SB.SinisterStrike, target) then
 		if inOpener then
 			print("Mutilate at " .. tostring(-player.power.energy))
 		end
 		return cast(SB.Mutilate, target)
-	end
+	end]]
 
 	-- 424785
 	--print(target.debuff(SB.SaberSlash).up )
@@ -156,12 +203,11 @@ local function combat()
 
 
 	-- sinister strike, NEVER?
-	--[[
+	
 	if -player.power.energy > 45 and castable(SB.SinisterStrike, target) and target.in_range("Sinister Strike") then
         return cast(SB.SinisterStrike, target)
     end
-	]]--
-
+	
 end
 
 local function resting()

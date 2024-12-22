@@ -24,6 +24,7 @@
 	<Script file="rotations_vanilla\paladin\paladin.lua" />
 	<Script file="rotations_vanilla\hunter\hunter.lua" />
 	<Script file="rotations_vanilla\rogue\rogue.lua" />
+	<Script file="rotations_vanilla\rogue\sub.lua" />
 	<Script file="rotations_vanilla\shaman\shaman.lua" />
 	<Script file="rotations_vanilla\shaman\elemental.lua" />
 	<Script file="rotations_vanilla\shaman\restoration.lua" />

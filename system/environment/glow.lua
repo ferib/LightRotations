@@ -42,7 +42,7 @@ function glow.trigger(spell)
 	-- not found?
 	if btnName == nil then
 		--print("btnName nil", spell)
-		print("No keybind was found for " .. GetSpellInfo(spell))
+		print("No keybind was found for " .. tostring(spell)) --GetSpellInfo(spell))
 		return
 	end
 

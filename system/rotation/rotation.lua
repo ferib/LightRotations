@@ -1,5 +1,9 @@
 local addon, light = ...
 
+local GetSpellSubtext = GetSpellSubtext or C_Spell.GetSpellSubtext
+local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
+
+
 light.rotation = {
     classes = {
         druid = 11,

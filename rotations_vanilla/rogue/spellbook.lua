@@ -88,4 +88,7 @@ light.rotation.spellbooks.rogue = {
     --Mutilate = { 399956, 1329 } - spells scuffed?
     Mutilate = { 399956 },
     Envenom = { 399963 }, 
+    Gauge = { 1776 },
+
+    Pickpocket = { 921 },
 }

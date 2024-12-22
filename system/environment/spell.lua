@@ -2,6 +2,9 @@ local addon, light = ...
 
 local spell = {}
 
+local IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable
+local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
+
 function spell:cooldown()
     local time, value = GetSpellCooldown(self.spell)
     if not time or time == 0 then
@@ -74,6 +77,7 @@ function spell:lastcast()
 end
 
 function spell:castable()
+    print(self.spell)
     local usable, noMana = IsUsableSpell(self.spell)
     if usable then
         if self.cooldown == 0 then
@@ -113,19 +117,30 @@ function light.environment.conditions.spell(unit)
             return false
         end,
         __call = function(self, arg)
+            --print(arg, "asd")
             if type(arg) == 'table' then
                 self.spell = arg.namerank
             elseif tonumber(arg) then
-                self.spell = GetSpellName(arg)
+                local spellinfo = GetSpellName(arg)
+                if type(spellinfo) == "table" then
+                    print("TABLE set")
+                    self.spell = spellinfo.name
+                else
+                    print("NO TABLE set")
+                    self.spell = spellinfo -- as is
+                end
             else
+                print("TABLE set 2")
                 self.spell = arg
             end
+            --[[
             local par = string.find(self.spell, '%(')
             if par ~= nil then
                 self.base = string.sub(self.spell, 1, par - 1)
             else
                 self.base = self.spell
             end
+            ]]
             return self
         end,
         __unm = function(t)

@@ -2,6 +2,8 @@ local addon, light = ...
 
 light.cast = { }
 
+local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
+
 function _CastSpellByName(spell, target)
     local target = target or "target"
 	local spell = spell or ""
