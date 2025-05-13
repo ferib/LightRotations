@@ -38,8 +38,9 @@ function glow.trigger(spell)
 
 	-- not found?
 	if btnName == nil then
+		local spellinfo = GetSpellInfo(spell)
 		--print("btnName nil", spell)
-		print("No keybind was found for " .. GetSpellInfo(spell))
+		print("No keybind was found for ", spellinfo)
 		return
 	end
 
@@ -53,6 +54,7 @@ function glow.trigger(spell)
 	
 	local duration = glow.durations[btnName]
 	ActionButton_ShowOverlayGlow(btn)
+	CastSpellByName(spell)
 
 	-- TODO: rm C_Timer and use clean queue?
 	C_Timer.After(duration, function(id)

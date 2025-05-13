@@ -1,0 +1,22 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<!-- SPELLBOOKS -->
+	<Script file="rotations_vanilla\druid\spellbook.lua" />
+	<Script file="rotations_vanilla\priest\spellbook.lua" />
+	<Script file="rotations_vanilla\mage\spellbook.lua" />
+	<Script file="rotations_vanilla\paladin\spellbook.lua" />
+	<Script file="rotations_vanilla\hunter\spellbook.lua" />
+	<Script file="rotations_vanilla\rogue\spellbook.lua" />
+	<Script file="rotations_vanilla\shaman\spellbook.lua" />
+	<Script file="rotations_vanilla\warlock\spellbook.lua" />
+	<Script file="rotations_vanilla\warrior\spellbook.lua" />
+
+	<!-- ROTATIONS -->
+	<Script file="rotations_vanilla\warlock\warlock.lua" />
+	<Script file="rotations_vanilla\warlock\dotlock.lua" />
+
+	<!-- MISC -->
+	<Script file="system\support\patches.lua" />
+	<Script file="system\support\ready.lua" />
+</Ui>

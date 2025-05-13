@@ -300,12 +300,20 @@ local function spell_cooldown(spell)
 end
 
 local function spell_castable(spell)
-	   if not type(spell) == "string" then
-		if type(spell) == 'table' then
+    if type(spell) ~= "string" then
+		if type(spell) == "table" then
+            --print("spell table", spell, spell.namerank)
 			spell = spell.namerank
 		end
 		spell = GetSpellInfo(spell)
 	end
+
+    if type(spell) == "table" then
+        --print("bad spell?", spell, type(spell))
+        for k,v in pairs(spell) do
+            print(k, v)
+        end
+    end
 
 	local usable, noMana = IsUsableSpell(spell)
     local inRange = IsSpellInRange(spell, calledUnit.unitID)
