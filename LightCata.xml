@@ -2,19 +2,23 @@
 ..\FrameXML\UI.xsd">
 
 	<!-- SPELLBOOKS -->
-	<Script file="rotations_vanilla\druid\spellbook.lua" />
-	<Script file="rotations_vanilla\priest\spellbook.lua" />
-	<Script file="rotations_vanilla\mage\spellbook.lua" />
-	<Script file="rotations_vanilla\paladin\spellbook.lua" />
-	<Script file="rotations_vanilla\hunter\spellbook.lua" />
-	<Script file="rotations_vanilla\rogue\spellbook.lua" />
-	<Script file="rotations_vanilla\shaman\spellbook.lua" />
-	<Script file="rotations_vanilla\warlock\spellbook.lua" />
-	<Script file="rotations_vanilla\warrior\spellbook.lua" />
+	<!--<Script file="rotations_cata\druid\spellbook.lua" />-->
+	<Script file="rotations_cata\priest\spellbook.lua" />
+	<!--<Script file="rotations_cata\mage\spellbook.lua" />-->
+	<!--<Script file="rotations_cata\paladin\spellbook.lua" />-->
+	<!--<Script file="rotations_cata\hunter\spellbook.lua" />-->
+	<!--<Script file="rotations_cata\rogue\spellbook.lua" />-->
+	<!--<Script file="rotations_cata\shaman\spellbook.lua" />-->
+	<Script file="rotations_cata\warlock\spellbook.lua" />
+	<!--<Script file="rotations_cata\warrior\spellbook.lua" />-->
 
 	<!-- ROTATIONS -->
-	<Script file="rotations_vanilla\warlock\warlock.lua" />
-	<Script file="rotations_vanilla\warlock\dotlock.lua" />
+	<Script file="rotations_cata\warlock\warlock.lua" />
+	<Script file="rotations_cata\warlock\dotlock.lua" />
+	<Script file="rotations_cata\warlock\destro.lua" />
+		
+	<Script file="rotations_cata\priest\priest.lua" />
+	<Script file="rotations_cata\priest\shadow.lua" />
 
 	<!-- MISC -->
 	<Script file="system\support\patches.lua" />
