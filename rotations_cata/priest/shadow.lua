@@ -5,6 +5,13 @@ local function combat()
         return
     end
 
+    if 
+        castable(SB.ShadowWordDeath, target) and
+        target.health.percent <= 25
+    then
+        return cast(SB.ShadowWordDeath, target)
+    end
+
     --print(player.channeling, player.channeling)
     if player.isChanneling then
         return
@@ -14,11 +21,13 @@ local function combat()
 
     -- shadowfriend
     -- pain
-    if 
-        not target.debuff(SB.ShadowWordPain).up and 
-        castable(SB.ShadowWordPain, target) 
-    then
-        return cast(SB.ShadowWordPain, target)
+    if toggle("multitarget", false) then
+        if 
+            not target.debuff(SB.ShadowWordPain).up and 
+            castable(SB.ShadowWordPain, target) 
+        then
+            return cast(SB.ShadowWordPain, target)
+        end
     end
 
     -- Mindflay max 3x or until 1 Shadow Orb and 5x Envagelism
@@ -39,22 +48,31 @@ local function combat()
         return cast(SB.Mindblast, target)
     end
 
-    -- Vamperic touch
-    if
-        castable(SB.VampericTouch, target) and
-        not target.debuff(SB.VampericTouch).up
-    then
-        return cast(SB.VampericTouch, target)
+    if toggle("cooldowns", false) then
+        -- Vamperic touch
+        if
+            castable(SB.VampericTouch, target) and
+            not target.debuff(SB.VampericTouch).up
+        then
+            return cast(SB.VampericTouch, target)
+        end
+
+        -- plague
+        if
+            castable(SB.DevouringPlague, target) and
+            not target.debuff(SB.DevouringPlague).up
+        then
+            return cast(SB.DevouringPlague, target)
+        end
     end
 
-    -- plague
-    if
-        castable(SB.DevouringPlague, target) and
-        not target.debuff(SB.DevouringPlague).up
-    then
-        return cast(SB.DevouringPlague, target)
-    end
-
+    -- check self heals before doing filler?
+    --if 
+    --    player.health.percent < 70 and
+    --    castable(SB.Renew, player)
+    --then
+    --    return cast(SB.Renew, player)
+    --end
 
     -- filler mindflay?
     if castable(SB.MindFlay, target) then

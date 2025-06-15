@@ -7,6 +7,7 @@ light.rotation.spellbooks.priest = {
     PowerWordShield = 17,
     Mindblast = 8092,
     Penance = 47540,
+    Renew = 139,
 
 
     --ShadowOrb = 95740,
@@ -15,5 +16,10 @@ light.rotation.spellbooks.priest = {
     VampericTouch = 34914,
     DevouringPlague = 2944,  
     EmpoweringShadow = 95799,
+    ShadowWordDeath = 32379,
 
+    Archangle = 87151,
+    DarkEvangelism = 87118,
+    DarkArchangle = 87153,
+    MindSpike = 73510,
 }

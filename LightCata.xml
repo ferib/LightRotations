@@ -19,6 +19,8 @@
 		
 	<Script file="rotations_cata\priest\priest.lua" />
 	<Script file="rotations_cata\priest\shadow.lua" />
+	<Script file="rotations_cata\priest\shadow_pvp.lua" />
+
 
 	<!-- MISC -->
 	<Script file="system\support\patches.lua" />
