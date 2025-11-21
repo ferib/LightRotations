@@ -4,9 +4,19 @@ local spell = {}
 
 local IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable
 local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
+--local GetSpellCooldown = GetSpellCooldown or C_Spell.GetSpellCooldown
 
 function spell:cooldown()
-    local time, value = GetSpellCooldown(self.spell)
+	local time, value
+
+	if GetSpellCooldown ~= nil then
+		time, value = GetSpellCooldown(self.spell)
+	else
+		local data = C_Spell.GetSpellCooldown(self.spell)
+		time = data.startTime
+		value = data.duration
+	end
+     
     if not time or time == 0 then
         return 0
     end
@@ -77,7 +87,7 @@ function spell:lastcast()
 end
 
 function spell:castable()
-    print(self.spell)
+    --print(self.spell)
     local usable, noMana = IsUsableSpell(self.spell)
     if usable then
         if self.cooldown == 0 then
@@ -123,14 +133,14 @@ function light.environment.conditions.spell(unit)
             elseif tonumber(arg) then
                 local spellinfo = GetSpellName(arg)
                 if type(spellinfo) == "table" then
-                    print("TABLE set")
+                    --print("TABLE set")
                     self.spell = spellinfo.name
                 else
-                    print("NO TABLE set")
+                    --print("NO TABLE set")
                     self.spell = spellinfo -- as is
                 end
             else
-                print("TABLE set 2")
+                --print("TABLE set 2")
                 self.spell = arg
             end
             --[[

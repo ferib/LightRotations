@@ -10,6 +10,12 @@ function _CastSpellByName(spell, target)
 
 	--CastSpellByName(spell, target)
 	light.glow.trigger(spell)
+	
+	_G.spell = spell
+	
+	if type(spell) == "table" then
+		spell = tostring(spell.name)
+	end
 
 	light.console.debug(4, 'cast', 'red', spell .. ' on ' .. target)
 	light.interface.status(spell)
@@ -20,6 +26,10 @@ function _CastGroundSpellByName(spell, target)
 
 	--RunMacroText("/cast [@cursor] " .. spell)
 	-- TODO: glow for macro?
+
+	if type(spell) == "table" then
+		spell = tostring(spell.name)
+	end
 
 	light.console.debug(4, 'cast', 'red', spell .. ' on ' .. target)
 	light.interface.status(spell)
@@ -76,6 +86,9 @@ function light.environment.hooks.cast(spell, target)
 	end
 	if type(spell) == 'table' then
 		spell = spell.namerank
+		if spell == nil then
+			spell = spell.name -- TWW
+		end
 	end
 	if type(spell) == 'number' then
 		spell = GetSpellName(spell)

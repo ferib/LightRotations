@@ -3,6 +3,8 @@ local addon, light = ...
 local GetSpellSubtext = GetSpellSubtext or C_Spell.GetSpellSubtext
 local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
 local UnitBuff = UnitBuff or C_UnitAuras.GetBuffDataByIndex
+local UnitDebuff = UnitDebuff or C_UnitAuras.GetDebuffDataByIndex
+local IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable
 
 light.environment = {
   conditions = { },
@@ -131,7 +133,7 @@ light.environment.unit_debuff = function(target, spell, owner)
   local i = 0; local go = true
   while i <= 40 and go do
     i = i + 1
-    debuff, _, count, _, duration, expires, caster, _, _, spellID = _G['UnitDebuff'](target, i)
+    debuff, _, count, _, duration, expires, caster, _, _, spellID = UnitDebuff(target, i)
     if not owner then
       if ((tonumber(spell) and spellID == tonumber(spell)) or debuff == spell) and caster == "player" then go = false end
     elseif owner == "any" then
@@ -146,7 +148,7 @@ light.environment.unit_reverse_debuff = function(target, candidates)
   local i = 0; local go = true
   while i <= 40 and go do
     i = i + 1
-    debuff, _, count, _, duration, expires, caster, _, _, spellID = _G['UnitDebuff'](target, i)
+    debuff, _, count, _, duration, expires, caster, _, _, spellID = UnitDebuff(target, i)
     if candidates[spellID] then go = false end
   end
   return debuff, count, duration, expires, caster, candidates[spellID]

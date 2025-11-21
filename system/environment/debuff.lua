@@ -1,6 +1,8 @@
 local addon, light = ...
 
 local UnitDebuff = light.environment.unit_debuff
+local IsUsableSpell = IsUsableSpell or C_Spell.IsSpellUsable
+local GetSpellInfo = GetSpellInfo or C_Spell.GetSpellInfo
 
 local debuff = {}
 

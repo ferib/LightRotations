@@ -138,6 +138,7 @@ info_frame.text_right:SetText('')
 
 light.interface.status_text_override = false
 function light.interface.status_override(text, duration, colorA, colorB)
+	text = tostring(text)
     light.interface.status_text_override = true
     info_frame.text:SetText(text)
 	local r, g, b = light.interface.color.hexToRgb(light.fontColor)
@@ -168,13 +169,14 @@ function light.interface.status_override(text, duration, colorA, colorB)
 end
 
 light.interface.status = function(text)
-    light.interface.status_text = text
+    light.interface.status_text = tostring(text) -- eh?? new APIs cause mixup with tbales!
     if not light.interface.status_text_override then
         info_frame.text:SetText(text)
     end
 end
 
 light.interface.status_extra = function(text)
+	text = tostring(text)
     info_frame.text_right:SetText(text)
 end
 
@@ -436,7 +438,7 @@ light.on_ready(function()
         text = 'Adjusts the size of the on-screen buttons',
         callback = function(button_size)
             local size = tonumber(button_size)
-            print(size, button_size)
+            --print(size, button_size)
             if size then
                 light.settings.store('button_size', size)
                 light.interface.buttons.resize()
