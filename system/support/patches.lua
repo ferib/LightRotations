@@ -24,6 +24,7 @@ function StaticPopup_OnShow(self)
     end
 end
 
+--[[
 function StaticPopup_OnHide(self)
     if self.which ~= 'MACRO_ACTION_FORBIDDEN' and self.which ~= 'ADDON_ACTION_FORBIDDEN' and self.which ~=
         'ADDON_ACTION_BLOCKED' then
@@ -49,6 +50,7 @@ function StaticPopup_OnHide(self)
         _G[self:GetName() .. "MoneyInputFrame"]:SetPoint("TOP", text, "BOTTOM", 0, -5);
     end
 end
+]]
 
 function C_Timer.NewAdvancedTicker(duration, callback, iterations)
     local ticker = setmetatable({}, TickerMetatable);

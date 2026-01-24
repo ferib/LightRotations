@@ -40,7 +40,8 @@ function glow.trigger(spell)
 	if btnName == nil then
 		local spellinfo = GetSpellInfo(spell)
 		--print("btnName nil", spell)
-		print("No keybind was found for ", spellinfo)
+		--print("No keybind was found for ", spellinfo)
+		Unlock(CastSpellByName, spell)
 		return
 	end
 
@@ -54,7 +55,7 @@ function glow.trigger(spell)
 	
 	local duration = glow.durations[btnName]
 	ActionButton_ShowOverlayGlow(btn)
-	CastSpellByName(spell)
+	Unlock(CastSpellByName, spell)
 
 	-- TODO: rm C_Timer and use clean queue?
 	C_Timer.After(duration, function(id)
@@ -114,6 +115,7 @@ function glow.updateActionsList()
 		for _, barName in pairs(actionBars) do
 			for i = 1, 12 do
 				local button = _G[barName .. 'Button' .. i]
+				do return end -- TODO: fix APIs?
 				local slot = ActionButton_GetPagedID(button) or ActionButton_CalculateAction(button) or
 							 button:GetAttribute('action') or 0
 				if HasAction(slot) then
